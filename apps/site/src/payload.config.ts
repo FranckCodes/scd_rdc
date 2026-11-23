@@ -1,6 +1,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { ar } from '@payloadcms/translations/languages/ar'
 import { en } from '@payloadcms/translations/languages/en'
 import { fr } from '@payloadcms/translations/languages/fr'
@@ -57,9 +58,18 @@ export default buildConfig({
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL || '' },
+    // En production, le schéma évolue uniquement par migrations (src/migrations), jamais par « push ».
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,
   plugins: [
+    // Fichiers envoyés (photos, PDF) : Vercel Blob en production (le disque de Vercel est éphémère).
+    // Sans jeton BLOB_READ_WRITE_TOKEN (développement local), les fichiers restent sur le disque.
+    vercelBlobStorage({
+      enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      collections: { media: true, documents: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
     // Formulaires des TDR (§8.1) : participation, partenaire, exposant, contribution, accréditation presse.
     // Les formulaires sont créés dans l'administration ; les réponses sont exportables.
     formBuilderPlugin({

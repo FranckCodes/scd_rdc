@@ -13,6 +13,10 @@ import { FONT_ARABIC_URL, FONT_BASE_URL, FONT_CHINESE_URL } from '@scd/ui/fonts'
 import '@scd/ui/tokens.css'
 import '../styles.css'
 
+// Les pages pré-générées sont reconstruites au plus toutes les 60 s :
+// un contenu publié dans l'administration apparaît sans redéploiement.
+export const revalidate = 60
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
 }

@@ -63,6 +63,10 @@ pnpm dev:data                   # SCD-RDC DATA : http://localhost:3001
 
 Au premier lancement, `/admin` propose de créer le premier compte administrateur.
 
+## Mise en ligne
+Voir **[DEPLOIEMENT.md](DEPLOIEMENT.md)** : deux projets Vercel (`apps/site`, `apps/data`), base Neon,
+stockage Vercel Blob, migrations appliquées automatiquement au déploiement.
+
 ## Notes techniques
 - **Payload est figé en 3.91.0** : les versions suivantes exigent Node ≥ 24.22. Mettre Node à jour
   avant de monter de version.
