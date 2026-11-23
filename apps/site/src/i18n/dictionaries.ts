@@ -6,7 +6,7 @@ import type { Locale } from './config'
 // Les contenus éditoriaux (actualités, pages, programme…) se traduisent dans l'administration.
 
 export type Dictionary = {
-  nav: { about: string; programme: string; salon: string; data: string; partnerships: string; press: string }
+  nav: { about: string; programme: string; salon: string; data: string; partnerships: string; press: string; practical: string }
   ui: { menu: string; language: string; toConfirm: string; skip: string }
   cta: { participate: string; interest: string; partner: string; programme: string; data: string }
   hero: { eyebrow: string; titleLight: string; titleBold: string; lead: string; photoCredit: string }
@@ -37,6 +37,7 @@ const fr: Dictionary = {
     data: 'SCD-RDC DATA',
     partnerships: 'Partenariats',
     press: 'Presse',
+    practical: 'Infos pratiques',
   },
   ui: { menu: 'Menu', language: 'Langue', toConfirm: 'à confirmer', skip: 'Aller au contenu' },
   cta: {
@@ -96,6 +97,7 @@ const en: Dictionary = {
     data: 'SCD-RDC DATA',
     partnerships: 'Partnerships',
     press: 'Press',
+    practical: 'Practical information',
   },
   ui: { menu: 'Menu', language: 'Language', toConfirm: 'to be confirmed', skip: 'Skip to content' },
   cta: {
@@ -148,7 +150,7 @@ const en: Dictionary = {
 }
 
 const zh: Dictionary = {
-  nav: { about: '关于', programme: '议程', salon: '项目展', data: 'SCD-RDC DATA', partnerships: '合作伙伴', press: '媒体' },
+  nav: { about: '关于', programme: '议程', salon: '项目展', data: 'SCD-RDC DATA', partnerships: '合作伙伴', press: '媒体', practical: '实用信息' },
   ui: { menu: '菜单', language: '语言', toConfirm: '待确认', skip: '跳至内容' },
   cta: { participate: '参加', interest: '表达参与意向', partner: '成为合作伙伴', programme: '查看议程', data: '探索平台' },
   hero: {
@@ -191,6 +193,7 @@ const ru: Dictionary = {
     data: 'SCD-RDC DATA',
     partnerships: 'Партнёрство',
     press: 'Пресса',
+    practical: 'Практическая информация',
   },
   ui: { menu: 'Меню', language: 'Язык', toConfirm: 'уточняется', skip: 'Перейти к содержанию' },
   cta: {
@@ -250,6 +253,7 @@ const ar: Dictionary = {
     data: 'SCD-RDC DATA',
     partnerships: 'الشراكات',
     press: 'الصحافة',
+    practical: 'معلومات عملية',
   },
   ui: { menu: 'القائمة', language: 'اللغة', toConfirm: 'قيد التأكيد', skip: 'الانتقال إلى المحتوى' },
   cta: {

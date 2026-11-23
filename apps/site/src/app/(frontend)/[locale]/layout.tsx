@@ -51,7 +51,7 @@ export default async function LocaleLayout({
         </a>
         <Header locale={locale} t={t} />
         <main id="contenu">{children}</main>
-        <Footer locale={locale} t={t} email={event.contact?.email || 'info@scd.rdc.org'} />
+        <Footer locale={locale} t={t} email={event.contact?.email || 'info@scd-rdc.org'} />
       </body>
     </html>
   )

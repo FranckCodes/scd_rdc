@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone, loggedIn } from '../access/roles'
+import { anyone, canValidate, loggedIn } from '../access/roles'
 
 // Pages éditoriales simples : À propos, Infos pratiques, Mentions légales, etc.
 export const Pages: CollectionConfig = {
@@ -19,6 +19,17 @@ export const Pages: CollectionConfig = {
       unique: true,
       index: true,
       admin: { description: 'Ex. : a-propos, infos-pratiques, mentions-legales' },
+    },
+    {
+      name: 'proposal',
+      label: 'Texte proposé — en attente de validation institutionnelle',
+      type: 'checkbox',
+      defaultValue: true,
+      access: { update: canValidate },
+      admin: {
+        position: 'sidebar',
+        description: 'Tant que cette case est cochée, le site affiche un bandeau « proposition en attente de validation ».',
+      },
     },
     { name: 'intro', label: 'Introduction', type: 'textarea', localized: true },
     { name: 'content', label: 'Contenu', type: 'richText', localized: true },

@@ -155,6 +155,10 @@ export interface Page {
    * Ex. : a-propos, infos-pratiques, mentions-legales
    */
   slug: string;
+  /**
+   * Tant que cette case est cochée, le site affiche un bandeau « proposition en attente de validation ».
+   */
+  proposal?: boolean | null;
   intro?: string | null;
   content?: {
     root: {
@@ -410,6 +414,11 @@ export interface User {
  */
 export interface Form {
   id: number;
+  /**
+   * Ex. : manifestation-interet → /fr/participer/manifestation-interet
+   */
+  slug: string;
+  intro?: string | null;
   title: string;
   fields?:
     | (
@@ -703,6 +712,7 @@ export interface PayloadMigration {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  proposal?: T;
   intro?: T;
   content?: T;
   meta?:
@@ -891,6 +901,8 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "forms_select".
  */
 export interface FormsSelect<T extends boolean = true> {
+  slug?: T;
+  intro?: T;
   title?: T;
   fields?:
     | T

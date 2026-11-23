@@ -50,7 +50,7 @@ export const EventInfo: GlobalConfig = {
       label: 'Contacts officiels',
       type: 'group',
       fields: [
-        { name: 'email', label: 'E-mail', type: 'email', defaultValue: 'info@scd.rdc.org' },
+        { name: 'email', label: 'E-mail', type: 'email', defaultValue: 'info@scd-rdc.org' },
         { name: 'phone', label: 'Téléphone', type: 'text' },
         { name: 'address', label: 'Adresse', type: 'textarea', localized: true },
       ],

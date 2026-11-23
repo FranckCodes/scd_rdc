@@ -66,8 +66,20 @@ export default buildConfig({
       fields: { payment: false },
       formOverrides: {
         labels: { singular: 'Formulaire', plural: 'Formulaires' },
-        admin: { group: 'Formulaires' },
+        admin: { group: 'Formulaires', useAsTitle: 'title' },
         access: { read: () => true, create: loggedIn, update: loggedIn, delete: loggedIn },
+        fields: ({ defaultFields }) => [
+          {
+            name: 'slug',
+            label: 'Adresse (slug)',
+            type: 'text',
+            required: true,
+            unique: true,
+            admin: { position: 'sidebar', description: 'Ex. : manifestation-interet → /fr/participer/manifestation-interet' },
+          },
+          { name: 'intro', label: 'Texte d’introduction', type: 'textarea', localized: true },
+          ...defaultFields,
+        ],
       },
       formSubmissionOverrides: {
         labels: { singular: 'Demande reçue', plural: 'Demandes reçues' },

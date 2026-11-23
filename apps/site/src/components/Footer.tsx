@@ -20,10 +20,12 @@ export function Footer({ locale, t, email }: { locale: Locale; t: Dictionary; em
               {l.label}
             </Link>
           ))}
+          <Link href={`/${locale}/participer`}>{t.cta.participate}</Link>
+          <Link href={`/${locale}/infos-pratiques`}>{t.nav.practical}</Link>
         </nav>
         <div className="site-footer__contact">
           <a href={`mailto:${email}`}>{email}</a>
-          <span>www.scd.rdc.org</span>
+          <span>www.scd-rdc.org</span>
         </div>
       </div>
       <div className="container site-footer__legal">

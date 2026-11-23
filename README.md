@@ -7,6 +7,17 @@ et de la plateforme **SCD-RDC DATA**.
 - Charte graphique : `resources/EMPREINTE DE LA COOPERATION.pdf` — elle fait foi (couleurs, polices)
 - Logos officiels : `resources/logos/` (PNG ; fichiers vectoriels encore attendus)
 - Direction visuelle retenue : **C2 — Bleu institutionnel**
+- Domaine : **scd-rdc.org** (site) et **data.scd-rdc.org** (SCD-RDC DATA) ; contact : info@scd-rdc.org (à confirmer)
+
+### Pages
+Accueil · À propos · Programme (filtres jour / composante / thématique) · Salon des projets · Partenariats ·
+Presse · Actualités · Participer (5 formulaires, réponse annoncée sous 24 h ouvrées) · Infos pratiques ·
+Mentions légales · Confidentialité · Accessibilité.
+
+Les textes institutionnels et juridiques chargés par `pnpm seed` (`apps/site/src/seed/`) sont des
+**propositions** : ils s'affichent avec un bandeau « en attente de validation » tant qu'un validateur
+n'a pas décoché la case correspondante dans l'administration. Les éléments à compléter sont entre crochets.
+Les e-mails des formulaires s'affichent dans la console tant qu'aucun service d'envoi n'est configuré.
 
 ## Architecture
 
@@ -45,6 +56,7 @@ Prérequis : Node 24, pnpm 10, Docker.
 pnpm install
 pnpm db:up                      # lance PostgreSQL (port 5433)
 cp apps/site/.env.example apps/site/.env   # puis renseigner PAYLOAD_SECRET
+pnpm seed                       # charge les textes proposés, les 5 formulaires et les infos de l'événement
 pnpm dev                        # site + back-office : http://localhost:3000
 pnpm dev:data                   # SCD-RDC DATA : http://localhost:3001
 ```

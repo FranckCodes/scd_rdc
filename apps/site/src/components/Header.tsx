@@ -23,7 +23,8 @@ export function Header({ locale, t }: { locale: Locale; t: Dictionary }) {
     <header className="site-header">
       <div className="container site-header__bar">
         <Link href={`/${locale}`} className="site-header__logo">
-          <Image src="/brand/logo-h-blanc.png" alt="SCD-RDC" width={185} height={56} priority />
+          <Image className="logo-full" src="/brand/logo-h-blanc.png" alt="SCD-RDC" width={185} height={56} priority />
+          <Image className="logo-short" src="/brand/logo-court-blanc.png" alt="SCD-RDC" width={98} height={40} priority />
         </Link>
 
         <nav aria-label={t.nav.programme} className="site-nav">
