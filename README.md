@@ -70,4 +70,3 @@ Au premier lancement, `/admin` propose de créer le premier compte administrateu
   sous Turbopack avec Next 16.3. À auto-héberger pour la production.
 - **Photos** de `apps/site/public/images` : photos d'illustration Unsplash (crédits affichés),
   à remplacer par les photos officielles autorisées.
-"# scd_rdc" 

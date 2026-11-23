@@ -7,3 +7,7 @@ dist/
 /media/
 apps/*/media/
 .DS_Store
+
+# Fichiers générés par Next.js / TypeScript
+*.tsbuildinfo
+next-env.d.ts
