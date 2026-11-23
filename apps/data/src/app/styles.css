@@ -1,0 +1,13 @@
+body { margin: 0; font-family: var(--scd-font-body); color: var(--scd-ink); background: var(--scd-surface-alt); }
+main { max-width: var(--scd-container); margin-inline: auto; padding: 24px var(--scd-gutter) 64px; }
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-block: 8px 32px; }
+.bar img { height: 48px; width: auto; }
+.bar a { color: var(--scd-navy); font-family: var(--scd-font-title); font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.intro { background: var(--scd-navy); color: var(--scd-white); border-radius: var(--scd-radius); padding: clamp(28px, 6vw, 64px); display: flex; flex-direction: column; gap: 18px; }
+.intro h1 { margin: 0; font-family: var(--scd-font-title); font-weight: 300; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.1; }
+.intro strong { font-weight: 800; }
+.intro p { margin: 0; max-width: 620px; font-size: 18px; line-height: 1.6; }
+.eyebrow { font-family: var(--scd-font-title); font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--scd-yellow); }
+.fiche { margin-top: 24px; background: var(--scd-white); border-radius: var(--scd-radius); padding: 32px; }
+.fiche h2 { margin: 0 0 16px; font-family: var(--scd-font-title); font-weight: 800; font-size: 22px; }
+.fiche ul { margin: 0; padding-inline-start: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px 32px; line-height: 1.5; }

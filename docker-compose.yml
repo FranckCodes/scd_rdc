@@ -1,0 +1,15 @@
+# Base PostgreSQL de développement (site + SCD-RDC DATA)
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: scd
+      POSTGRES_PASSWORD: scd_dev
+      POSTGRES_DB: scd_site
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

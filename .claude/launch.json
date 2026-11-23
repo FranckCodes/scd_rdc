@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "site", "dev"],
+      "port": 3000
+    },
+    {
+      "name": "data",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "data", "dev"],
+      "port": 3001
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "scd-rdc",
+  "private": true,
+  "packageManager": "pnpm@10.33.2",
+  "scripts": {
+    "dev": "pnpm --filter site dev",
+    "dev:data": "pnpm --filter data dev",
+    "build": "pnpm -r build",
+    "db:up": "docker compose up -d db",
+    "db:down": "docker compose down"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
+}

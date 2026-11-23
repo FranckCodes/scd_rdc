@@ -1,0 +1,44 @@
+/*
+ * Jetons de la charte « Empreinte de la coopération » (novembre 2026),
+ * direction retenue : C2 — Bleu institutionnel.
+ * Partagés par le site institutionnel (apps/site) et SCD-RDC DATA (apps/data).
+ */
+:root {
+  /* Couleurs principales de la charte */
+  --scd-sky: #00b5ea;
+  --scd-navy: #0170bf;
+  --scd-yellow: #e8cf34;
+  --scd-green: #5cdd4b;
+  /* Couleurs secondaires */
+  --scd-black: #000000;
+  --scd-white: #ffffff;
+  --scd-red: #e01010;
+
+  /* Rôles d'interface (contrastes vérifiés : texte blanc sur navy, texte foncé sur sky/yellow/green) */
+  --scd-ink: #0a1a2b;
+  --scd-ink-muted: #44525f;
+  --scd-surface: #ffffff;
+  --scd-surface-alt: #f2f4f5;
+  --scd-line: #e3e8ec;
+  --scd-line-strong: #d5dde3;
+  --scd-navy-hover: #014f86;
+
+  /* Typographie de la charte (chargée via fonts.ts) */
+  --scd-font-title: 'Montserrat', system-ui, sans-serif;
+  --scd-font-body: 'Raleway', system-ui, sans-serif;
+
+  --scd-radius: 6px;
+  --scd-radius-btn: 4px;
+  --scd-container: 1280px;
+  --scd-gutter: clamp(20px, 3vw, 24px);
+}
+
+/* Écritures non latines : polices dédiées */
+:lang(ar) {
+  --scd-font-title: 'Noto Sans Arabic', system-ui, sans-serif;
+  --scd-font-body: 'Noto Sans Arabic', system-ui, sans-serif;
+}
+:lang(zh) {
+  --scd-font-title: 'Noto Sans SC', system-ui, sans-serif;
+  --scd-font-body: 'Noto Sans SC', system-ui, sans-serif;
+}

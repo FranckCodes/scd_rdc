@@ -1,0 +1,308 @@
+import type { Locale } from './config'
+
+// Textes de l'interface du site public.
+// ⚠ Les versions EN, ZH, RU et AR sont des traductions PROVISOIRES pour le développement.
+// Les TDR (§12) exigent une traduction humaine : faire relire avant toute mise en ligne.
+// Les contenus éditoriaux (actualités, pages, programme…) se traduisent dans l'administration.
+
+export type Dictionary = {
+  nav: { about: string; programme: string; salon: string; data: string; partnerships: string; press: string }
+  ui: { menu: string; language: string; toConfirm: string; skip: string }
+  cta: { participate: string; interest: string; partner: string; programme: string; data: string }
+  hero: { eyebrow: string; titleLight: string; titleBold: string; lead: string; photoCredit: string }
+  info: { dates: string; place: string; format: string }
+  components: {
+    titleLight: string
+    titleBold: string
+    items: { title: string; text: string }[]
+  }
+  data: {
+    eyebrow: string
+    titleLight: string
+    titleBold: string
+    text: string
+    sample: string
+    note: string
+  }
+  partners: { titleLight: string; titleBold: string; note: string; empty: string }
+  news: { title: string; empty: string; all: string }
+  footer: { tagline: string; legal: string; privacy: string; accessibility: string }
+}
+
+const fr: Dictionary = {
+  nav: {
+    about: 'À propos',
+    programme: 'Programme',
+    salon: 'Salon des projets',
+    data: 'SCD-RDC DATA',
+    partnerships: 'Partenariats',
+    press: 'Presse',
+  },
+  ui: { menu: 'Menu', language: 'Langue', toConfirm: 'à confirmer', skip: 'Aller au contenu' },
+  cta: {
+    participate: 'Participer',
+    interest: 'Manifester son intérêt',
+    partner: 'Devenir partenaire',
+    programme: 'Voir le programme',
+    data: 'Découvrir la plateforme',
+  },
+  hero: {
+    eyebrow: 'Édition inaugurale',
+    titleLight: 'La coopération au développement, ',
+    titleBold: 'visible, coordonnée et utile.',
+    lead: 'Institutions, partenaires techniques et financiers, secteur privé et société civile réunis autour d’une exigence commune : rendre compte des résultats.',
+    photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
+  },
+  info: { dates: 'Dates', place: 'Lieu', format: 'Format' },
+  components: {
+    titleLight: 'Cinq composantes, ',
+    titleBold: 'un programme',
+    items: [
+      { title: 'Forum national', text: 'Dialogue de haut niveau sur les priorités nationales.' },
+      { title: 'Salon des projets', text: 'Environ 20 pavillons de démonstration.' },
+      { title: 'Agora citoyenne', text: 'La voix des bénéficiaires et de la société civile.' },
+      { title: 'Laboratoire des solutions', text: 'Innovations et bonnes pratiques.' },
+      { title: 'Trophées', text: 'Les résultats probants, distingués.' },
+    ],
+  },
+  data: {
+    eyebrow: 'SCD-RDC DATA · V1 en préparation',
+    titleLight: 'Qui finance quoi, où, ',
+    titleBold: 'pour qui ?',
+    text: 'Le portefeuille de la coopération, province par province. Fiches sourcées, datées et validées.',
+    sample: 'projets phares',
+    note: 'Chaque fiche indique sa source, sa date de mise à jour et son statut de validation.',
+  },
+  partners: {
+    titleLight: 'Ils s’engagent ',
+    titleBold: 'à nos côtés',
+    note: 'Les logos sont publiés uniquement après validation écrite de chaque institution.',
+    empty: 'Partenaires en attente de confirmation.',
+  },
+  news: { title: 'Actualités', empty: 'Les premières actualités seront publiées prochainement.', all: 'Tout voir' },
+  footer: {
+    tagline: '« Coopérer pour développer, rendre compte pour transformer. »',
+    legal: 'Mentions légales',
+    privacy: 'Confidentialité',
+    accessibility: 'Accessibilité',
+  },
+}
+
+const en: Dictionary = {
+  nav: {
+    about: 'About',
+    programme: 'Programme',
+    salon: 'Projects Fair',
+    data: 'SCD-RDC DATA',
+    partnerships: 'Partnerships',
+    press: 'Press',
+  },
+  ui: { menu: 'Menu', language: 'Language', toConfirm: 'to be confirmed', skip: 'Skip to content' },
+  cta: {
+    participate: 'Take part',
+    interest: 'Express interest',
+    partner: 'Become a partner',
+    programme: 'See the programme',
+    data: 'Explore the platform',
+  },
+  hero: {
+    eyebrow: 'Inaugural edition',
+    titleLight: 'Development cooperation, ',
+    titleBold: 'visible, coordinated and useful.',
+    lead: 'Institutions, technical and financial partners, the private sector and civil society brought together by a shared commitment: accounting for results.',
+    photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
+  },
+  info: { dates: 'Dates', place: 'Venue', format: 'Format' },
+  components: {
+    titleLight: 'Five components, ',
+    titleBold: 'one programme',
+    items: [
+      { title: 'National Forum', text: 'High-level dialogue on national priorities.' },
+      { title: 'Projects Fair', text: 'Around 20 demonstration pavilions.' },
+      { title: 'Citizens’ Agora', text: 'The voice of beneficiaries and civil society.' },
+      { title: 'Solutions Lab', text: 'Innovations and good practices.' },
+      { title: 'Awards', text: 'Proven results, recognised.' },
+    ],
+  },
+  data: {
+    eyebrow: 'SCD-RDC DATA · V1 in preparation',
+    titleLight: 'Who funds what, where, ',
+    titleBold: 'for whom?',
+    text: 'The cooperation portfolio, province by province. Sourced, dated and validated project sheets.',
+    sample: 'flagship projects',
+    note: 'Each sheet states its source, last update and validation status.',
+  },
+  partners: {
+    titleLight: 'Partners ',
+    titleBold: 'at our side',
+    note: 'Logos are published only after written approval from each institution.',
+    empty: 'Partners awaiting confirmation.',
+  },
+  news: { title: 'News', empty: 'The first news items will be published soon.', all: 'See all' },
+  footer: {
+    tagline: '“Cooperate to develop, account to transform.”',
+    legal: 'Legal notice',
+    privacy: 'Privacy',
+    accessibility: 'Accessibility',
+  },
+}
+
+const zh: Dictionary = {
+  nav: { about: '关于', programme: '议程', salon: '项目展', data: 'SCD-RDC DATA', partnerships: '合作伙伴', press: '媒体' },
+  ui: { menu: '菜单', language: '语言', toConfirm: '待确认', skip: '跳至内容' },
+  cta: { participate: '参加', interest: '表达参与意向', partner: '成为合作伙伴', programme: '查看议程', data: '探索平台' },
+  hero: {
+    eyebrow: '首届',
+    titleLight: '发展合作，',
+    titleBold: '可见、协调、有效。',
+    lead: '政府机构、技术与资金伙伴、私营部门和民间社会齐聚一堂，共同致力于对成果负责。',
+    photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
+  },
+  info: { dates: '日期', place: '地点', format: '形式' },
+  components: {
+    titleLight: '五个板块，',
+    titleBold: '一个议程',
+    items: [
+      { title: '国家论坛', text: '围绕国家优先事项的高级别对话。' },
+      { title: '项目展', text: '约20个展示馆。' },
+      { title: '公民广场', text: '受益者与民间社会的声音。' },
+      { title: '解决方案实验室', text: '创新与良好实践。' },
+      { title: '奖项', text: '表彰成效显著的举措。' },
+    ],
+  },
+  data: {
+    eyebrow: 'SCD-RDC DATA · 第一版筹备中',
+    titleLight: '谁资助什么、在哪里、',
+    titleBold: '为了谁？',
+    text: '按省份呈现的合作项目组合。项目信息均注明来源、日期并经过核实。',
+    sample: '重点项目',
+    note: '每份项目信息均注明来源、更新日期及核实状态。',
+  },
+  partners: { titleLight: '与我们', titleBold: '同行的伙伴', note: '各机构书面同意后方可发布其标志。', empty: '合作伙伴待确认。' },
+  news: { title: '新闻', empty: '首批新闻即将发布。', all: '查看全部' },
+  footer: { tagline: '“合作促发展，问责促变革。”', legal: '法律声明', privacy: '隐私', accessibility: '无障碍' },
+}
+
+const ru: Dictionary = {
+  nav: {
+    about: 'О неделе',
+    programme: 'Программа',
+    salon: 'Выставка проектов',
+    data: 'SCD-RDC DATA',
+    partnerships: 'Партнёрство',
+    press: 'Пресса',
+  },
+  ui: { menu: 'Меню', language: 'Язык', toConfirm: 'уточняется', skip: 'Перейти к содержанию' },
+  cta: {
+    participate: 'Участвовать',
+    interest: 'Заявить об интересе',
+    partner: 'Стать партнёром',
+    programme: 'Смотреть программу',
+    data: 'Открыть платформу',
+  },
+  hero: {
+    eyebrow: 'Первая неделя',
+    titleLight: 'Сотрудничество в целях развития — ',
+    titleBold: 'прозрачное, согласованное и полезное.',
+    lead: 'Государственные институты, технические и финансовые партнёры, частный сектор и гражданское общество объединены общей задачей: отчитываться о результатах.',
+    photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
+  },
+  info: { dates: 'Даты', place: 'Место', format: 'Формат' },
+  components: {
+    titleLight: 'Пять направлений — ',
+    titleBold: 'одна программа',
+    items: [
+      { title: 'Национальный форум', text: 'Диалог высокого уровня о национальных приоритетах.' },
+      { title: 'Выставка проектов', text: 'Около 20 демонстрационных павильонов.' },
+      { title: 'Гражданская агора', text: 'Голос получателей помощи и гражданского общества.' },
+      { title: 'Лаборатория решений', text: 'Инновации и лучшие практики.' },
+      { title: 'Премии', text: 'Признание доказанных результатов.' },
+    ],
+  },
+  data: {
+    eyebrow: 'SCD-RDC DATA · версия 1 в подготовке',
+    titleLight: 'Кто что финансирует, где, ',
+    titleBold: 'для кого?',
+    text: 'Портфель сотрудничества по провинциям. Карточки проектов с источником, датой и статусом проверки.',
+    sample: 'ключевых проектов',
+    note: 'В каждой карточке указаны источник, дата обновления и статус проверки.',
+  },
+  partners: {
+    titleLight: 'Наши ',
+    titleBold: 'партнёры',
+    note: 'Логотипы публикуются только после письменного согласия каждой организации.',
+    empty: 'Партнёры ожидают подтверждения.',
+  },
+  news: { title: 'Новости', empty: 'Первые новости скоро появятся.', all: 'Все новости' },
+  footer: {
+    tagline: '«Сотрудничать ради развития, отчитываться ради перемен».',
+    legal: 'Правовая информация',
+    privacy: 'Конфиденциальность',
+    accessibility: 'Доступность',
+  },
+}
+
+const ar: Dictionary = {
+  nav: {
+    about: 'حول الأسبوع',
+    programme: 'البرنامج',
+    salon: 'معرض المشاريع',
+    data: 'SCD-RDC DATA',
+    partnerships: 'الشراكات',
+    press: 'الصحافة',
+  },
+  ui: { menu: 'القائمة', language: 'اللغة', toConfirm: 'قيد التأكيد', skip: 'الانتقال إلى المحتوى' },
+  cta: {
+    participate: 'المشاركة',
+    interest: 'إبداء الاهتمام',
+    partner: 'كن شريكًا',
+    programme: 'عرض البرنامج',
+    data: 'اكتشف المنصة',
+  },
+  hero: {
+    eyebrow: 'الدورة الأولى',
+    titleLight: 'التعاون الإنمائي، ',
+    titleBold: 'واضح ومنسّق ومفيد.',
+    lead: 'مؤسسات وشركاء تقنيون وماليون وقطاع خاص ومجتمع مدني يجمعهم التزام مشترك: المساءلة عن النتائج.',
+    photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
+  },
+  info: { dates: 'التواريخ', place: 'المكان', format: 'الصيغة' },
+  components: {
+    titleLight: 'خمسة محاور، ',
+    titleBold: 'برنامج واحد',
+    items: [
+      { title: 'المنتدى الوطني', text: 'حوار رفيع المستوى حول الأولويات الوطنية.' },
+      { title: 'معرض المشاريع', text: 'نحو 20 جناحًا للعرض.' },
+      { title: 'الساحة المدنية', text: 'صوت المستفيدين والمجتمع المدني.' },
+      { title: 'مختبر الحلول', text: 'ابتكارات وممارسات جيدة.' },
+      { title: 'الجوائز', text: 'تكريم النتائج المثبتة.' },
+    ],
+  },
+  data: {
+    eyebrow: 'SCD-RDC DATA · النسخة الأولى قيد الإعداد',
+    titleLight: 'من يموّل ماذا، وأين، ',
+    titleBold: 'ولمن؟',
+    text: 'محفظة التعاون مقاطعةً بمقاطعة. بطاقات مشاريع موثّقة المصدر ومؤرّخة ومعتمدة.',
+    sample: 'مشروعًا رائدًا',
+    note: 'تذكر كل بطاقة مصدرها وتاريخ تحديثها وحالة اعتمادها.',
+  },
+  partners: {
+    titleLight: 'شركاؤنا ',
+    titleBold: 'إلى جانبنا',
+    note: 'لا تُنشر الشعارات إلا بعد موافقة خطية من كل مؤسسة.',
+    empty: 'الشركاء بانتظار التأكيد.',
+  },
+  news: { title: 'الأخبار', empty: 'ستُنشر الأخبار الأولى قريبًا.', all: 'عرض الكل' },
+  footer: {
+    tagline: '«نتعاون من أجل التنمية، ونُساءَل من أجل التغيير.»',
+    legal: 'الإشعار القانوني',
+    privacy: 'الخصوصية',
+    accessibility: 'إمكانية الوصول',
+  },
+}
+
+const dictionaries: Record<Locale, Dictionary> = { fr, en, zh, ru, ar }
+
+export function getDictionary(locale: Locale): Dictionary {
+  return dictionaries[locale]
+}
