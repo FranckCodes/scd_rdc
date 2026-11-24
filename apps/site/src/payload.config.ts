@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
@@ -28,6 +29,19 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
+
+  // Envoi des e-mails (notifications et accusés de réception des formulaires, mots de passe oubliés)
+  // via Resend. Sans RESEND_API_KEY (développement local), les e-mails sont seulement écrits dans la console.
+  ...(process.env.RESEND_API_KEY
+    ? {
+        email: resendAdapter({
+          apiKey: process.env.RESEND_API_KEY,
+          defaultFromAddress: process.env.EMAIL_FROM_ADDRESS || 'noreply@scd-rdc.org',
+          defaultFromName: process.env.EMAIL_FROM_NAME || 'SCD-RDC',
+        }),
+      }
+    : {}),
+
   admin: {
     user: Users.slug,
     meta: { titleSuffix: ' · SCD-RDC' },

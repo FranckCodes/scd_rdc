@@ -60,6 +60,51 @@ les enregistrements DNS indiqués par Vercel. Le certificat HTTPS est automatiqu
 
 ---
 
+## 3. E-mails des formulaires (Resend)
+
+Chaque demande envoyée par un formulaire déclenche deux e-mails : une **notification** à
+`info@scd-rdc.org` (avec « Répondre à » = le demandeur) et un **accusé de réception** au demandeur
+(« réponse sous 24 heures ouvrées »). L'expédition passe par **Resend**.
+
+### 3.1 Compte et domaine
+1. Créer un compte sur https://resend.com.
+2. **Domains → Add Domain** → `scd-rdc.org` (région : Europe si proposée).
+3. Resend affiche des enregistrements DNS à créer. Les ajouter chez **Hostinger**
+   (hPanel → Domaines → scd-rdc.org → DNS → Gérer les enregistrements DNS), **à l'identique** :
+   - un **TXT** `resend._domainkey` (DKIM) ;
+   - un **MX** et un **TXT** sur le sous-domaine `send` (SPF d'envoi).
+
+   Ils se placent sur des sous-domaines dédiés : ils **ne touchent pas** aux enregistrements MX
+   et SPF de la messagerie Hostinger de `scd-rdc.org`.
+4. Revenir dans Resend → **Verify DNS Records** → attendre le statut **Verified**.
+5. **API Keys → Create API Key** (permission : *Sending access*, domaine : `scd-rdc.org`).
+   Copier la clé (elle commence par `re_` et ne s'affiche qu'une fois).
+
+### 3.2 Variables Vercel (projet du site)
+| Variable | Valeur |
+|---|---|
+| `RESEND_API_KEY` | la clé `re_…` |
+| `EMAIL_FROM_ADDRESS` | `noreply@scd-rdc.org` |
+| `EMAIL_FROM_NAME` | `SCD-RDC` |
+
+Puis **Redeploy**. Tester en envoyant un formulaire : la notification doit arriver dans la boîte
+`info@scd-rdc.org` (vérifier que cette boîte existe bien chez Hostinger) et l'accusé de réception
+chez l'expéditeur.
+
+### 3.3 Destinataires
+Les adresses de notification se modifient dans l'administration :
+**Formulaires → [formulaire] → E-mails**. On peut y mettre l'adresse de la commission concernée
+(partenariats, presse…) et ajouter des destinataires en copie.
+
+> Les formulaires chargés avant l'ajout de Resend n'ont pas le « Répondre à » automatique : dans
+> chaque formulaire, ouvrir le premier e-mail (notification) et mettre `{{email}}` dans **Reply To**.
+
+## Recharger les contenus de départ
+`pnpm seed` ne crée que ce qui manque et **n'écrase jamais** un contenu existant. Pour tout
+réinitialiser (perte des modifications faites dans l'administration) : `SEED_FORCE=1 pnpm seed`.
+
+---
+
 ## Faire évoluer le modèle de contenus
 
 Toute modification des collections (`apps/site/src/collections`, `payload.config.ts`) doit être
@@ -73,8 +118,6 @@ pnpm migrate:create nom-du-changement   # génère src/migrations/<date>_nom-du-
 Valider le fichier de migration avec le code. Il sera appliqué au prochain déploiement.
 
 ## Encore à faire avant l'ouverture au public
-- **E-mails** des formulaires : configurer un service d'envoi (Resend, SMTP…) — aujourd'hui ils
-  sont seulement écrits dans les journaux.
 - **Polices** : les auto-héberger plutôt que de les charger depuis Google Fonts.
 - **Mesure d'audience** respectueuse de la vie privée (ex. Vercel Web Analytics, sans cookie).
 - **Sauvegardes** : vérifier la rétention des sauvegardes Neon selon l'offre choisie.

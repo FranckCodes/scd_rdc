@@ -1,4 +1,6 @@
-// Charge les contenus proposés dans la base (idempotent : met à jour si l'élément existe déjà).
+// Charge les contenus proposés dans la base.
+// Par défaut, ne crée que ce qui manque : les pages et formulaires déjà présents (et peut-être
+// modifiés dans l'administration) ne sont PAS écrasés. Pour tout réécrire : SEED_FORCE=1 pnpm seed
 // Lancer : pnpm --filter site seed
 import config from '@payload-config'
 import { getPayload } from 'payload'
@@ -7,11 +9,16 @@ import { forms } from './forms'
 import { pages } from './pages'
 
 const payload = await getPayload({ config })
+const FORCE = process.env.SEED_FORCE === '1'
 
 async function upsert(collection: 'pages' | 'forms', slug: string, data: Record<string, unknown>) {
   const existing = await payload.find({ collection, where: { slug: { equals: slug } }, limit: 1, locale: 'fr' })
   const opts = { collection, data, locale: 'fr' as const, context: { seed: true } }
   if (existing.docs[0]) {
+    if (!FORCE) {
+      payload.logger.info(`= ${collection}/${slug} (déjà présent, conservé)`)
+      return
+    }
     await payload.update({ ...opts, id: existing.docs[0].id } as never)
     payload.logger.info(`↻ ${collection}/${slug}`)
   } else {
@@ -25,6 +32,12 @@ for (const page of pages) {
 }
 for (const form of forms) {
   await upsert('forms', form.slug, form)
+}
+
+const currentEvent = await payload.findGlobal({ slug: 'event-info', locale: 'fr' })
+if (!FORCE && (currentEvent.keyFigures?.length ?? 0) > 0) {
+  payload.logger.info('= Informations de l’événement (déjà renseignées, conservées)')
+  process.exit(0)
 }
 
 await payload.updateGlobal({

@@ -39,6 +39,8 @@ const confirmation = (what: string) =>
 const emails = (subject: string, what: string) => [
   {
     emailTo: NOTIFY_TO,
+    // « Répondre » dans la boîte de l'équipe écrit directement au demandeur
+    replyTo: '{{email}}',
     subject: `[SCD-RDC] ${subject}`,
     message: doc(p(`Nouvelle ${what} reçue depuis le site. Détails : {{*:table}}`), p('À traiter sous 24 heures ouvrées.')),
   },
