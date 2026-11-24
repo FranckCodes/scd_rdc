@@ -3,6 +3,7 @@ import React from 'react'
 
 import { FONT_BASE_URL } from '@scd/ui/fonts'
 import '@scd/ui/tokens.css'
+import '@scd/ui/motion.css'
 import './styles.css'
 
 export const metadata: Metadata = {

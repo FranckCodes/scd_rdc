@@ -31,6 +31,24 @@
   --scd-radius-btn: 4px;
   --scd-container: 1280px;
   --scd-gutter: clamp(20px, 3vw, 24px);
+
+  /* Mouvement (plan d'animation) : court, sobre, jamais décoratif */
+  --scd-dur-fast: 150ms; /* survol, focus, couleurs */
+  --scd-dur-base: 250ms; /* menus, panneaux, badges */
+  --scd-dur-slow: 400ms; /* apparitions */
+  --scd-dur-signature: 1200ms; /* l'empreinte, une seule fois */
+  --scd-ease-out: cubic-bezier(0.2, 0, 0, 1); /* ce qui entre */
+  --scd-ease-in: cubic-bezier(0.4, 0, 1, 1); /* ce qui sort */
+  --scd-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1); /* ce qui se déplace */
+  --scd-shift: 12px; /* amplitude maximale d'un glissement */
+  --scd-shift-sm: 8px;
+  --scd-stagger: 60ms; /* décalage entre éléments d'une cascade */
+  --scd-dir: 1; /* sens de lecture : 1 = de gauche à droite, -1 = de droite à gauche */
+}
+
+/* Arabe : les mouvements horizontaux s'inversent */
+[dir='rtl'] {
+  --scd-dir: -1;
 }
 
 /* Écritures non latines : polices dédiées */

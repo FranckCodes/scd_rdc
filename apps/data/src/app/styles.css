@@ -2,7 +2,9 @@ body { margin: 0; font-family: var(--scd-font-body); color: var(--scd-ink); back
 main { max-width: var(--scd-container); margin-inline: auto; padding: 24px var(--scd-gutter) 64px; }
 .bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-block: 8px 32px; }
 .bar img { height: 48px; width: auto; }
-.bar a { color: var(--scd-navy); font-family: var(--scd-font-title); font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.bar a { color: var(--scd-navy); font-family: var(--scd-font-title); font-weight: 700; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; transition: color var(--scd-dur-fast) var(--scd-ease-out); }
+.bar a:hover { color: var(--scd-navy-hover); }
+:focus-visible { outline: 3px solid var(--scd-navy); outline-offset: 2px; }
 .intro { background: var(--scd-navy); color: var(--scd-white); border-radius: var(--scd-radius); padding: clamp(28px, 6vw, 64px); display: flex; flex-direction: column; gap: 18px; }
 .intro h1 { margin: 0; font-family: var(--scd-font-title); font-weight: 300; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.1; }
 .intro strong { font-weight: 800; }

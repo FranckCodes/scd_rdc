@@ -7,7 +7,7 @@ import type { Locale } from './config'
 
 export type Dictionary = {
   nav: { about: string; programme: string; salon: string; data: string; partnerships: string; press: string; practical: string }
-  ui: { menu: string; language: string; toConfirm: string; skip: string }
+  ui: { menu: string; language: string; toConfirm: string; skip: string; mainNav: string; siteMap: string }
   cta: { participate: string; interest: string; partner: string; programme: string; data: string }
   hero: { eyebrow: string; titleLight: string; titleBold: string; lead: string; photoCredit: string }
   info: { dates: string; place: string; format: string }
@@ -39,7 +39,7 @@ const fr: Dictionary = {
     press: 'Presse',
     practical: 'Infos pratiques',
   },
-  ui: { menu: 'Menu', language: 'Langue', toConfirm: 'à confirmer', skip: 'Aller au contenu' },
+  ui: { menu: 'Menu', language: 'Langue', toConfirm: 'à confirmer', skip: 'Aller au contenu', mainNav: 'Navigation principale', siteMap: 'Plan du site' },
   cta: {
     participate: 'Participer',
     interest: 'Manifester son intérêt',
@@ -99,7 +99,7 @@ const en: Dictionary = {
     press: 'Press',
     practical: 'Practical information',
   },
-  ui: { menu: 'Menu', language: 'Language', toConfirm: 'to be confirmed', skip: 'Skip to content' },
+  ui: { menu: 'Menu', language: 'Language', toConfirm: 'to be confirmed', skip: 'Skip to content', mainNav: 'Main navigation', siteMap: 'Site map' },
   cta: {
     participate: 'Take part',
     interest: 'Express interest',
@@ -151,7 +151,7 @@ const en: Dictionary = {
 
 const zh: Dictionary = {
   nav: { about: '关于', programme: '议程', salon: '项目展', data: 'SCD-RDC DATA', partnerships: '合作伙伴', press: '媒体', practical: '实用信息' },
-  ui: { menu: '菜单', language: '语言', toConfirm: '待确认', skip: '跳至内容' },
+  ui: { menu: '菜单', language: '语言', toConfirm: '待确认', skip: '跳至内容', mainNav: '主导航', siteMap: '网站地图' },
   cta: { participate: '参加', interest: '表达参与意向', partner: '成为合作伙伴', programme: '查看议程', data: '探索平台' },
   hero: {
     eyebrow: '首届',
@@ -195,7 +195,7 @@ const ru: Dictionary = {
     press: 'Пресса',
     practical: 'Практическая информация',
   },
-  ui: { menu: 'Меню', language: 'Язык', toConfirm: 'уточняется', skip: 'Перейти к содержанию' },
+  ui: { menu: 'Меню', language: 'Язык', toConfirm: 'уточняется', skip: 'Перейти к содержанию', mainNav: 'Основная навигация', siteMap: 'Карта сайта' },
   cta: {
     participate: 'Участвовать',
     interest: 'Заявить об интересе',
@@ -255,7 +255,7 @@ const ar: Dictionary = {
     press: 'الصحافة',
     practical: 'معلومات عملية',
   },
-  ui: { menu: 'القائمة', language: 'اللغة', toConfirm: 'قيد التأكيد', skip: 'الانتقال إلى المحتوى' },
+  ui: { menu: 'القائمة', language: 'اللغة', toConfirm: 'قيد التأكيد', skip: 'الانتقال إلى المحتوى', mainNav: 'التنقل الرئيسي', siteMap: 'خريطة الموقع' },
   cta: {
     participate: 'المشاركة',
     interest: 'إبداء الاهتمام',

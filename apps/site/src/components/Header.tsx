@@ -5,13 +5,15 @@ import type { Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/dictionaries'
 
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { MobileMenu } from './MobileMenu'
+import { NavLinks, type NavItem } from './NavLinks'
 
-export function navLinks(locale: Locale, t: Dictionary) {
+export function navLinks(locale: Locale, t: Dictionary): NavItem[] {
   return [
     { href: `/${locale}/a-propos`, label: t.nav.about },
     { href: `/${locale}/programme`, label: t.nav.programme },
     { href: `/${locale}/salon`, label: t.nav.salon },
-    { href: process.env.NEXT_PUBLIC_DATA_URL || 'http://localhost:3001', label: t.nav.data },
+    { href: process.env.NEXT_PUBLIC_DATA_URL || 'http://localhost:3001', label: t.nav.data, external: true },
     { href: `/${locale}/partenariats`, label: t.nav.partnerships },
     { href: `/${locale}/presse`, label: t.nav.press },
   ]
@@ -27,32 +29,13 @@ export function Header({ locale, t }: { locale: Locale; t: Dictionary }) {
           <Image className="logo-short" src="/brand/logo-court-blanc.png" alt="SCD-RDC" width={98} height={40} priority />
         </Link>
 
-        <nav aria-label={t.nav.programme} className="site-nav">
-          {links.map((l) => (
-            <Link key={l.href} href={l.href}>
-              {l.label}
-            </Link>
-          ))}
-        </nav>
+        <NavLinks items={links} label={t.ui.mainNav} className="site-nav" />
 
         <LanguageSwitcher current={locale} label={t.ui.language} />
 
-        {/* Menu mobile sans JavaScript */}
-        <details className="mobile-menu">
-          <summary aria-label={t.ui.menu}>
-            <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </summary>
-          <div className="mobile-menu__panel">
-            {links.map((l) => (
-              <Link key={l.href} href={l.href}>
-                {l.label}
-              </Link>
-            ))}
-            <LanguageSwitcher current={locale} label={t.ui.language} />
-          </div>
-        </details>
+        <MobileMenu items={links} menuLabel={t.ui.menu} navLabel={t.ui.mainNav}>
+          <LanguageSwitcher current={locale} label={t.ui.language} />
+        </MobileMenu>
       </div>
     </header>
   )

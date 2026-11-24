@@ -2,6 +2,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { Arrow } from '@/components/Arrow'
 import { PageHeader } from '@/components/PageHeader'
 import { setup } from '@/lib/locale'
 
@@ -23,7 +24,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
       <PageHeader title={article.title} intro={article.excerpt} eyebrow={date} />
       <div className="container prose-wrap">
         <Link className="link-arrow" href={`/${locale}/actualites`}>
-          ← {tp.news.back}
+          <Arrow back /> {tp.news.back}
         </Link>
         {article.content && (
           <div className="prose">

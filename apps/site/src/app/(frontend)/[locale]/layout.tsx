@@ -11,6 +11,7 @@ import { getDictionary } from '@/i18n/dictionaries'
 
 import { FONT_ARABIC_URL, FONT_BASE_URL, FONT_CHINESE_URL } from '@scd/ui/fonts'
 import '@scd/ui/tokens.css'
+import '@scd/ui/motion.css'
 import '../styles.css'
 
 // Les pages pré-générées sont reconstruites au plus toutes les 60 s :

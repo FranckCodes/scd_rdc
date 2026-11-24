@@ -1,0 +1,70 @@
+/*
+ * Mouvement partagé SCD-RDC (site institutionnel et SCD-RDC DATA).
+ * Règles du plan d'animation :
+ *  - n'animer que transform, opacity (et le tracé des SVG) : fluide même sur un Android d'entrée de gamme ;
+ *  - aucune boucle infinie hors indicateur de chargement ;
+ *  - le réglage système « Réduire les animations » est toujours respecté ;
+ *  - le logo officiel n'est jamais animé (charte §06) : seul le motif de l'empreinte l'est.
+ * Les durées et courbes sont dans tokens.css (--scd-dur-*, --scd-ease-*).
+ */
+
+@keyframes scd-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scd-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--scd-shift-sm));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scd-drop-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--scd-shift-sm)));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes scd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tracé d'un SVG : stroke-dasharray: 1 + pathLength="1", puis stroke-dashoffset de 1 à 0 */
+@keyframes scd-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/*
+ * « Réduire les animations » (réglage du téléphone ou de l'ordinateur) :
+ * plus aucun mouvement, chaque élément apparaît directement dans son état final.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Where } from 'payload'
 
+import { Arrow } from '@/components/Arrow'
 import { PageHeader, StatusBadge } from '@/components/PageHeader'
 import { componentKeys, sectorKeys, sectorLabel } from '@/i18n/sectors'
 import { setup } from '@/lib/locale'
@@ -102,7 +103,7 @@ export default async function ProgrammePage({ params, searchParams }: { params: 
             </ul>
           )}
           <Link className="link-arrow" href={`/${locale}/participer/contribution`}>
-            {tp.participate.forms.contribution.title} →
+            {tp.participate.forms.contribution.title} <Arrow />
           </Link>
         </div>
       </section>

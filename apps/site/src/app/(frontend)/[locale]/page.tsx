@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
+import { Arrow } from '@/components/Arrow'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
@@ -101,7 +102,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <strong className="accent">{t.components.titleBold}</strong>
             </h2>
             <Link className="link-arrow" href={`/${locale}/programme`}>
-              {t.cta.programme} →
+              {t.cta.programme} <Arrow />
             </Link>
           </div>
           <div className="cards">
@@ -177,7 +178,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <strong>{t.news.title}</strong>
             </h2>
             <Link className="link-arrow" href={`/${locale}/actualites`}>
-              {t.news.all} →
+              {t.news.all} <Arrow />
             </Link>
           </div>
           {news.docs.length > 0 ? (

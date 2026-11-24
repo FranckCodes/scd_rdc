@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { Arrow } from '@/components/Arrow'
 import { PageHeader } from '@/components/PageHeader'
 import type { FormKey } from '@/i18n/pages'
 import { setup } from '@/lib/locale'
@@ -17,7 +18,7 @@ export default async function ParticiperPage({ params }: { params: Promise<{ loc
             <Link key={key} href={`/${locale}/participer/${key}`} className="card" style={{ borderTopColor: ['var(--scd-navy)', 'var(--scd-sky)', 'var(--scd-green)', 'var(--scd-yellow)', 'var(--scd-red)'][i] }}>
               <span className="card__title">{tp.participate.forms[key].title}</span>
               <span className="card__text">{tp.participate.forms[key].desc}</span>
-              <span className="card__meta">{tp.participate.delay} →</span>
+              <span className="card__meta">{tp.participate.delay} <Arrow /></span>
             </Link>
           ))}
         </div>

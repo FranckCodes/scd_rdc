@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 // Affiche un formulaire défini dans l'administration (plugin form-builder) et l'envoie à l'API Payload.
 type Option = { label: string; value: string }
@@ -30,6 +30,13 @@ export function FormRenderer({
   confirmation: React.ReactNode
 }) {
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
+  const doneRef = useRef<HTMLDivElement>(null)
+
+  // Le formulaire disparaît au profit de la confirmation : on y place le focus
+  // pour que le clavier et les lecteurs d'écran ne « perdent » pas l'utilisateur.
+  useEffect(() => {
+    if (state === 'done') doneRef.current?.focus()
+  }, [state])
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -55,14 +62,19 @@ export function FormRenderer({
 
   if (state === 'done') {
     return (
-      <div className="form-confirmation" role="status">
-        {confirmation}
+      <div ref={doneRef} tabIndex={-1} className="form-confirmation">
+        {/* Coche qui se dessine (cercle puis trait) */}
+        <svg className="form-confirmation__icon" aria-hidden="true" width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <circle className="draw" cx="22" cy="22" r="19" pathLength={1} />
+          <path className="draw draw--late" d="M13.5 22.5l6 6L31 16.5" pathLength={1} />
+        </svg>
+        <div className="form-confirmation__text">{confirmation}</div>
       </div>
     )
   }
 
   return (
-    <form className="form" onSubmit={onSubmit} noValidate={false}>
+    <form className="form" onSubmit={onSubmit} noValidate={false} aria-busy={state === 'sending'}>
       {fields.map((f, i) => {
         const id = `f-${f.name ?? i}`
         const req = Boolean(f.required)
@@ -130,6 +142,15 @@ export function FormRenderer({
         </p>
       )}
       <button className="btn btn--navy" type="submit" disabled={state === 'sending'}>
+        {state === 'sending' && (
+          // Mini-empreinte qui tourne pendant l'envoi (immobile si « Réduire les animations »)
+          <span className="spinner" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              <circle cx="12" cy="12" r="9.5" strokeDasharray="34 26" />
+              <circle cx="12" cy="12" r="5" strokeDasharray="17 14" />
+            </svg>
+          </span>
+        )}
         {state === 'sending' ? labels.sending : submitLabel || labels.submit}
       </button>
     </form>

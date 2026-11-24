@@ -2,6 +2,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { Arrow } from '@/components/Arrow'
 import { FormRenderer, type FormField } from '@/components/FormRenderer'
 import { PageHeader } from '@/components/PageHeader'
 import { setup } from '@/lib/locale'
@@ -21,7 +22,7 @@ export default async function FormPage({ params }: { params: Promise<{ locale: s
       <section className="section">
         <div className="container form-wrap">
           <Link className="link-arrow" href={`/${locale}/participer`}>
-            ← {tp.form.back}
+            <Arrow back /> {tp.form.back}
           </Link>
           <FormRenderer
             formId={form.id}

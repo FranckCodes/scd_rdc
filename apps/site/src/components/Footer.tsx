@@ -14,7 +14,7 @@ export function Footer({ locale, t, email }: { locale: Locale; t: Dictionary; em
           <Image src="/brand/logo-h-blanc.png" alt="SCD-RDC" width={159} height={48} />
           <p>{t.footer.tagline}</p>
         </div>
-        <nav aria-label={t.nav.about} className="site-footer__nav">
+        <nav aria-label={t.ui.siteMap} className="site-footer__nav">
           {navLinks(locale, t).map((l) => (
             <Link key={l.href} href={l.href}>
               {l.label}
