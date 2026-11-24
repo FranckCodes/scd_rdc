@@ -5,6 +5,8 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 import { Arrow } from '@/components/Arrow'
+import { CountUp } from '@/components/CountUp'
+import { FingerprintRings } from '@/components/FingerprintRings'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 
@@ -36,12 +38,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       {/* ACCROCHE */}
       <section className="hero">
-        <svg className="hero__rings" aria-hidden="true" viewBox="0 0 400 400" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round">
-          <circle cx="200" cy="200" r="60" strokeDasharray="220 30" />
-          <circle cx="200" cy="200" r="100" strokeDasharray="380 40 120 30" />
-          <circle cx="200" cy="200" r="140" strokeDasharray="520 50 180 40" />
-          <circle cx="200" cy="200" r="180" strokeDasharray="700 60 240 50" />
-        </svg>
+        <FingerprintRings id="hero-rings" className="hero__rings" />
         <div className="container hero__grid">
           <div className="hero__text">
             <span className="eyebrow eyebrow--light">
@@ -134,7 +131,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="data-visual">
             <div className="data-visual__box">
               <div>
-                <span className="data-visual__num">50</span>
+                <span className="data-visual__num">
+                  <CountUp value={50} />
+                </span>
                 <span>{t.data.sample}</span>
               </div>
               <p>{t.data.note}</p>

@@ -1,9 +1,12 @@
 import React from 'react'
 
+import { FingerprintRings } from './FingerprintRings'
+
 // Bandeau bleu marine en tête des pages intérieures (direction C2).
 export function PageHeader({ title, intro, eyebrow, children }: { title: string; intro?: string | null; eyebrow?: string; children?: React.ReactNode }) {
   return (
     <section className="page-header">
+      <FingerprintRings id="band-rings" className="page-header__rings" />
       <div className="container page-header__inner">
         {eyebrow && <span className="eyebrow eyebrow--light">{eyebrow}</span>}
         <h1 className="page-header__title">{title}</h1>
