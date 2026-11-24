@@ -19,7 +19,13 @@ leur domaine et ne s'appellent pas l'un l'autre.
 1. Vercel → **Add New… → Project** → importer `FranckCodes/scd_rdc`.
 2. **Root Directory** : `apps/data` (Framework : Next.js, détecté).
 3. Variable d'environnement : `NEXT_PUBLIC_SITE_URL` = `https://scd-rdc.org`
+   (DATA y lit aussi les fiches projets validées). Facultatif : `SITE_API_URL` si l'API du site
+   doit être lue à une autre adresse (par exemple l'adresse `…vercel.app` du site tant que
+   `scd-rdc.org` n'est pas branché).
 4. **Deploy**.
+
+> Ne jamais définir `DATA_DEMO` sur Vercel : cette variable n'active la démonstration (projets
+> fictifs) que sur un ordinateur, via `apps/data/.env.local`, et elle est de toute façon refusée sur Vercel.
 
 ## 2. Projet `scd-rdc-site`
 
@@ -116,6 +122,16 @@ pnpm migrate:create nom-du-changement   # génère src/migrations/<date>_nom-du-
 ```
 
 Valider le fichier de migration avec le code. Il sera appliqué au prochain déploiement.
+
+## Publier une fiche projet sur SCD-RDC DATA
+1. Administration du site → **Projets (SCD-RDC DATA)** → créer la fiche (source et date de mise à jour obligatoires).
+2. Cocher « Montant et source validés et publiables » seulement si l'institution l'a autorisé par écrit.
+3. Un compte **admin** ou **validateur** passe le statut de validation à **Confirmé**.
+4. La fiche apparaît sur `data.scd-rdc.org` en 5 minutes au plus. Repasser une fiche à « En attente »
+   la retire de DATA dans le même délai.
+
+Démonstration locale avec des projets fictifs : créer `apps/data/.env.local` contenant `DATA_DEMO=1`,
+puis `pnpm --filter data dev` (http://localhost:3001). Un bandeau jaune rappelle que tout est fictif.
 
 ## Encore à faire avant l'ouverture au public
 - **Polices** : les auto-héberger plutôt que de les charger depuis Google Fonts.

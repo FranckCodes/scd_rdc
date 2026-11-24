@@ -73,6 +73,7 @@ export interface Config {
     speakers: Speaker;
     exhibitors: Exhibitor;
     partners: Partner;
+    projects: Project;
     documents: Document;
     media: Media;
     users: User;
@@ -91,6 +92,7 @@ export interface Config {
     speakers: SpeakersSelect<false> | SpeakersSelect<true>;
     exhibitors: ExhibitorsSelect<false> | ExhibitorsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
+    projects: ProjectsSelect<false> | ProjectsSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -351,6 +353,91 @@ export interface Partner {
   url?: string | null;
   order?: number | null;
   logoAuthorized?: boolean | null;
+  /**
+   * Ne passer à « Confirmé » qu’après validation écrite par le responsable désigné.
+   */
+  validationStatus: 'confirme' | 'en-attente' | 'a-venir';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Fiches publiées sur data.scd-rdc.org uniquement au statut « Confirmé ». Ne jamais inventer ni arrondir une donnée : chaque fiche cite sa source et sa date de mise à jour.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects".
+ */
+export interface Project {
+  id: number;
+  title: string;
+  slug: string;
+  summary: string;
+  institution: string;
+  partners?: string | null;
+  supervision?: string | null;
+  sector:
+    | 'infrastructures'
+    | 'energie'
+    | 'capital-humain'
+    | 'climat'
+    | 'agriculture'
+    | 'industrie'
+    | 'sante'
+    | 'territoires'
+    | 'culture';
+  province:
+    | 'bas-uele'
+    | 'equateur'
+    | 'haut-katanga'
+    | 'haut-lomami'
+    | 'haut-uele'
+    | 'ituri'
+    | 'kasai'
+    | 'kasai-central'
+    | 'kasai-oriental'
+    | 'kinshasa'
+    | 'kongo-central'
+    | 'kwango'
+    | 'kwilu'
+    | 'lomami'
+    | 'lualaba'
+    | 'mai-ndombe'
+    | 'maniema'
+    | 'mongala'
+    | 'nord-kivu'
+    | 'nord-ubangi'
+    | 'sankuru'
+    | 'sud-kivu'
+    | 'sud-ubangi'
+    | 'tanganyika'
+    | 'tshopo'
+    | 'tshuapa';
+  /**
+   * Territoire, ville… sans précision sensible.
+   */
+  location?: string | null;
+  objectives?: string | null;
+  periodStart?: string | null;
+  periodEnd?: string | null;
+  targetPopulation?: string | null;
+  status: 'annonce' | 'en-preparation' | 'finance' | 'en-execution' | 'acheve' | 'cloture';
+  fundingPublishable?: boolean | null;
+  amount?: number | null;
+  currency?: ('USD' | 'CDF' | 'EUR') | null;
+  fundingSource?: string | null;
+  results?:
+    | {
+        indicator: string;
+        value: string;
+        period?: string | null;
+        source: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Institution qui a fourni et validé les informations.
+   */
+  dataSource: string;
+  updatedOn: string;
   /**
    * Ne passer à « Confirmé » qu’après validation écrite par le responsable désigné.
    */
@@ -644,6 +731,10 @@ export interface PayloadLockedDocument {
         value: number | Partner;
       } | null)
     | ({
+        relationTo: 'projects';
+        value: number | Project;
+      } | null)
+    | ({
         relationTo: 'documents';
         value: number | Document;
       } | null)
@@ -799,6 +890,44 @@ export interface PartnersSelect<T extends boolean = true> {
   url?: T;
   order?: T;
   logoAuthorized?: T;
+  validationStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "projects_select".
+ */
+export interface ProjectsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  summary?: T;
+  institution?: T;
+  partners?: T;
+  supervision?: T;
+  sector?: T;
+  province?: T;
+  location?: T;
+  objectives?: T;
+  periodStart?: T;
+  periodEnd?: T;
+  targetPopulation?: T;
+  status?: T;
+  fundingPublishable?: T;
+  amount?: T;
+  currency?: T;
+  fundingSource?: T;
+  results?:
+    | T
+    | {
+        indicator?: T;
+        value?: T;
+        period?: T;
+        source?: T;
+        id?: T;
+      };
+  dataSource?: T;
+  updatedOn?: T;
   validationStatus?: T;
   updatedAt?: T;
   createdAt?: T;

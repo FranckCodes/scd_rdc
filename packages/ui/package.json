@@ -2,10 +2,11 @@
   "name": "@scd/ui",
   "version": "0.1.0",
   "private": true,
-  "description": "Charte graphique partagée SCD-RDC (jetons CSS, mouvement, polices)",
+  "description": "Charte graphique et listes de référence partagées SCD-RDC (jetons CSS, mouvement, polices, provinces/secteurs)",
   "exports": {
     "./tokens.css": "./tokens.css",
     "./motion.css": "./motion.css",
-    "./fonts": "./fonts.ts"
+    "./fonts": "./fonts.ts",
+    "./reference": "./reference.ts"
   }
 }

@@ -18,6 +18,7 @@ import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { Pages } from './collections/Pages'
 import { Partners } from './collections/Partners'
+import { Projects } from './collections/Projects'
 import { Sessions } from './collections/Sessions'
 import { Speakers } from './collections/Speakers'
 import { Users } from './collections/Users'
@@ -65,7 +66,7 @@ export default buildConfig({
     fallback: true,
   },
 
-  collections: [Pages, News, Sessions, Speakers, Exhibitors, Partners, Documents, Media, Users],
+  collections: [Pages, News, Sessions, Speakers, Exhibitors, Partners, Projects, Documents, Media, Users],
   globals: [EventInfo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

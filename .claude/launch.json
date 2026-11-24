@@ -18,6 +18,12 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "data", "dev"],
       "port": 3001
+    },
+    {
+      "name": "data-prod",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "data", "exec", "next", "start", "--port", "3003"],
+      "port": 3003
     }
   ]
 }
