@@ -17,6 +17,15 @@
   }
 }
 
+@keyframes scd-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes scd-fade-up {
   from {
     opacity: 0;
@@ -66,5 +75,13 @@
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Transitions entre pages (View Transitions) : le contenu change instantanément */
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

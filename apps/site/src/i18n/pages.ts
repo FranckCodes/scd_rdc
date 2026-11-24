@@ -22,6 +22,7 @@ export type PageDictionary = {
     filter: string
     empty: string
     room: string
+    updated: string
   }
   salon: { title: string; intro: string; sectors: string; exhibitors: string; empty: string; cta: string }
   partnerships: {
@@ -83,6 +84,7 @@ const fr: PageDictionary = {
     filter: 'Filtrer',
     empty: 'Le programme détaillé sera publié dès la validation des premières sessions.',
     room: 'Salle',
+    updated: 'Programme mis à jour.',
   },
   salon: {
     title: 'Salon des projets',
@@ -161,6 +163,7 @@ const en: PageDictionary = {
     filter: 'Filter',
     empty: 'The detailed programme will be published once the first sessions are approved.',
     room: 'Room',
+    updated: 'Programme updated.',
   },
   salon: {
     title: 'Projects Fair',
@@ -228,6 +231,7 @@ const zh: PageDictionary = {
     filter: '筛选',
     empty: '首批会议审定后将公布详细议程。',
     room: '会议室',
+    updated: '议程已更新。',
   },
   salon: {
     title: '项目展',
@@ -296,6 +300,7 @@ const ru: PageDictionary = {
     filter: 'Фильтр',
     empty: 'Подробная программа будет опубликована после утверждения первых сессий.',
     room: 'Зал',
+    updated: 'Программа обновлена.',
   },
   salon: {
     title: 'Выставка проектов',
@@ -363,6 +368,7 @@ const ar: PageDictionary = {
     filter: 'تصفية',
     empty: 'سيُنشر البرنامج المفصّل بعد اعتماد الجلسات الأولى.',
     room: 'القاعة',
+    updated: 'تم تحديث البرنامج.',
   },
   salon: {
     title: 'معرض المشاريع',

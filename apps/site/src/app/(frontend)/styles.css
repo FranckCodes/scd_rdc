@@ -343,3 +343,16 @@ ul.cards { list-style: none; margin: 0; padding: 0; }
 
 /* Compteur (0 → valeur) : chiffres à chasse fixe et largeur réservée, pour que rien ne bouge autour */
 .count-up__digits { display: inline-block; font-variant-numeric: tabular-nums; }
+
+/* ===== Transitions entre pages (animations, phase 3) =====
+   View Transitions de React (voir [locale]/template.tsx) : fondu enchaîné court, l'ancienne page
+   sort plus vite que la nouvelle n'entre. Désactivées avec « Réduire les animations » (motion.css). */
+::view-transition-old(root) { animation: var(--scd-dur-fast) var(--scd-ease-in) both scd-fade-out; }
+::view-transition-new(root) { animation: var(--scd-dur-base) var(--scd-ease-out) both scd-fade-in; }
+::view-transition-old(.page-exit) { animation: var(--scd-dur-fast) var(--scd-ease-in) both scd-fade-out; }
+::view-transition-new(.page-enter) { animation: var(--scd-dur-base) var(--scd-ease-out) both scd-fade-up; }
+
+/* Programme : la liste filtrée remplace la précédente en fondu, sa hauteur s'ajuste en douceur */
+::view-transition-group(.programme-swap) { animation-duration: var(--scd-dur-base); animation-timing-function: var(--scd-ease-in-out); }
+::view-transition-old(.programme-swap) { animation: var(--scd-dur-fast) var(--scd-ease-in) both scd-fade-out; }
+::view-transition-new(.programme-swap) { animation: var(--scd-dur-base) var(--scd-ease-out) both scd-fade-up; }
