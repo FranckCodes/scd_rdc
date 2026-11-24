@@ -21,5 +21,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Ne pas toucher à l'administration, à l'API, aux fichiers Next ni aux fichiers statiques.
-  matcher: ['/((?!admin|api|_next|brand|images|media|favicon.ico|robots.txt|sitemap.xml).*)'],
+  matcher: ['/((?!admin|api|_next|brand|images|media|favicon.ico|icon.png|apple-icon.png|robots.txt|sitemap.xml).*)'],
 }

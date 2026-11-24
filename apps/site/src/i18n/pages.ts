@@ -48,6 +48,8 @@ export type PageDictionary = {
     contact: string
   }
   news: { title: string; empty: string; back: string }
+  live: string
+  trophies: { title: string; intro: string; empty: string; pending: string; laureate: string; live: string; revealed: string }
 }
 
 const fr: PageDictionary = {
@@ -127,6 +129,16 @@ const fr: PageDictionary = {
     contact: 'Contact presse',
   },
   news: { title: 'Actualités', empty: 'Les premières actualités seront publiées prochainement.', back: 'Toutes les actualités' },
+  live: 'En cours',
+  trophies: {
+    title: 'Trophées',
+    intro: 'Les Trophées distinguent des résultats probants de la coopération au développement en RDC. Les lauréats sont dévoilés lors de la cérémonie de remise.',
+    empty: 'Les catégories des Trophées seront annoncées prochainement.',
+    pending: 'Lauréat dévoilé lors de la cérémonie',
+    laureate: 'Lauréat',
+    live: 'Cérémonie en cours : les lauréats apparaissent ici au fil des annonces.',
+    revealed: 'Lauréat dévoilé',
+  },
 }
 
 const en: PageDictionary = {
@@ -201,6 +213,16 @@ const en: PageDictionary = {
     contact: 'Press contact',
   },
   news: { title: 'News', empty: 'The first news items will be published soon.', back: 'All news' },
+  live: 'Live now',
+  trophies: {
+    title: 'Awards',
+    intro: 'The Awards recognise proven results of development cooperation in the DRC. Winners are revealed at the award ceremony.',
+    empty: 'The award categories will be announced soon.',
+    pending: 'Winner revealed at the ceremony',
+    laureate: 'Winner',
+    live: 'Ceremony in progress: winners appear here as they are announced.',
+    revealed: 'Winner revealed',
+  },
 }
 
 const zh: PageDictionary = {
@@ -264,6 +286,16 @@ const zh: PageDictionary = {
     contact: '媒体联系',
   },
   news: { title: '新闻', empty: '首批新闻即将发布。', back: '全部新闻' },
+  live: '正在进行',
+  trophies: {
+    title: '奖项',
+    intro: '奖项表彰刚果民主共和国发展合作中成效显著的成果。获奖者将在颁奖典礼上揭晓。',
+    empty: '奖项类别即将公布。',
+    pending: '获奖者将在颁奖典礼上揭晓',
+    laureate: '获奖者',
+    live: '颁奖典礼正在进行：获奖者将在此陆续公布。',
+    revealed: '获奖者揭晓',
+  },
 }
 
 const ru: PageDictionary = {
@@ -338,6 +370,16 @@ const ru: PageDictionary = {
     contact: 'Контакт для прессы',
   },
   news: { title: 'Новости', empty: 'Первые новости скоро появятся.', back: 'Все новости' },
+  live: 'Идёт сейчас',
+  trophies: {
+    title: 'Премии',
+    intro: 'Премии отмечают доказанные результаты сотрудничества в целях развития в ДРК. Лауреаты объявляются на церемонии награждения.',
+    empty: 'Номинации будут объявлены в ближайшее время.',
+    pending: 'Лауреат будет объявлен на церемонии',
+    laureate: 'Лауреат',
+    live: 'Идёт церемония: лауреаты появляются здесь по мере объявления.',
+    revealed: 'Объявлен лауреат',
+  },
 }
 
 const ar: PageDictionary = {
@@ -406,6 +448,16 @@ const ar: PageDictionary = {
     contact: 'جهة الاتصال الصحفية',
   },
   news: { title: 'الأخبار', empty: 'ستُنشر الأخبار الأولى قريبًا.', back: 'جميع الأخبار' },
+  live: 'جارٍ الآن',
+  trophies: {
+    title: 'الجوائز',
+    intro: 'تكرّم الجوائز النتائج المثبتة للتعاون من أجل التنمية في جمهورية الكونغو الديمقراطية. ويُكشف عن الفائزين خلال حفل توزيع الجوائز.',
+    empty: 'ستُعلن فئات الجوائز قريبًا.',
+    pending: 'يُكشف عن الفائز خلال الحفل',
+    laureate: 'الفائز',
+    live: 'الحفل جارٍ: يظهر الفائزون هنا تباعًا عند الإعلان عنهم.',
+    revealed: 'تم الكشف عن الفائز',
+  },
 }
 
 const dictionaries: Record<Locale, PageDictionary> = { fr, en, zh, ru, ar }

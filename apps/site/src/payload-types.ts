@@ -71,6 +71,7 @@ export interface Config {
     news: News;
     sessions: Session;
     speakers: Speaker;
+    trophies: Trophy;
     exhibitors: Exhibitor;
     partners: Partner;
     projects: Project;
@@ -90,6 +91,7 @@ export interface Config {
     news: NewsSelect<false> | NewsSelect<true>;
     sessions: SessionsSelect<false> | SessionsSelect<true>;
     speakers: SpeakersSelect<false> | SpeakersSelect<true>;
+    trophies: TrophiesSelect<false> | TrophiesSelect<true>;
     exhibitors: ExhibitorsSelect<false> | ExhibitorsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
@@ -303,6 +305,34 @@ export interface Speaker {
   organization?: string | null;
   photo?: (number | null) | Media;
   bio?: string | null;
+  /**
+   * Ne passer à « Confirmé » qu’après validation écrite par le responsable désigné.
+   */
+  validationStatus: 'confirme' | 'en-attente' | 'a-venir';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Une fiche par catégorie. Le lauréat reste confidentiel (invisible en ligne) jusqu’à ce que « Lauréat dévoilé » soit coché pendant la cérémonie.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trophies".
+ */
+export interface Trophy {
+  id: number;
+  category: string;
+  description?: string | null;
+  laureate?: {
+    name?: string | null;
+    organisation?: string | null;
+    summary?: string | null;
+    photo?: (number | null) | Media;
+  };
+  order?: number | null;
+  /**
+   * À cocher au moment de l’annonce, pendant la cérémonie : le lauréat apparaît alors en ligne.
+   */
+  revealed?: boolean | null;
   /**
    * Ne passer à « Confirmé » qu’après validation écrite par le responsable désigné.
    */
@@ -723,6 +753,10 @@ export interface PayloadLockedDocument {
         value: number | Speaker;
       } | null)
     | ({
+        relationTo: 'trophies';
+        value: number | Trophy;
+      } | null)
+    | ({
         relationTo: 'exhibitors';
         value: number | Exhibitor;
       } | null)
@@ -860,6 +894,27 @@ export interface SpeakersSelect<T extends boolean = true> {
   organization?: T;
   photo?: T;
   bio?: T;
+  validationStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "trophies_select".
+ */
+export interface TrophiesSelect<T extends boolean = true> {
+  category?: T;
+  description?: T;
+  laureate?:
+    | T
+    | {
+        name?: T;
+        organisation?: T;
+        summary?: T;
+        photo?: T;
+      };
+  order?: T;
+  revealed?: T;
   validationStatus?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1224,10 +1279,16 @@ export interface EventInfo {
   id: number;
   dates?: string | null;
   datesConfirmed?: boolean | null;
+  startDate?: string | null;
+  endDate?: string | null;
   city?: string | null;
   venue?: string | null;
   venueConfirmed?: boolean | null;
   format?: string | null;
+  /**
+   * À activer pendant la cérémonie seulement : la page Trophées ouverte chez les visiteurs se met à jour d’elle-même et retourne la carte de chaque lauréat dévoilé.
+   */
+  ceremonyLive?: boolean | null;
   keyFigures?:
     | {
         value: string;
@@ -1252,10 +1313,13 @@ export interface EventInfo {
 export interface EventInfoSelect<T extends boolean = true> {
   dates?: T;
   datesConfirmed?: T;
+  startDate?: T;
+  endDate?: T;
   city?: T;
   venue?: T;
   venueConfirmed?: T;
   format?: T;
+  ceremonyLive?: T;
   keyFigures?:
     | T
     | {

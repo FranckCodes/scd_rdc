@@ -61,6 +61,18 @@
   }
 }
 
+/* Pastille « en direct » : un anneau s'élargit et s'efface. Jouée 3 fois (moins de 5 s), puis plus rien ne bouge. */
+@keyframes scd-pulse {
+  from {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
 /*
  * « Réduire les animations » (réglage du téléphone ou de l'ordinateur) :
  * plus aucun mouvement, chaque élément apparaît directement dans son état final.

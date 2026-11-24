@@ -133,6 +133,20 @@ Valider le fichier de migration avec le code. Il sera appliqué au prochain dép
 Démonstration locale avec des projets fictifs : créer `apps/data/.env.local` contenant `DATA_DEMO=1`,
 puis `pnpm --filter data dev` (http://localhost:3001). Un bandeau jaune rappelle que tout est fictif.
 
+## Temps forts de l'événement
+- **Compte à rebours (accueil)** : administration → *Informations de l’événement* → saisir le premier et
+  le dernier jour, puis un compte validateur coche « Confirmé officiellement » pour les dates. Sans ces
+  deux conditions, rien ne s'affiche. Pendant l'événement, il devient « En cours · Jour 1 ».
+- **Pastilles « En cours » (programme)** : automatiques pour les sessions qui ont un jour (Jour 1 / Jour 2)
+  et des heures de début et de fin, à l'heure de Kinshasa (format `09:30`).
+- **Trophées** (`/fr/trophees`) : une fiche par catégorie dans *Programme → Trophées*. Le lauréat reste
+  invisible en ligne (pages et API) tant que « Lauréat dévoilé » n'est pas coché.
+  Le jour de la cérémonie :
+  1. cocher « Cérémonie des Trophées en cours » dans *Informations de l’événement* ;
+  2. au moment de chaque annonce, cocher « Lauréat dévoilé » sur la catégorie : la carte se retourne
+     d'elle-même chez les visiteurs (15 s au plus) ;
+  3. décocher « Cérémonie des Trophées en cours » à la fin.
+
 ## Encore à faire avant l'ouverture au public
 - **Polices** : les auto-héberger plutôt que de les charger depuis Google Fonts.
 - **Mesure d'audience** respectueuse de la vie privée (ex. Vercel Web Analytics, sans cookie).

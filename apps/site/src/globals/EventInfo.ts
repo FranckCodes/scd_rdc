@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import type { GlobalConfig } from 'payload'
 
 import { canValidate } from '../access/roles'
@@ -12,17 +13,49 @@ const confirmed = (name: string) => ({
   access: { update: canValidate },
 })
 
+const dayOnly = { date: { pickerAppearance: 'dayOnly' as const, displayFormat: 'dd/MM/yyyy' } }
+
 export const EventInfo: GlobalConfig = {
   slug: 'event-info',
   label: 'Informations de l’événement',
   admin: { group: 'Administration' },
   access: { read: () => true },
+  hooks: {
+    // Dates, mode cérémonie… apparaissent sur de nombreuses pages : tout le site est régénéré.
+    afterChange: [
+      ({ doc }) => {
+        try {
+          revalidatePath('/', 'layout')
+        } catch {
+          // Hors de Next.js (script de chargement des contenus) : rien à régénérer.
+        }
+        return doc
+      },
+    ],
+  },
   fields: [
     {
       type: 'row',
       fields: [
         { name: 'dates', label: 'Dates', type: 'text', localized: true, defaultValue: 'Mars 2027' },
         confirmed('datesConfirmed'),
+      ],
+    },
+    {
+      type: 'collapsible',
+      label: 'Calendrier exact (compte à rebours et pastilles « En cours »)',
+      admin: {
+        description:
+          'Le compte à rebours de l’accueil et les pastilles « En cours » du programme n’apparaissent que si ces dates sont saisies ET que les dates sont confirmées officiellement.',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            { name: 'startDate', label: 'Premier jour (Jour 1 du programme)', type: 'date', admin: dayOnly },
+            { name: 'endDate', label: 'Dernier jour', type: 'date', admin: dayOnly },
+          ],
+        },
       ],
     },
     {
@@ -34,6 +67,17 @@ export const EventInfo: GlobalConfig = {
       ],
     },
     { name: 'format', label: 'Format', type: 'text', localized: true, defaultValue: '2 jours · 250–300 décideurs' },
+    {
+      name: 'ceremonyLive',
+      label: 'Cérémonie des Trophées en cours',
+      type: 'checkbox',
+      defaultValue: false,
+      access: { update: canValidate },
+      admin: {
+        description:
+          'À activer pendant la cérémonie seulement : la page Trophées ouverte chez les visiteurs se met à jour d’elle-même et retourne la carte de chaque lauréat dévoilé.',
+      },
+    },
     {
       name: 'keyFigures',
       label: 'Chiffres clés (sourcés et datés)',

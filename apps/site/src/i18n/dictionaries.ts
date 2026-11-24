@@ -1,3 +1,4 @@
+import type { CountdownLabels } from '../components/Countdown'
 import type { Locale } from './config'
 
 // Textes de l'interface du site public.
@@ -11,6 +12,7 @@ export type Dictionary = {
   cta: { participate: string; interest: string; partner: string; programme: string; data: string }
   hero: { eyebrow: string; titleLight: string; titleBold: string; lead: string; photoCredit: string }
   info: { dates: string; place: string; format: string }
+  countdown: CountdownLabels
   components: {
     titleLight: string
     titleBold: string
@@ -55,6 +57,13 @@ const fr: Dictionary = {
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
   info: { dates: 'Dates', place: 'Lieu', format: 'Format' },
+  countdown: {
+    number: 'J-{n}',
+    label: { one: 'avant l’ouverture', other: 'avant l’ouverture' },
+    spoken: { one: 'Ouverture dans {n} jour', other: 'Ouverture dans {n} jours' },
+    live: 'En cours',
+    day: 'Jour {n}',
+  },
   components: {
     titleLight: 'Cinq composantes, ',
     titleBold: 'un programme',
@@ -115,6 +124,13 @@ const en: Dictionary = {
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
   info: { dates: 'Dates', place: 'Venue', format: 'Format' },
+  countdown: {
+    number: '{n}',
+    label: { one: 'day to go', other: 'days to go' },
+    spoken: { one: 'Opening in {n} day', other: 'Opening in {n} days' },
+    live: 'Live now',
+    day: 'Day {n}',
+  },
   components: {
     titleLight: 'Five components, ',
     titleBold: 'one programme',
@@ -161,6 +177,7 @@ const zh: Dictionary = {
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
   info: { dates: '日期', place: '地点', format: '形式' },
+  countdown: { number: '{n}', label: { other: '天后开幕' }, spoken: { other: '{n}天后开幕' }, live: '正在进行', day: '第{n}天' },
   components: {
     titleLight: '五个板块，',
     titleBold: '一个议程',
@@ -211,6 +228,13 @@ const ru: Dictionary = {
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
   info: { dates: 'Даты', place: 'Место', format: 'Формат' },
+  countdown: {
+    number: '{n}',
+    label: { one: 'день до открытия', few: 'дня до открытия', many: 'дней до открытия', other: 'дня до открытия' },
+    spoken: { one: 'До открытия {n} день', few: 'До открытия {n} дня', many: 'До открытия {n} дней', other: 'До открытия {n} дня' },
+    live: 'Идёт сейчас',
+    day: 'День {n}',
+  },
   components: {
     titleLight: 'Пять направлений — ',
     titleBold: 'одна программа',
@@ -271,6 +295,13 @@ const ar: Dictionary = {
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
   info: { dates: 'التواريخ', place: 'المكان', format: 'الصيغة' },
+  countdown: {
+    number: '{n}',
+    label: { zero: 'يوم على الافتتاح', one: 'يوم على الافتتاح', two: 'يومان على الافتتاح', few: 'أيام على الافتتاح', many: 'يومًا على الافتتاح', other: 'يوم على الافتتاح' },
+    spoken: { zero: 'الافتتاح بعد {n} يوم', one: 'الافتتاح بعد يوم واحد', two: 'الافتتاح بعد يومين', few: 'الافتتاح بعد {n} أيام', many: 'الافتتاح بعد {n} يومًا', other: 'الافتتاح بعد {n} يوم' },
+    live: 'جارٍ الآن',
+    day: 'اليوم {n}',
+  },
   components: {
     titleLight: 'خمسة محاور، ',
     titleBold: 'برنامج واحد',

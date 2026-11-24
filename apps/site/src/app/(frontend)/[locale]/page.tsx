@@ -5,10 +5,13 @@ import { getPayload } from 'payload'
 
 import config from '@payload-config'
 import { Arrow } from '@/components/Arrow'
+import { Countdown } from '@/components/Countdown'
 import { CountUp } from '@/components/CountUp'
 import { FingerprintRings } from '@/components/FingerprintRings'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
+import { componentKeys } from '@/i18n/sectors'
+import { eventPhase } from '@/lib/event-time'
 
 // Page d'accueil — direction C2 « Bleu institutionnel » (TDR §7).
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -33,6 +36,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     confirmed ? null : <span className="muted"> · {t.ui.toConfirm}</span>
   const ruleColors = ['var(--scd-navy)', 'var(--scd-sky)', 'var(--scd-green)', 'var(--scd-yellow)', 'var(--scd-red)']
   const formatDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' })
+  // Compte à rebours : seulement si les dates sont confirmées officiellement ET le premier jour saisi.
+  const countdownStart = event.datesConfirmed && event.startDate ? event.startDate : null
+  const phase = countdownStart ? eventPhase(new Date(), countdownStart, event.endDate) : null
 
   return (
     <>
@@ -49,6 +55,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <strong>{t.hero.titleBold}</strong>
             </h1>
             <p className="lead">{t.hero.lead}</p>
+            {countdownStart && phase && phase.kind !== 'after' && (
+              <Countdown
+                start={countdownStart}
+                end={event.endDate}
+                initial={phase}
+                locale={locale}
+                labels={t.countdown}
+                programmeHref={`/${locale}/programme`}
+              />
+            )}
             <div className="actions">
               <Link className="btn btn--yellow" href={`/${locale}/participer`}>
                 {t.cta.interest}
@@ -104,7 +120,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <div className="cards">
             {t.components.items.map((item, i) => (
-              <Link key={item.title} href={`/${locale}/programme`} className="card" style={{ borderTopColor: ruleColors[i] }}>
+              <Link
+                key={item.title}
+                href={componentKeys[i] === 'trophees' ? `/${locale}/trophees` : `/${locale}/programme`}
+                className="card"
+                style={{ borderTopColor: ruleColors[i] }}
+              >
                 <span className="card__num">0{i + 1}</span>
                 <span className="card__title">{item.title}</span>
                 <span className="card__text">{item.text}</span>

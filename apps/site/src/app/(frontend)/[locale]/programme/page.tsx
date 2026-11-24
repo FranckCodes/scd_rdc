@@ -3,9 +3,11 @@ import type { Where } from 'payload'
 import { ViewTransition } from 'react'
 
 import { Arrow } from '@/components/Arrow'
+import { LiveBadge } from '@/components/LiveBadge'
 import { PageHeader, StatusBadge } from '@/components/PageHeader'
 import { ProgrammeFilters } from '@/components/ProgrammeFilters'
 import { componentKeys, sectorKeys, sectorLabel } from '@/i18n/sectors'
+import { isSessionLive } from '@/lib/event-time'
 import { setup } from '@/lib/locale'
 
 type Search = Promise<{ jour?: string; composante?: string; theme?: string }>
@@ -26,6 +28,10 @@ export default async function ProgrammePage({
   if (jour) and.push({ day: { equals: jour } })
   if (composante) and.push({ component: { equals: composante } })
   if (theme) and.push({ sectors: { contains: theme } })
+  const event = await payload.findGlobal({ slug: 'event-info', locale })
+  // Pastilles « En cours » : seulement si les dates sont confirmées et le premier jour saisi (Jour 1).
+  const eventStart = event.datesConfirmed && event.startDate ? event.startDate : null
+  const now = new Date()
   const sessions = await payload.find({
     collection: 'sessions',
     locale,
@@ -86,6 +92,16 @@ export default async function ProgrammePage({
                           <span className="small muted">
                             {tp.programme.room} {s.room}
                           </span>
+                        )}
+                        {eventStart && s.day && (
+                          <LiveBadge
+                            eventStart={eventStart}
+                            day={s.day === 'j2' ? 2 : 1}
+                            startTime={s.startTime}
+                            endTime={s.endTime}
+                            initial={isSessionLive(now, eventStart, s.day === 'j2' ? 2 : 1, s.startTime, s.endTime)}
+                            label={tp.live}
+                          />
                         )}
                       </div>
                       <div className="session__body">
