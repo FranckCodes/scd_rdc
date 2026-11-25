@@ -49,7 +49,7 @@ function Intro() {
   return (
     <section className="intro">
       <FingerprintRings id="intro-rings" className="intro__rings" />
-      <span className="eyebrow">SCD-RDC DATA</span>
+      <span className="eyebrow">SCD-RDC DATA · Version pilote</span>
       <h1>
         Qui finance quoi, où, <strong>pour qui ?</strong>
       </h1>
@@ -88,32 +88,23 @@ export default async function DataHome({ searchParams }: { searchParams: Promise
   const filters = parseFilters(await searchParams)
   const { mode, projects } = await getProjects()
 
-  if (mode === 'unavailable') {
-    return (
-      <>
-        <Intro />
-        <section className="notice" aria-labelledby="indisponible-titre">
-          <h2 id="indisponible-titre">Données momentanément indisponibles</h2>
-          <p>Les fiches projets ne peuvent pas être affichées pour le moment. Merci de réessayer dans quelques minutes.</p>
-        </section>
-        <Method />
-      </>
-    )
-  }
-
-  // En ligne, tant qu'aucune fiche n'est validée : rien d'inventé, on explique ce qui sera publié.
-  if (projects.length === 0) {
+  // Version pilote : tant qu'aucune fiche n'est validée (ou si l'API du site ne répond pas), rien
+  // d'inventé ni d'alarmant : on explique ce qui sera publié et comment.
+  if (mode === 'unavailable' || projects.length === 0) {
     return (
       <>
         <Intro />
         <section className="panel collecting" aria-labelledby="collecte-titre">
           <div className="collecting__text">
-            <span className="eyebrow eyebrow--navy">Données en cours de collecte</span>
+            <span className="eyebrow eyebrow--navy">Version pilote · données en cours de validation</span>
             <h2 id="collecte-titre">Les premières fiches arrivent</h2>
             <p>
-              Aucune fiche n’a encore été validée. Elles seront publiées au fur et à mesure de leur validation par les
-              institutions porteuses ; chaque province se colorera alors sur la carte.
+              {mode === 'unavailable' ? '' : 'Aucune fiche n’a encore été validée. '}Les fiches sont publiées au fur et à
+              mesure de leur validation par les institutions porteuses ; chaque province se colorera alors sur la carte.
             </p>
+            {mode === 'unavailable' && (
+              <p className="collecting__retry">Si vous cherchez une fiche déjà publiée, merci de réessayer dans quelques minutes.</p>
+            )}
             <h3>Contenu d’une fiche projet</h3>
             <ul className="fields">
               {FICHE_FIELDS.map((field) => (

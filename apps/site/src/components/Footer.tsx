@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import type { Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/dictionaries'
+import { getPageDictionary } from '@/i18n/pages'
 
 import { navLinks } from './Header'
 
@@ -22,6 +23,7 @@ export function Footer({ locale, t, email }: { locale: Locale; t: Dictionary; em
           ))}
           <Link href={`/${locale}/participer`}>{t.cta.participate}</Link>
           <Link href={`/${locale}/infos-pratiques`}>{t.nav.practical}</Link>
+          <Link href={`/${locale}/gouvernance`}>{getPageDictionary(locale).governance.link}</Link>
         </nav>
         <div className="site-footer__contact">
           <a href={`mailto:${email}`}>{email}</a>

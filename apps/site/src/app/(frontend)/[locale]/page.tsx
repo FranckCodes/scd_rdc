@@ -12,6 +12,7 @@ import { notOrganiserWhere, Organisers } from '@/components/Organisers'
 import { SdgSection } from '@/components/SdgSection'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
+import { getPageDictionary } from '@/i18n/pages'
 import { componentKeys } from '@/i18n/sectors'
 import { eventPhase } from '@/lib/event-time'
 
@@ -56,7 +57,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               {t.hero.titleLight}
               <strong>{t.hero.titleBold}</strong>
             </h1>
-            <p className="lead">{t.hero.lead}</p>
+            <p className="hero__signature">{t.footer.tagline}</p>
+            <p className="lead">
+              <strong className="lead__strong">{t.hero.positioning}</strong> {t.hero.lead}
+            </p>
             {countdownStart && phase && phase.kind !== 'after' && (
               <Countdown
                 start={countdownStart}
@@ -193,7 +197,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               ))}
             </ul>
           ) : (
-            <p className="placeholder">{t.partners.empty}</p>
+            // Aucun partenaire confirmé : on présente les catégories recherchées plutôt qu'un message d'attente
+            <div className="sought">
+              <h3 className="sought__title">{t.partners.sought}</h3>
+              <ul className="tiers">
+                {Object.entries(getPageDictionary(locale).partnerships.tiers).map(([k, label]) => (
+                  <li key={k}>
+                    <Link href={`/${locale}/partenariats`}>{label}</Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-muted">{t.partners.soughtText}</p>
+            </div>
           )}
         </div>
       </section>

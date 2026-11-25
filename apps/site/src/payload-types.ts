@@ -75,6 +75,7 @@ export interface Config {
     exhibitors: Exhibitor;
     partners: Partner;
     projects: Project;
+    governance: Governance;
     documents: Document;
     media: Media;
     users: User;
@@ -95,6 +96,7 @@ export interface Config {
     exhibitors: ExhibitorsSelect<false> | ExhibitorsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    governance: GovernanceSelect<false> | GovernanceSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -485,6 +487,29 @@ export interface Project {
   createdAt: string;
 }
 /**
+ * Publié sur la page « Gouvernance et organisation » uniquement au statut « Confirmé ». Ne confirmer une personne qu’après sa désignation officielle et son accord écrit.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "governance".
+ */
+export interface Governance {
+  id: number;
+  body: 'entite' | 'patronage' | 'organisation' | 'secretariat' | 'commissions';
+  name: string;
+  role?: string | null;
+  organization?: string | null;
+  description?: string | null;
+  photo?: (number | null) | Media;
+  email?: string | null;
+  order?: number | null;
+  /**
+   * Ne passer à « Confirmé » qu’après validation écrite par le responsable désigné.
+   */
+  validationStatus: 'confirme' | 'en-attente' | 'a-venir';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "documents".
  */
@@ -778,6 +803,10 @@ export interface PayloadLockedDocument {
         value: number | Project;
       } | null)
     | ({
+        relationTo: 'governance';
+        value: number | Governance;
+      } | null)
+    | ({
         relationTo: 'documents';
         value: number | Document;
       } | null)
@@ -993,6 +1022,23 @@ export interface ProjectsSelect<T extends boolean = true> {
       };
   dataSource?: T;
   updatedOn?: T;
+  validationStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "governance_select".
+ */
+export interface GovernanceSelect<T extends boolean = true> {
+  body?: T;
+  name?: T;
+  role?: T;
+  organization?: T;
+  description?: T;
+  photo?: T;
+  email?: T;
+  order?: T;
   validationStatus?: T;
   updatedAt?: T;
   createdAt?: T;

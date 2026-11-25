@@ -39,6 +39,8 @@ img { max-width: 100%; height: auto; }
 .display strong, .h2 strong { font-weight: 800; }
 .h2 .accent { color: var(--scd-navy); }
 .lead { margin: 0; max-width: 540px; font-size: clamp(16px, 1.4vw, 19px); line-height: 1.65; color: rgba(255, 255, 255, 0.92); }
+.lead__strong { font-weight: 700; color: var(--scd-white); }
+.hero__signature { margin: 0; padding-inline-start: 14px; border-inline-start: 4px solid var(--scd-yellow); font-family: var(--scd-font-title); font-weight: 600; font-style: italic; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.4; color: var(--scd-white); }
 .eyebrow { font-family: var(--scd-font-title); font-weight: 700; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--scd-navy); }
 .eyebrow--light { color: var(--scd-white); }
 .label { display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--scd-ink-muted); }
@@ -191,6 +193,16 @@ a.card:active { transform: none; box-shadow: 0 2px 8px rgba(10, 26, 43, 0.08); }
 .organisers li > a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 .organisers img { max-width: 100%; max-height: 72px; width: auto; height: auto; object-fit: contain; }
 .organisers__name { font-weight: 700; letter-spacing: 0.02em; color: var(--scd-navy); }
+.governance { display: flex; flex-direction: column; gap: clamp(32px, 5vw, 56px); }
+.governance__body { display: flex; flex-direction: column; gap: 10px; }
+.governance__empty { margin: 4px 0 0; padding: 14px 18px; border-inline-start: 4px solid var(--scd-line-strong); background: var(--scd-surface-alt); border-radius: var(--scd-radius-btn); color: var(--scd-ink-muted); }
+.governance__list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 14px; }
+.governance__member { display: flex; gap: 14px; align-items: flex-start; padding: 18px; background: var(--scd-white); border: 1px solid var(--scd-line); border-top: 3px solid var(--scd-navy); border-radius: var(--scd-radius-btn); }
+.governance__member img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex: none; }
+.governance__member p { margin: 0; }
+.governance__name { font-family: var(--scd-font-title); font-weight: 700; }
+.governance__role { font-weight: 600; color: var(--scd-navy); }
+.governance__org, .governance__desc { color: var(--scd-ink-muted); font-size: 15px; }
 .sdgs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(96px, 30%), 1fr)); gap: 10px; }
 @media (min-width: 1000px) { .sdgs { grid-template-columns: repeat(9, minmax(0, 1fr)); } }
 .sdgs a { display: block; border-radius: 6px; outline-offset: 3px; transition: transform var(--scd-dur-fast) var(--scd-ease-out), box-shadow var(--scd-dur-fast) var(--scd-ease-out); }
@@ -314,6 +326,10 @@ ul.cards { list-style: none; margin: 0; padding: 0; }
 .checklist li { position: relative; padding-inline-start: 30px; font-size: 17px; line-height: 1.55; }
 .checklist li::before { content: ''; position: absolute; inset-inline-start: 0; top: 7px; width: 14px; height: 14px; border-radius: 50%; background: var(--scd-sky); }
 .tiers li { padding: 18px 20px; background: var(--scd-surface-alt); border-radius: var(--scd-radius-btn); border-inline-start: 4px solid var(--scd-navy); font-family: var(--scd-font-title); font-weight: 700; }
+.tiers li > a { color: inherit; text-decoration: none; display: block; }
+.tiers li > a:hover, .tiers li > a:focus-visible { color: var(--scd-navy); text-decoration: underline; }
+.sought { display: flex; flex-direction: column; gap: 14px; }
+.sought__title { margin: 0; font-family: var(--scd-font-title); font-size: 18px; font-weight: 700; }
 .downloads a { font-weight: 600; }
 .news--list { grid-template-columns: 1fr; }
 .box { padding: 24px; border-radius: var(--scd-radius); background: var(--scd-surface-alt); }
@@ -328,7 +344,7 @@ ul.cards { list-style: none; margin: 0; padding: 0; }
    - Rien n'est retardé au chargement : un bloc déjà entièrement visible est déjà complet. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .tiers > *, .checklist > *, .split > *, .box, .placeholder) {
+    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .governance__member, .tiers > *, .checklist > *, .split > *, .box, .placeholder) {
       animation: scd-fade-up linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 100%;
@@ -339,7 +355,7 @@ ul.cards { list-style: none; margin: 0; padding: 0; }
     :is(.cards, .chips) > :nth-child(n + 4) { animation-range: entry 24% entry 100%; }
     :is(.cards, .chips) > :nth-child(n + 5) { animation-range: entry 32% entry 100%; }
     /* Un bloc atteint au clavier est toujours entièrement visible */
-    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .tiers > *, .checklist > *, .split > *, .box, .placeholder):focus-within {
+    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .governance__member, .tiers > *, .checklist > *, .split > *, .box, .placeholder):focus-within {
       animation: none;
     }
   }

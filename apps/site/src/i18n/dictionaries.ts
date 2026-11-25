@@ -10,7 +10,7 @@ export type Dictionary = {
   nav: { about: string; programme: string; salon: string; data: string; partnerships: string; press: string; practical: string }
   ui: { menu: string; language: string; toConfirm: string; skip: string; mainNav: string; siteMap: string }
   cta: { participate: string; interest: string; partner: string; programme: string; data: string }
-  hero: { eyebrow: string; titleLight: string; titleBold: string; lead: string; photoCredit: string }
+  hero: { eyebrow: string; titleLight: string; titleBold: string; positioning: string; lead: string; photoCredit: string }
   info: { dates: string; place: string; format: string }
   countdown: CountdownLabels
   components: {
@@ -28,7 +28,7 @@ export type Dictionary = {
   }
   organisers: { title: string; empty: string }
   sdgs: { titleLight: string; titleBold: string; text: string; link: string }
-  partners: { titleLight: string; titleBold: string; note: string; empty: string }
+  partners: { titleLight: string; titleBold: string; note: string; empty: string; sought: string; soughtText: string }
   news: { title: string; empty: string; all: string }
   footer: { tagline: string; legal: string; privacy: string; accessibility: string }
 }
@@ -55,6 +55,7 @@ const fr: Dictionary = {
     eyebrow: 'Édition inaugurale',
     titleLight: 'La coopération au développement, ',
     titleBold: 'visible, coordonnée et utile.',
+    positioning: 'Une plateforme nationale de dialogue, de partenariat, de valorisation des projets et de redevabilité.',
     lead: 'Institutions, partenaires techniques et financiers, secteur privé et société civile réunis autour d’une exigence commune : rendre compte des résultats.',
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
@@ -78,7 +79,7 @@ const fr: Dictionary = {
     ],
   },
   data: {
-    eyebrow: 'SCD-RDC DATA · V1 en préparation',
+    eyebrow: 'SCD-RDC DATA · Version pilote',
     titleLight: 'Qui finance quoi, où, ',
     titleBold: 'pour qui ?',
     text: 'Le portefeuille de la coopération, province par province. Fiches sourcées, datées et validées.',
@@ -96,7 +97,7 @@ const fr: Dictionary = {
     titleLight: 'Ils s’engagent ',
     titleBold: 'à nos côtés',
     note: 'Les logos sont publiés uniquement après validation écrite de chaque institution.',
-    empty: 'Partenaires en attente de confirmation.',
+    empty: 'Partenaires en attente de confirmation.', sought: 'Catégories de partenaires recherchées', soughtText: 'Les premiers partenaires seront présentés ici dès réception de leur accord écrit. Le dossier de partenariat détaille les contreparties de chaque catégorie.',
   },
   news: { title: 'Actualités', empty: 'Les premières actualités seront publiées prochainement.', all: 'Tout voir' },
   footer: {
@@ -129,6 +130,7 @@ const en: Dictionary = {
     eyebrow: 'Inaugural edition',
     titleLight: 'Development cooperation, ',
     titleBold: 'visible, coordinated and useful.',
+    positioning: 'A national platform for dialogue, partnership, project showcasing and accountability.',
     lead: 'Institutions, technical and financial partners, the private sector and civil society brought together by a shared commitment: accounting for results.',
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
@@ -152,7 +154,7 @@ const en: Dictionary = {
     ],
   },
   data: {
-    eyebrow: 'SCD-RDC DATA · V1 in preparation',
+    eyebrow: 'SCD-RDC DATA · Pilot version',
     titleLight: 'Who funds what, where, ',
     titleBold: 'for whom?',
     text: 'The cooperation portfolio, province by province. Sourced, dated and validated project sheets.',
@@ -170,7 +172,7 @@ const en: Dictionary = {
     titleLight: 'Partners ',
     titleBold: 'at our side',
     note: 'Logos are published only after written approval from each institution.',
-    empty: 'Partners awaiting confirmation.',
+    empty: 'Partners awaiting confirmation.', sought: 'Partner categories we are looking for', soughtText: 'The first partners will be presented here as soon as their written approval is received. The partnership pack details the benefits of each category.',
   },
   news: { title: 'News', empty: 'The first news items will be published soon.', all: 'See all' },
   footer: {
@@ -189,6 +191,7 @@ const zh: Dictionary = {
     eyebrow: '首届',
     titleLight: '发展合作，',
     titleBold: '可见、协调、有效。',
+    positioning: '一个集对话、合作、项目展示与问责于一体的国家级平台。',
     lead: '政府机构、技术与资金伙伴、私营部门和民间社会齐聚一堂，共同致力于对成果负责。',
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
@@ -206,7 +209,7 @@ const zh: Dictionary = {
     ],
   },
   data: {
-    eyebrow: 'SCD-RDC DATA · 第一版筹备中',
+    eyebrow: 'SCD-RDC DATA · 试点版',
     titleLight: '谁资助什么、在哪里、',
     titleBold: '为了谁？',
     text: '按省份呈现的合作项目组合。项目信息均注明来源、日期并经过核实。',
@@ -220,7 +223,7 @@ const zh: Dictionary = {
     link: '按目标浏览项目',
   },
   organisers: { title: '主办单位', empty: '主办单位待确认。' },
-  partners: { titleLight: '与我们', titleBold: '同行的伙伴', note: '各机构书面同意后方可发布其标志。', empty: '合作伙伴待确认。' },
+  partners: { titleLight: '与我们', titleBold: '同行的伙伴', note: '各机构书面同意后方可发布其标志。', empty: '合作伙伴待确认。', sought: '我们寻求的合作伙伴类别', soughtText: '首批合作伙伴在收到其书面同意后将在此展示。合作手册详细介绍了各类别的权益。' },
   news: { title: '新闻', empty: '首批新闻即将发布。', all: '查看全部' },
   footer: { tagline: '“合作促发展，问责促变革。”', legal: '法律声明', privacy: '隐私', accessibility: '无障碍' },
 }
@@ -247,6 +250,7 @@ const ru: Dictionary = {
     eyebrow: 'Первая неделя',
     titleLight: 'Сотрудничество в целях развития — ',
     titleBold: 'прозрачное, согласованное и полезное.',
+    positioning: 'Национальная платформа для диалога, партнёрства, представления проектов и подотчётности.',
     lead: 'Государственные институты, технические и финансовые партнёры, частный сектор и гражданское общество объединены общей задачей: отчитываться о результатах.',
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
@@ -270,7 +274,7 @@ const ru: Dictionary = {
     ],
   },
   data: {
-    eyebrow: 'SCD-RDC DATA · версия 1 в подготовке',
+    eyebrow: 'SCD-RDC DATA · пилотная версия',
     titleLight: 'Кто что финансирует, где, ',
     titleBold: 'для кого?',
     text: 'Портфель сотрудничества по провинциям. Карточки проектов с источником, датой и статусом проверки.',
@@ -288,7 +292,7 @@ const ru: Dictionary = {
     titleLight: 'Наши ',
     titleBold: 'партнёры',
     note: 'Логотипы публикуются только после письменного согласия каждой организации.',
-    empty: 'Партнёры ожидают подтверждения.',
+    empty: 'Партнёры ожидают подтверждения.', sought: 'Категории партнёров, которых мы ищем', soughtText: 'Первые партнёры будут представлены здесь после получения их письменного согласия. В партнёрском пакете описаны преимущества каждой категории.',
   },
   news: { title: 'Новости', empty: 'Первые новости скоро появятся.', all: 'Все новости' },
   footer: {
@@ -321,6 +325,7 @@ const ar: Dictionary = {
     eyebrow: 'الدورة الأولى',
     titleLight: 'التعاون الإنمائي، ',
     titleBold: 'واضح ومنسّق ومفيد.',
+    positioning: 'منصة وطنية للحوار والشراكة وإبراز المشاريع والمساءلة.',
     lead: 'مؤسسات وشركاء تقنيون وماليون وقطاع خاص ومجتمع مدني يجمعهم التزام مشترك: المساءلة عن النتائج.',
     photoCredit: 'Masina, Kinshasa · Kaysha / Unsplash',
   },
@@ -344,7 +349,7 @@ const ar: Dictionary = {
     ],
   },
   data: {
-    eyebrow: 'SCD-RDC DATA · النسخة الأولى قيد الإعداد',
+    eyebrow: 'SCD-RDC DATA · النسخة التجريبية',
     titleLight: 'من يموّل ماذا، وأين، ',
     titleBold: 'ولمن؟',
     text: 'محفظة التعاون مقاطعةً بمقاطعة. بطاقات مشاريع موثّقة المصدر ومؤرّخة ومعتمدة.',
@@ -362,7 +367,7 @@ const ar: Dictionary = {
     titleLight: 'شركاؤنا ',
     titleBold: 'إلى جانبنا',
     note: 'لا تُنشر الشعارات إلا بعد موافقة خطية من كل مؤسسة.',
-    empty: 'الشركاء بانتظار التأكيد.',
+    empty: 'الشركاء بانتظار التأكيد.', sought: 'فئات الشركاء الذين نبحث عنهم', soughtText: 'سيُعرض الشركاء الأوائل هنا فور تلقّي موافقتهم الخطية. ويعرض ملف الشراكة مزايا كل فئة.',
   },
   news: { title: 'الأخبار', empty: 'ستُنشر الأخبار الأولى قريبًا.', all: 'عرض الكل' },
   footer: {

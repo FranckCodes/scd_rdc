@@ -57,7 +57,8 @@ cd apps/site
 DATABASE_URL="<url Neon>" pnpm seed
 ```
 
-Puis ouvrir `https://<projet>.vercel.app/admin` et **créer le premier compte administrateur**.
+Depuis le 25/11/2026, ce chargement ne modifie plus le schéma de la base en ligne : seules les
+migrations le font (au déploiement). Puis ouvrir `https://<projet>.vercel.app/admin` et **créer le premier compte administrateur**.
 
 ### 2.4 Brancher le domaine
 Vercel → projet → **Settings → Domains** : ajouter `scd-rdc.org` et `www.scd-rdc.org`
@@ -144,6 +145,13 @@ l'accueil et la page À propos, jamais dans la liste des partenaires. Sans logo,
 - **En ligne** : ouvrir la fiche dans l'administration et charger le logo dans « Logo officiel ».
   Si l'on passe plutôt par `pnpm seed` vers Neon, définir aussi `BLOB_READ_WRITE_TOKEN`, sinon les
   fichiers restent sur le poste.
+
+## Gouvernance et organisation (`/fr/gouvernance`)
+Administration → *Contenus → Gouvernance et organisation* : une fiche par personne, institution ou commission,
+rattachée à son instance (entité porteuse, comité de patronage, comité d'organisation, secrétariat exécutif,
+commissions spécialisées). Une fiche n'apparaît en ligne (page et API) qu'au statut **Confirmé** : ne confirmer
+une personnalité qu'après sa désignation officielle **et** son accord écrit. Une instance sans fiche confirmée
+affiche « Composition communiquée après confirmation officielle ».
 
 ## Temps forts de l'événement
 - **Compte à rebours (accueil)** : administration → *Informations de l’événement* → saisir le premier et

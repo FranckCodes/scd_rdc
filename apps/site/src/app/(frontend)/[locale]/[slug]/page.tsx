@@ -1,9 +1,11 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
+import { Arrow } from '@/components/Arrow'
 import { Organisers } from '@/components/Organisers'
 import { Notice, PageHeader } from '@/components/PageHeader'
 import { isLocale } from '@/i18n/config'
@@ -51,6 +53,13 @@ export default async function EditorialPage({ params }: { params: Params }) {
           </div>
         )}
       </div>
+      {slug === 'a-propos' && (
+        <div className="container prose-wrap">
+          <Link className="link-arrow" href={`/${locale}/gouvernance`}>
+            {tp.governance.link} <Arrow />
+          </Link>
+        </div>
+      )}
       {slug === 'a-propos' && (
         <Organisers title={getDictionary(locale).organisers.title} empty={getDictionary(locale).organisers.empty} alt />
       )}

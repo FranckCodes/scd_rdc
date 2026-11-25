@@ -3,6 +3,7 @@ import * as migration_20261124_101445_projets from './20261124_101445_projets';
 import * as migration_20261124_131715_evenement_trophees from './20261124_131715_evenement_trophees';
 import * as migration_20261125_110439_organisateurs from './20261125_110439_organisateurs';
 import * as migration_20261125_112041_odd_projets from './20261125_112041_odd_projets';
+import * as migration_20261125_125113_gouvernance from './20261125_125113_gouvernance';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20261125_112041_odd_projets.up,
     down: migration_20261125_112041_odd_projets.down,
-    name: '20261125_112041_odd_projets'
+    name: '20261125_112041_odd_projets',
+  },
+  {
+    up: migration_20261125_125113_gouvernance.up,
+    down: migration_20261125_125113_gouvernance.down,
+    name: '20261125_125113_gouvernance'
   },
 ];

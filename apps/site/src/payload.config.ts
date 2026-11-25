@@ -19,6 +19,7 @@ import { News } from './collections/News'
 import { Pages } from './collections/Pages'
 import { Partners } from './collections/Partners'
 import { Projects } from './collections/Projects'
+import { Governance } from './collections/Governance'
 import { Trophies } from './collections/Trophies'
 import { Sessions } from './collections/Sessions'
 import { Speakers } from './collections/Speakers'
@@ -67,7 +68,7 @@ export default buildConfig({
     fallback: true,
   },
 
-  collections: [Pages, News, Sessions, Speakers, Trophies, Exhibitors, Partners, Projects, Documents, Media, Users],
+  collections: [Pages, News, Sessions, Speakers, Trophies, Exhibitors, Partners, Projects, Governance, Documents, Media, Users],
   globals: [EventInfo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -75,6 +76,10 @@ export default buildConfig({
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL || '' },
     // En production, le schéma évolue uniquement par migrations (src/migrations), jamais par « push ».
+    // « push » (synchronisation automatique du schéma en développement) est réservé à la base locale :
+    // lancer `pnpm seed` vers Neon depuis un poste ne doit jamais modifier le schéma en ligne,
+    // sinon `payload migrate` refuse ensuite d'appliquer les migrations sur Vercel.
+    push: /@(localhost|127\.0\.0\.1)(:\d+)?\//.test(process.env.DATABASE_URL ?? ''),
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
   sharp,

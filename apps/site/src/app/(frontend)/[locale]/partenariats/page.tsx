@@ -62,7 +62,14 @@ export default async function PartenariatsPage({ params }: { params: Promise<{ l
             <strong>{p.current}</strong>
           </h2>
           {partners.docs.length === 0 ? (
-            <p className="placeholder">{p.empty}</p>
+            <div className="stack">
+              <p className="text-muted">{p.empty}</p>
+              <div>
+                <Link className="btn btn--navy" href={`/${locale}/participer/partenaire`}>
+                  {p.cta}
+                </Link>
+              </div>
+            </div>
           ) : (
             <ul className="partners">
               {partners.docs.map((pt) => (

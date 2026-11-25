@@ -50,6 +50,14 @@ export type PageDictionary = {
   news: { title: string; empty: string; back: string }
   live: string
   trophies: { title: string; intro: string; empty: string; pending: string; laureate: string; live: string; revealed: string }
+  governance: {
+    title: string
+    intro: string
+    bodies: Record<'entite' | 'patronage' | 'organisation' | 'secretariat' | 'commissions', { title: string; text: string }>
+    empty: string
+    contact: string
+    link: string
+  }
 }
 
 const fr: PageDictionary = {
@@ -130,6 +138,20 @@ const fr: PageDictionary = {
   },
   news: { title: 'Actualités', empty: 'Les premières actualités seront publiées prochainement.', back: 'Toutes les actualités' },
   live: 'En cours',
+  governance: {
+    title: 'Gouvernance et organisation',
+    intro: 'Qui organise la SCD-RDC, sous quelle gouvernance et avec quelles responsabilités. Seules les personnes et institutions dont la participation est officiellement confirmée sont présentées.',
+    bodies: {
+      entite: { title: 'Entité porteuse', text: 'L’institution qui porte la SCD-RDC et en assume la responsabilité.' },
+      patronage: { title: 'Comité de patronage', text: 'Les personnalités qui accordent leur haut patronage à la SCD-RDC.' },
+      organisation: { title: 'Comité d’organisation', text: 'Les membres chargés de préparer et de conduire l’événement.' },
+      secretariat: { title: 'Secrétariat exécutif', text: 'L’équipe chargée de la coordination au quotidien et du suivi des partenaires.' },
+      commissions: { title: 'Commissions spécialisées', text: 'Programme, partenariats, communication, logistique et autres commissions thématiques.' },
+    },
+    empty: 'Composition communiquée après confirmation officielle.',
+    contact: 'Contact institutionnel',
+    link: 'Gouvernance et organisation',
+  },
   trophies: {
     title: 'Trophées',
     intro: 'Les Trophées distinguent des résultats probants de la coopération au développement en RDC. Les lauréats sont dévoilés lors de la cérémonie de remise.',
@@ -214,6 +236,20 @@ const en: PageDictionary = {
   },
   news: { title: 'News', empty: 'The first news items will be published soon.', back: 'All news' },
   live: 'Live now',
+  governance: {
+    title: 'Governance and organisation',
+    intro: 'Who organises SCD-RDC, under what governance and with which responsibilities. Only people and institutions whose participation has been officially confirmed are listed.',
+    bodies: {
+      entite: { title: 'Lead institution', text: 'The institution that leads SCD-RDC and is accountable for it.' },
+      patronage: { title: 'Patronage committee', text: 'The figures who grant SCD-RDC their high patronage.' },
+      organisation: { title: 'Organising committee', text: 'The members in charge of preparing and running the event.' },
+      secretariat: { title: 'Executive secretariat', text: 'The team in charge of day-to-day coordination and partner follow-up.' },
+      commissions: { title: 'Specialised commissions', text: 'Programme, partnerships, communication, logistics and other thematic commissions.' },
+    },
+    empty: 'Membership announced after official confirmation.',
+    contact: 'Institutional contact',
+    link: 'Governance and organisation',
+  },
   trophies: {
     title: 'Awards',
     intro: 'The Awards recognise proven results of development cooperation in the DRC. Winners are revealed at the award ceremony.',
@@ -287,6 +323,20 @@ const zh: PageDictionary = {
   },
   news: { title: '新闻', empty: '首批新闻即将发布。', back: '全部新闻' },
   live: '正在进行',
+  governance: {
+    title: '治理与组织',
+    intro: '谁在组织 SCD-RDC、采用何种治理架构、承担哪些职责。仅展示已正式确认参与的人员和机构。',
+    bodies: {
+      entite: { title: '主办机构', text: '负责 SCD-RDC 并承担相应责任的机构。' },
+      patronage: { title: '名誉赞助委员会', text: '为 SCD-RDC 提供高级别支持的知名人士。' },
+      organisation: { title: '组织委员会', text: '负责筹备和举办活动的成员。' },
+      secretariat: { title: '执行秘书处', text: '负责日常协调和合作伙伴跟进的团队。' },
+      commissions: { title: '专门委员会', text: '议程、合作、传播、后勤及其他专题委员会。' },
+    },
+    empty: '正式确认后公布成员名单。',
+    contact: '机构联系方式',
+    link: '治理与组织',
+  },
   trophies: {
     title: '奖项',
     intro: '奖项表彰刚果民主共和国发展合作中成效显著的成果。获奖者将在颁奖典礼上揭晓。',
@@ -371,6 +421,20 @@ const ru: PageDictionary = {
   },
   news: { title: 'Новости', empty: 'Первые новости скоро появятся.', back: 'Все новости' },
   live: 'Идёт сейчас',
+  governance: {
+    title: 'Управление и организация',
+    intro: 'Кто организует SCD-RDC, на основе какой системы управления и с какими обязанностями. Представлены только лица и организации, чьё участие официально подтверждено.',
+    bodies: {
+      entite: { title: 'Организация-учредитель', text: 'Организация, которая проводит SCD-RDC и несёт за неё ответственность.' },
+      patronage: { title: 'Попечительский комитет', text: 'Видные деятели, оказывающие SCD-RDC высокое покровительство.' },
+      organisation: { title: 'Организационный комитет', text: 'Члены, отвечающие за подготовку и проведение мероприятия.' },
+      secretariat: { title: 'Исполнительный секретариат', text: 'Команда, отвечающая за повседневную координацию и работу с партнёрами.' },
+      commissions: { title: 'Специализированные комиссии', text: 'Программа, партнёрства, коммуникация, логистика и другие тематические комиссии.' },
+    },
+    empty: 'Состав будет объявлен после официального подтверждения.',
+    contact: 'Контакт для организаций',
+    link: 'Управление и организация',
+  },
   trophies: {
     title: 'Премии',
     intro: 'Премии отмечают доказанные результаты сотрудничества в целях развития в ДРК. Лауреаты объявляются на церемонии награждения.',
@@ -449,6 +513,20 @@ const ar: PageDictionary = {
   },
   news: { title: 'الأخبار', empty: 'ستُنشر الأخبار الأولى قريبًا.', back: 'جميع الأخبار' },
   live: 'جارٍ الآن',
+  governance: {
+    title: 'الحوكمة والتنظيم',
+    intro: 'من ينظّم SCD-RDC، وفي إطار أي حوكمة، وبأي مسؤوليات. لا يُعرض إلا الأشخاص والمؤسسات الذين تأكدت مشاركتهم رسميًا.',
+    bodies: {
+      entite: { title: 'الجهة الحاملة', text: 'المؤسسة التي تحمل SCD-RDC وتتحمّل مسؤوليتها.' },
+      patronage: { title: 'لجنة الرعاية', text: 'الشخصيات التي تمنح SCD-RDC رعايتها السامية.' },
+      organisation: { title: 'اللجنة المنظِّمة', text: 'الأعضاء المكلّفون بالتحضير للحدث وتسييره.' },
+      secretariat: { title: 'الأمانة التنفيذية', text: 'الفريق المكلّف بالتنسيق اليومي ومتابعة الشركاء.' },
+      commissions: { title: 'اللجان المتخصصة', text: 'البرنامج والشراكات والاتصال واللوجستيات وغيرها من اللجان الموضوعية.' },
+    },
+    empty: 'يُعلن عن التشكيلة بعد التأكيد الرسمي.',
+    contact: 'جهة الاتصال المؤسسية',
+    link: 'الحوكمة والتنظيم',
+  },
   trophies: {
     title: 'الجوائز',
     intro: 'تكرّم الجوائز النتائج المثبتة للتعاون من أجل التنمية في جمهورية الكونغو الديمقراطية. ويُكشف عن الفائزين خلال حفل توزيع الجوائز.',
