@@ -2,17 +2,20 @@
 
 import React, { useState } from 'react'
 
-import { PROJECT_STATUSES, PROVINCES, SECTORS } from '@scd/ui/reference'
+import { PROJECT_STATUSES, PROVINCES, SDGS, SECTORS } from '@scd/ui/reference'
 
 import { dashboardHref, type Filters as FilterValues } from '../lib/filters'
 import { isPlainClick, useDashboardNav } from './DashboardNav'
 
-type Values = Pick<FilterValues, 'secteur' | 'province' | 'statut'>
-type Draft = { secteur: string; province: string; statut: string }
+type Values = Pick<FilterValues, 'secteur' | 'province' | 'odd' | 'statut'>
+type Draft = { secteur: string; province: string; odd: string; statut: string }
+
+const SDG_OPTIONS = SDGS.map((s) => ({ id: s.id, label: `ODD ${s.id} — ${s.fr}` }))
 
 const toDraft = (values: Values): Draft => ({
   secteur: values.secteur ?? '',
   province: values.province ?? '',
+  odd: values.odd ?? '',
   statut: values.statut ?? '',
 })
 
@@ -23,13 +26,13 @@ const toDraft = (values: Values): Draft => ({
 export function Filters({ values }: { values: Values }) {
   const { go, isPending } = useDashboardNav()
   const [draft, setDraft] = useState(() => toDraft(values))
-  const key = `${values.secteur ?? ''}|${values.province ?? ''}|${values.statut ?? ''}`
+  const key = `${values.secteur ?? ''}|${values.province ?? ''}|${values.odd ?? ''}|${values.statut ?? ''}`
   const [previousKey, setPreviousKey] = useState(key)
   if (key !== previousKey) {
     setPreviousKey(key)
     setDraft(toDraft(values))
   }
-  const hasFilters = Boolean(values.secteur || values.province || values.statut)
+  const hasFilters = Boolean(values.secteur || values.province || values.odd || values.statut)
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -37,6 +40,7 @@ export function Filters({ values }: { values: Values }) {
       dashboardHref({
         secteur: (draft.secteur || undefined) as Values['secteur'],
         province: (draft.province || undefined) as Values['province'],
+        odd: (draft.odd || undefined) as Values['odd'],
         statut: (draft.statut || undefined) as Values['statut'],
       }),
     )
@@ -60,6 +64,7 @@ export function Filters({ values }: { values: Values }) {
     <form className="filters" action="/" method="get" onSubmit={onSubmit} aria-busy={isPending}>
       {select('secteur', 'Secteur', 'Tous les secteurs', SECTORS)}
       {select('province', 'Province', 'Toutes les provinces', PROVINCES)}
+      {select('odd', 'Objectif (ODD)', 'Tous les ODD', SDG_OPTIONS)}
       {select('statut', 'Avancement', 'Tous les statuts', PROJECT_STATUSES)}
       <div className="filters__actions">
         <button className="btn btn--navy" type="submit" disabled={isPending}>

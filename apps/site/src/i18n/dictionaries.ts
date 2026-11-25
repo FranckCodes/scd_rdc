@@ -26,6 +26,8 @@ export type Dictionary = {
     sample: string
     note: string
   }
+  organisers: { title: string; empty: string }
+  sdgs: { titleLight: string; titleBold: string; text: string; link: string }
   partners: { titleLight: string; titleBold: string; note: string; empty: string }
   news: { title: string; empty: string; all: string }
   footer: { tagline: string; legal: string; privacy: string; accessibility: string }
@@ -83,6 +85,13 @@ const fr: Dictionary = {
     sample: 'projets phares',
     note: 'Chaque fiche indique sa source, sa date de mise à jour et son statut de validation.',
   },
+  sdgs: {
+    titleLight: 'La coopération au service des ',
+    titleBold: 'Objectifs de développement durable',
+    text: 'Chaque projet présenté sur SCD-RDC DATA indique les objectifs auxquels il contribue, selon la déclaration de l’institution qui le porte. Choisissez un objectif pour voir les projets concernés.',
+    link: 'Explorer les projets par objectif',
+  },
+  organisers: { title: 'Organisé par', empty: 'Organisateurs en cours de confirmation.' },
   partners: {
     titleLight: 'Ils s’engagent ',
     titleBold: 'à nos côtés',
@@ -150,6 +159,13 @@ const en: Dictionary = {
     sample: 'flagship projects',
     note: 'Each sheet states its source, last update and validation status.',
   },
+  sdgs: {
+    titleLight: 'Cooperation serving the ',
+    titleBold: 'Sustainable Development Goals',
+    text: 'Each project on SCD-RDC DATA shows the goals it contributes to, as declared by the institution that leads it. Choose a goal to see the related projects.',
+    link: 'Explore projects by goal',
+  },
+  organisers: { title: 'Organised by', empty: 'Organisers being confirmed.' },
   partners: {
     titleLight: 'Partners ',
     titleBold: 'at our side',
@@ -197,6 +213,13 @@ const zh: Dictionary = {
     sample: '重点项目',
     note: '每份项目信息均注明来源、更新日期及核实状态。',
   },
+  sdgs: {
+    titleLight: '合作助力',
+    titleBold: '可持续发展目标',
+    text: 'SCD-RDC DATA 上的每个项目都标明其所贡献的目标（以项目牵头机构的申报为准）。选择一个目标即可查看相关项目。',
+    link: '按目标浏览项目',
+  },
+  organisers: { title: '主办单位', empty: '主办单位待确认。' },
   partners: { titleLight: '与我们', titleBold: '同行的伙伴', note: '各机构书面同意后方可发布其标志。', empty: '合作伙伴待确认。' },
   news: { title: '新闻', empty: '首批新闻即将发布。', all: '查看全部' },
   footer: { tagline: '“合作促发展，问责促变革。”', legal: '法律声明', privacy: '隐私', accessibility: '无障碍' },
@@ -254,6 +277,13 @@ const ru: Dictionary = {
     sample: 'ключевых проектов',
     note: 'В каждой карточке указаны источник, дата обновления и статус проверки.',
   },
+  sdgs: {
+    titleLight: 'Сотрудничество во имя ',
+    titleBold: 'Целей устойчивого развития',
+    text: 'Для каждого проекта на SCD-RDC DATA указаны цели, которым он способствует, по заявлению ведущей организации. Выберите цель, чтобы увидеть связанные проекты.',
+    link: 'Проекты по целям',
+  },
+  organisers: { title: 'Организаторы', empty: 'Организаторы уточняются.' },
   partners: {
     titleLight: 'Наши ',
     titleBold: 'партнёры',
@@ -321,6 +351,13 @@ const ar: Dictionary = {
     sample: 'مشروعًا رائدًا',
     note: 'تذكر كل بطاقة مصدرها وتاريخ تحديثها وحالة اعتمادها.',
   },
+  sdgs: {
+    titleLight: 'التعاون في خدمة ',
+    titleBold: 'أهداف التنمية المستدامة',
+    text: 'يبيّن كل مشروع على منصة SCD-RDC DATA الأهداف التي يسهم فيها، وفق ما تعلنه المؤسسة المسؤولة عنه. اختر هدفًا لعرض المشاريع المرتبطة به.',
+    link: 'استكشاف المشاريع حسب الهدف',
+  },
+  organisers: { title: 'الجهات المنظِّمة', empty: 'الجهات المنظِّمة قيد التأكيد.' },
   partners: {
     titleLight: 'شركاؤنا ',
     titleBold: 'إلى جانبنا',

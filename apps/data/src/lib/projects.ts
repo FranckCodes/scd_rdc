@@ -3,8 +3,10 @@ import { cache } from 'react'
 import {
   PROJECT_STATUSES,
   PROVINCES,
+  SDGS,
   SECTORS,
   type ProjectStatusId,
+  type SdgId,
   type ProvinceId,
   type SectorId,
 } from '@scd/ui/reference'
@@ -35,6 +37,8 @@ export type Project = {
   periodEnd: string | null
   targetPopulation: string | null
   status: ProjectStatusId
+  /** Objectifs de développement durable déclarés par l'institution porteuse (peut être vide). */
+  sdgs: SdgId[]
   /** Présent seulement si le montant a été validé et déclaré publiable par l'institution source. */
   funding: { amount: number; currency: Currency; source: string | null } | null
   results: ProjectResult[]
@@ -59,6 +63,7 @@ const API_BASE = (process.env.SITE_API_URL || process.env.NEXT_PUBLIC_SITE_URL |
 const sectorIds = new Set<string>(SECTORS.map((s) => s.id))
 const provinceIds = new Set<string>(PROVINCES.map((p) => p.id))
 const statusIds = new Set<string>(PROJECT_STATUSES.map((s) => s.id))
+const sdgIds = new Set<string>(SDGS.map((s) => s.id))
 const currencies = new Set<string>(['USD', 'CDF', 'EUR'])
 
 type Doc = Record<string, unknown>
@@ -114,6 +119,9 @@ function normalize(doc: Doc): Project | null {
     periodEnd: text(doc.periodEnd),
     targetPopulation: text(doc.targetPopulation),
     status: status as ProjectStatusId,
+    sdgs: Array.isArray(doc.sdgs)
+      ? SDGS.filter((s) => (doc.sdgs as unknown[]).some((v) => String(v) === s.id && sdgIds.has(s.id))).map((s) => s.id)
+      : [],
     funding,
     results,
     dataSource,

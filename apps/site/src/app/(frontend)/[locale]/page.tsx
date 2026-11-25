@@ -8,6 +8,8 @@ import { Arrow } from '@/components/Arrow'
 import { Countdown } from '@/components/Countdown'
 import { CountUp } from '@/components/CountUp'
 import { FingerprintRings } from '@/components/FingerprintRings'
+import { notOrganiserWhere, Organisers } from '@/components/Organisers'
+import { SdgSection } from '@/components/SdgSection'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { componentKeys } from '@/i18n/sectors'
@@ -28,7 +30,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       collection: 'partners',
       limit: 12,
       sort: 'order',
-      where: { and: [{ validationStatus: { equals: 'confirme' } }, { logoAuthorized: { equals: true } }] },
+      where: { and: [{ validationStatus: { equals: 'confirme' } }, { logoAuthorized: { equals: true } }, notOrganiserWhere] },
     }),
   ])
 
@@ -164,6 +166,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
       </section>
+
+      {/* OBJECTIFS DE DÉVELOPPEMENT DURABLE */}
+      <SdgSection locale={locale} labels={t.sdgs} />
+
+      {/* ORGANISATEURS */}
+      <Organisers title={t.organisers.title} empty={t.organisers.empty} />
 
       {/* PARTENAIRES */}
       <section className="section section--alt">

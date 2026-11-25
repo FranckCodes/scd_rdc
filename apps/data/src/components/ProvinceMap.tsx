@@ -60,7 +60,7 @@ export function ProvinceMap({
 }: {
   stats: Record<string, ProvinceStat>
   selected?: string
-  filters: Pick<Filters, 'secteur' | 'statut'>
+  filters: Pick<Filters, 'secteur' | 'statut' | 'odd'>
 }) {
   const { go, isPending } = useDashboardNav()
   // Liens <a> du SVG (React les type comme des liens HTML ; les deux ont focus())

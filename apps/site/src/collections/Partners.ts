@@ -15,7 +15,9 @@ export const Partners: CollectionConfig = {
       name: 'tier',
       label: 'Catégorie',
       type: 'select',
+      admin: { description: '« Organisateur » : affiché dans « Organisé par » (accueil et À propos), pas dans la liste des partenaires.' },
       options: [
+        { label: 'Organisateur', value: 'organisateur' },
         { label: 'Institutionnel', value: 'institutionnel' },
         { label: 'Partenaire technique et financier', value: 'ptf' },
         { label: 'Sponsor', value: 'sponsor' },

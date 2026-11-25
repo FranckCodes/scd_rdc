@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { SDGS, sdgIcon } from '@scd/ui/reference'
+
 import { formatAmountShort, formatDate, provinceLabel, sectorLabel, statusLabel } from '../lib/format'
 import type { Project } from '../lib/projects'
 
@@ -16,6 +18,16 @@ export function ProjectCard({ project, demo }: { project: Project; demo: boolean
         </Link>
       </h3>
       <p className="card__institution">{project.institution}</p>
+      {project.sdgs.length > 0 && (
+        <ul className="card__sdgs" aria-label="Objectifs de développement durable">
+          {SDGS.filter((s) => project.sdgs.includes(s.id)).map((s) => (
+            <li key={s.id}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={sdgIcon(s.id, 'fr')} alt={`ODD ${s.id} — ${s.fr}`} title={`ODD ${s.id} — ${s.fr}`} width={32} height={32} loading="lazy" decoding="async" />
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="card__facts">
         <span className="chip" data-status={project.status}>
           {statusLabel(project.status)}

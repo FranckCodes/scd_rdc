@@ -4,8 +4,10 @@ import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
 import config from '@payload-config'
+import { Organisers } from '@/components/Organisers'
 import { Notice, PageHeader } from '@/components/PageHeader'
 import { isLocale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionaries'
 import { setup } from '@/lib/locale'
 
 type Params = Promise<{ locale: string; slug: string }>
@@ -49,6 +51,9 @@ export default async function EditorialPage({ params }: { params: Params }) {
           </div>
         )}
       </div>
+      {slug === 'a-propos' && (
+        <Organisers title={getDictionary(locale).organisers.title} empty={getDictionary(locale).organisers.empty} alt />
+      )}
     </>
   )
 }

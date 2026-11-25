@@ -1,6 +1,6 @@
 import type { Access, CollectionConfig, FieldAccess } from 'payload'
 
-import { PROJECT_STATUSES, PROVINCES } from '@scd/ui/reference'
+import { PROJECT_STATUSES, PROVINCES, SDGS } from '@scd/ui/reference'
 
 import { loggedIn } from '../access/roles'
 import { sectorOptions } from '../fields/options'
@@ -55,6 +55,14 @@ export const Projects: CollectionConfig = {
         },
         { name: 'location', label: 'Localisation publiable', type: 'text', admin: { description: 'Territoire, ville… sans précision sensible.' } },
       ],
+    },
+    {
+      name: 'sdgs',
+      label: 'Objectifs de développement durable (ODD) concernés',
+      type: 'select',
+      hasMany: true,
+      options: SDGS.map((s) => ({ label: `ODD ${s.id} — ${s.fr}`, value: s.id })),
+      admin: { description: 'Selon la déclaration de l’institution porteuse uniquement. Laisser vide si l’information n’est pas confirmée.' },
     },
     // Contenu
     { name: 'objectives', label: 'Objectifs', type: 'textarea', localized: true },

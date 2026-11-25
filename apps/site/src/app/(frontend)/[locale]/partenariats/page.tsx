@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { notOrganiserWhere } from '@/components/Organisers'
 import { PageHeader } from '@/components/PageHeader'
 import { setup } from '@/lib/locale'
 
@@ -12,7 +13,7 @@ export default async function PartenariatsPage({ params }: { params: Promise<{ l
       collection: 'partners',
       limit: 100,
       sort: 'order',
-      where: { and: [{ validationStatus: { equals: 'confirme' } }, { logoAuthorized: { equals: true } }] },
+      where: { and: [{ validationStatus: { equals: 'confirme' } }, { logoAuthorized: { equals: true } }, notOrganiserWhere] },
     }),
     payload.find({ collection: 'documents', locale, limit: 1, where: { kind: { equals: 'dossier' } } }),
   ])

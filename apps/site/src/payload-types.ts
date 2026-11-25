@@ -378,7 +378,10 @@ export interface Exhibitor {
 export interface Partner {
   id: number;
   name: string;
-  tier?: ('institutionnel' | 'ptf' | 'sponsor' | 'media') | null;
+  /**
+   * « Organisateur » : affiché dans « Organisé par » (accueil et À propos), pas dans la liste des partenaires.
+   */
+  tier?: ('organisateur' | 'institutionnel' | 'ptf' | 'sponsor' | 'media') | null;
   logo?: (number | null) | Media;
   url?: string | null;
   order?: number | null;
@@ -445,6 +448,12 @@ export interface Project {
    * Territoire, ville… sans précision sensible.
    */
   location?: string | null;
+  /**
+   * Selon la déclaration de l’institution porteuse uniquement. Laisser vide si l’information n’est pas confirmée.
+   */
+  sdgs?:
+    | ('1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14' | '15' | '16' | '17')[]
+    | null;
   objectives?: string | null;
   periodStart?: string | null;
   periodEnd?: string | null;
@@ -963,6 +972,7 @@ export interface ProjectsSelect<T extends boolean = true> {
   sector?: T;
   province?: T;
   location?: T;
+  sdgs?: T;
   objectives?: T;
   periodStart?: T;
   periodEnd?: T;

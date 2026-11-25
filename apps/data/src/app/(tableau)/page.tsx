@@ -1,6 +1,6 @@
 import { ViewTransition } from 'react'
 
-import { PROJECT_STATUSES, PROVINCES, SECTORS } from '@scd/ui/reference'
+import { PROJECT_STATUSES, PROVINCES, SDGS, SECTORS } from '@scd/ui/reference'
 
 import { AnimatedNumber } from '../../components/AnimatedNumber'
 import { BarChart, type BarRow } from '../../components/BarChart'
@@ -10,6 +10,7 @@ import { FingerprintRings } from '../../components/FingerprintRings'
 import { Pagination } from '../../components/Pagination'
 import { ProjectCard } from '../../components/ProjectCard'
 import { ProvinceLocator, ProvinceMap, type ProvinceStat } from '../../components/ProvinceMap'
+import { SdgGrid } from '../../components/SdgGrid'
 import { applyFilters, PAGE_SIZE, parseFilters, type SearchParams } from '../../lib/filters'
 import {
   countLabel,
@@ -17,6 +18,7 @@ import {
   formatInteger,
   fundingTotals,
   provinceLabel,
+  sdgLabel,
   sectorLabel,
   statusLabel,
 } from '../../lib/format'
@@ -26,7 +28,7 @@ import { getProjects, type Project } from '../../lib/projects'
 const FICHE_FIELDS = [
   'Intitulé et résumé public',
   'Institution porteuse, partenaires, tutelle',
-  'Secteur, province / territoire',
+  'Secteur, province / territoire, ODD concernés',
   'Objectifs, période, population cible',
   'Montant et source (si validés et publiables)',
   'Statut : annoncé → clôturé',
@@ -73,6 +75,10 @@ function Method() {
           d’origine, sans conversion.
         </li>
         <li>La carte compte les projets selon leur province de rattachement (26 provinces, découpage de 2015).</li>
+        <li>
+          Les objectifs de développement durable (ODD) d’une fiche sont ceux que déclare l’institution porteuse ; une
+          fiche peut en compter plusieurs.
+        </li>
       </ul>
     </section>
   )
@@ -137,6 +143,11 @@ export default async function DataHome({ searchParams }: { searchParams: Promise
     if (inProvince.length) stats[province.id] = { count: inProvince.length, funding: publishedFunding(inProvince) }
   }
 
+  // La grille ODD montre tous les objectifs pour les autres filtres (secteur, province, avancement)
+  const forSdgs = applyFilters(projects, filters, 'odd')
+  const sdgCounts: Record<string, number> = {}
+  for (const sdg of SDGS) sdgCounts[sdg.id] = forSdgs.filter((p) => p.sdgs.includes(sdg.id)).length
+
   const funding = fundingTotals(filtered)
   const otherCurrencies = (['EUR', 'CDF'] as const)
     .filter((currency) => funding.byCurrency[currency] > 0)
@@ -146,6 +157,7 @@ export default async function DataHome({ searchParams }: { searchParams: Promise
   const activeFilters = [
     filters.secteur && sectorLabel(filters.secteur),
     filters.province && provinceLabel(filters.province),
+    filters.odd && `ODD ${filters.odd}`,
     filters.statut && statusLabel(filters.statut),
   ]
     .filter(Boolean)
@@ -167,7 +179,7 @@ export default async function DataHome({ searchParams }: { searchParams: Promise
       <Intro />
       <DashboardNav summary={summary}>
         <section className="panel" aria-label="Filtres">
-          <Filters values={{ secteur: filters.secteur, province: filters.province, statut: filters.statut }} />
+          <Filters values={{ secteur: filters.secteur, province: filters.province, odd: filters.odd, statut: filters.statut }} />
         </section>
 
         <dl className="totals">
@@ -217,7 +229,7 @@ export default async function DataHome({ searchParams }: { searchParams: Promise
             <ProvinceMap
               stats={stats}
               selected={filters.province}
-              filters={{ secteur: filters.secteur, statut: filters.statut }}
+              filters={{ secteur: filters.secteur, statut: filters.statut, odd: filters.odd }}
             />
           </section>
           <div className="overview__charts">
@@ -229,6 +241,20 @@ export default async function DataHome({ searchParams }: { searchParams: Promise
             </div>
           </div>
         </div>
+
+        <section className="panel" aria-labelledby="odd-titre">
+          <div className="panel__head">
+            <h2 id="odd-titre" className="panel__title">
+              Projets par objectif de développement durable
+            </h2>
+            {filters.odd && <p className="panel__note">{sdgLabel(filters.odd)}</p>}
+          </div>
+          <SdgGrid
+            counts={sdgCounts}
+            selected={filters.odd}
+            filters={{ secteur: filters.secteur, province: filters.province, statut: filters.statut }}
+          />
+        </section>
 
         {hasUsdFunding && (
           <div className="panel">

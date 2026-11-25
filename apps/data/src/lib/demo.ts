@@ -1,4 +1,4 @@
-import { SECTORS, type ProjectStatusId, type ProvinceId, type SectorId } from '@scd/ui/reference'
+import { SECTORS, type ProjectStatusId, type ProvinceId, type SdgId, type SectorId } from '@scd/ui/reference'
 
 import type { Currency, Project } from './projects'
 
@@ -38,6 +38,19 @@ const PLAN: [ProvinceId, number][] = [
   ['sankuru', 1],
   ['haut-uele', 1],
 ]
+
+// ODD plausibles par secteur, pour la démonstration seulement (fictif).
+const DEMO_SDGS: Record<SectorId, SdgId[]> = {
+  infrastructures: ['9', '11'],
+  energie: ['7', '13'],
+  'capital-humain': ['4', '8', '5'],
+  climat: ['13', '15'],
+  agriculture: ['2', '15', '1'],
+  industrie: ['9', '8'],
+  sante: ['3', '6'],
+  territoires: ['11', '16'],
+  culture: ['4', '11'],
+}
 
 const STATUS_POOL: ProjectStatusId[] = [
   'annonce',
@@ -93,6 +106,10 @@ function buildDemoProjects(): Project[] {
       periodEnd: `${startYear + duration}-${String(startMonth).padStart(2, '0')}-01T12:00:00.000Z`,
       targetPopulation: rand() < 0.7 ? `${(1 + Math.floor(rand() * 40)) * 5} 000 personnes (fictif)` : null,
       status: pick(STATUS_POOL),
+      sdgs: [
+        ...DEMO_SDGS[sector].filter((_, i) => i === 0 || rand() < 0.5),
+        ...(rand() < 0.3 ? (['17'] as SdgId[]) : []),
+      ],
       funding: hasFunding ? { amount, currency, source: `Bailleur fictif ${pick(['A', 'B', 'C'])}` } : null,
       results:
         rand() < 0.6

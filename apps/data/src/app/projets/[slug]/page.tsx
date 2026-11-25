@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type React from 'react'
 
+import { SDGS, sdgIcon } from '@scd/ui/reference'
+
 import { ProvinceLocator } from '../../../components/ProvinceMap'
 import {
   formatAmountFull,
@@ -95,6 +97,24 @@ export default async function ProjectPage({ params }: Params) {
             <h2 id="resume-titre">Résumé</h2>
             <p className="prose">{project.summary}</p>
           </section>
+          {project.sdgs.length > 0 && (
+            <section className="panel" aria-labelledby="odd-fiche-titre">
+              <h2 id="odd-fiche-titre">Objectifs de développement durable</h2>
+              <ul className="fiche__sdgs">
+                {SDGS.filter((s) => project.sdgs.includes(s.id)).map((s) => (
+                  <li key={s.id}>
+                    <a href={`/?odd=${s.id}#odd-titre`} title="Voir toutes les fiches liées à cet objectif">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={sdgIcon(s.id, 'fr')} alt="" width={88} height={88} loading="lazy" decoding="async" />
+                      <span>
+                        <strong>ODD {s.id}</strong> {s.fr}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
           {project.objectives && (
             <section className="panel" aria-labelledby="objectifs-titre">
               <h2 id="objectifs-titre">Objectifs</h2>

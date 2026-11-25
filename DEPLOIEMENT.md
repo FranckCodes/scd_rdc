@@ -126,12 +126,24 @@ Valider le fichier de migration avec le code. Il sera appliqué au prochain dép
 ## Publier une fiche projet sur SCD-RDC DATA
 1. Administration du site → **Projets (SCD-RDC DATA)** → créer la fiche (source et date de mise à jour obligatoires).
 2. Cocher « Montant et source validés et publiables » seulement si l'institution l'a autorisé par écrit.
-3. Un compte **admin** ou **validateur** passe le statut de validation à **Confirmé**.
-4. La fiche apparaît sur `data.scd-rdc.org` en 5 minutes au plus. Repasser une fiche à « En attente »
+3. Renseigner « Objectifs de développement durable (ODD) concernés » **uniquement** selon la déclaration
+   de l'institution porteuse : la fiche apparaît alors dans la grille ODD de DATA (et via la section ODD de l'accueil).
+4. Un compte **admin** ou **validateur** passe le statut de validation à **Confirmé**.
+5. La fiche apparaît sur `data.scd-rdc.org` en 5 minutes au plus. Repasser une fiche à « En attente »
    la retire de DATA dans le même délai.
 
 Démonstration locale avec des projets fictifs : créer `apps/data/.env.local` contenant `DATA_DEMO=1`,
 puis `pnpm --filter data dev` (http://localhost:3001). Un bandeau jaune rappelle que tout est fictif.
+
+## Organisateurs (« Organisé par »)
+Les quatre cabinets organisateurs (CBS SARL, NKOSI ADVISORY, CABINET DEBRE INT’L, BANTU EXPERTISE) sont
+créés par `pnpm seed` dans *Partenariats → Partenaires*, catégorie **Organisateur**. Ils s'affichent sur
+l'accueil et la page À propos, jamais dans la liste des partenaires. Sans logo, leur nom s'affiche.
+- **En local** : déposer les logos dans `resources/logos/organisateurs/` (un fichier par cabinet, nom
+  contenant `cbs`, `nkosi`, `debre` ou `bantu`), puis relancer `pnpm seed`.
+- **En ligne** : ouvrir la fiche dans l'administration et charger le logo dans « Logo officiel ».
+  Si l'on passe plutôt par `pnpm seed` vers Neon, définir aussi `BLOB_READ_WRITE_TOKEN`, sinon les
+  fichiers restent sur le poste.
 
 ## Temps forts de l'événement
 - **Compte à rebours (accueil)** : administration → *Informations de l’événement* → saisir le premier et

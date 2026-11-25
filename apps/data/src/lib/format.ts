@@ -1,4 +1,4 @@
-import { PROJECT_STATUSES, PROVINCES, SECTORS } from '@scd/ui/reference'
+import { PROJECT_STATUSES, PROVINCES, SDGS, SECTORS } from '@scd/ui/reference'
 
 import type { Currency, Project } from './projects'
 
@@ -10,6 +10,8 @@ const findLabel = (list: readonly { id: string; label: string }[], id: string) =
 export const sectorLabel = (id: string) => findLabel(SECTORS, id)
 export const provinceLabel = (id: string) => findLabel(PROVINCES, id)
 export const statusLabel = (id: string) => findLabel(PROJECT_STATUSES, id)
+/** « ODD 7 — Énergie propre et d’un coût abordable » */
+export const sdgLabel = (id: string) => `ODD ${id} — ${SDGS.find((s) => s.id === id)?.fr ?? ''}`
 
 const integer = new Intl.NumberFormat('fr-FR')
 const compact = new Intl.NumberFormat('fr-FR', { notation: 'compact', maximumFractionDigits: 1 })

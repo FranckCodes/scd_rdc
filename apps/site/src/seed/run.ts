@@ -2,6 +2,10 @@
 // Par défaut, ne crée que ce qui manque : les pages et formulaires déjà présents (et peut-être
 // modifiés dans l'administration) ne sont PAS écrasés. Pour tout réécrire : SEED_FORCE=1 pnpm seed
 // Lancer : pnpm --filter site seed
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
 import config from '@payload-config'
 import { getPayload } from 'payload'
 
@@ -32,6 +36,54 @@ for (const page of pages) {
 }
 for (const form of forms) {
   await upsert('forms', form.slug, form)
+}
+
+// Organisateurs (« Organisé par ») — confirmés par l'équipe SCD-RDC le 25/11/2026.
+// Logos : déposer les fichiers dans resources/logos/organisateurs/ (PNG/SVG/JPG, un par cabinet,
+// nom contenant le mot-clé ci-dessous). Un logo manquant est ajouté au prochain `pnpm seed`.
+const organisers = [
+  { name: 'CBS SARL', key: 'cbs' },
+  { name: 'NKOSI ADVISORY', key: 'nkosi' },
+  { name: 'CABINET DEBRE INT’L', key: 'debre' },
+  { name: 'BANTU EXPERTISE', key: 'bantu' },
+]
+const logoDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../resources/logos/organisateurs')
+const logoFiles = fs.existsSync(logoDir) ? fs.readdirSync(logoDir).filter((f) => /\.(png|svg|jpe?g|webp)$/i.test(f)) : []
+
+for (const [index, org] of organisers.entries()) {
+  const file = logoFiles.find((f) => f.toLowerCase().includes(org.key))
+  const existing = (
+    await payload.find({ collection: 'partners', where: { name: { equals: org.name } }, limit: 1, depth: 0 })
+  ).docs[0]
+  if (existing && existing.logo && !FORCE) {
+    payload.logger.info(`= partners/${org.name} (déjà présent, conservé)`)
+    continue
+  }
+  let logo: number | undefined
+  if (file) {
+    const media = await payload.create({
+      collection: 'media',
+      locale: 'fr',
+      data: { alt: `Logo ${org.name}`, credit: org.name, rightsCleared: true },
+      filePath: path.join(logoDir, file),
+    })
+    logo = media.id
+  }
+  const data = {
+    name: org.name,
+    tier: 'organisateur' as const,
+    order: index + 1,
+    validationStatus: 'confirme' as const,
+    logoAuthorized: true,
+    ...(logo ? { logo } : {}),
+  }
+  if (existing) {
+    await payload.update({ collection: 'partners', id: existing.id, data })
+    payload.logger.info(`↻ partners/${org.name}${logo ? ' (logo ajouté)' : ' (logo à déposer)'}`)
+  } else {
+    await payload.create({ collection: 'partners', data })
+    payload.logger.info(`+ partners/${org.name}${logo ? '' : ' (logo à déposer)'}`)
+  }
 }
 
 const currentEvent = await payload.findGlobal({ slug: 'event-info', locale: 'fr' })
