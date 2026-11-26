@@ -27,6 +27,8 @@ export type Dictionary = {
     note: string
   }
   organisers: { title: string; empty: string }
+  quick: { title: string; items: { label: string; text: string }[] }
+  film: { title: string; play: string }
   sdgs: { titleLight: string; titleBold: string; text: string; link: string }
   partners: { titleLight: string; titleBold: string; note: string; empty: string; sought: string; soughtText: string }
   news: { title: string; empty: string; all: string }
@@ -92,6 +94,8 @@ const fr: Dictionary = {
     text: 'Chaque projet présenté sur SCD-RDC DATA indique les objectifs auxquels il contribue, selon la déclaration de l’institution qui le porte. Choisissez un objectif pour voir les projets concernés.',
     link: 'Explorer les projets par objectif',
   },
+  quick: { title: "Comment vous associer", items: [{ label: "Devenir partenaire", text: "Institutions, bailleurs et entreprises" }, { label: "Exposer un projet", text: "Au Salon des projets" }, { label: "Participer au Forum", text: "Manifester son intérêt" }, { label: "Devenir partenaire média", text: "Couvrir et relayer l’événement" }] },
+  film: { title: "Film de présentation", play: "Lire le film" },
   organisers: { title: 'Organisé par', empty: 'Organisateurs en cours de confirmation.' },
   partners: {
     titleLight: 'Ils s’engagent ',
@@ -167,6 +171,8 @@ const en: Dictionary = {
     text: 'Each project on SCD-RDC DATA shows the goals it contributes to, as declared by the institution that leads it. Choose a goal to see the related projects.',
     link: 'Explore projects by goal',
   },
+  quick: { title: "How to get involved", items: [{ label: "Become a partner", text: "Institutions, donors and companies" }, { label: "Exhibit a project", text: "At the Projects Fair" }, { label: "Join the Forum", text: "Express your interest" }, { label: "Become a media partner", text: "Cover and relay the event" }] },
+  film: { title: "Presentation film", play: "Play the film" },
   organisers: { title: 'Organised by', empty: 'Organisers being confirmed.' },
   partners: {
     titleLight: 'Partners ',
@@ -222,6 +228,8 @@ const zh: Dictionary = {
     text: 'SCD-RDC DATA 上的每个项目都标明其所贡献的目标（以项目牵头机构的申报为准）。选择一个目标即可查看相关项目。',
     link: '按目标浏览项目',
   },
+  quick: { title: "参与方式", items: [{ label: "成为合作伙伴", text: "机构、出资方与企业" }, { label: "展示项目", text: "在项目展上" }, { label: "参加论坛", text: "表达参与意向" }, { label: "成为媒体合作伙伴", text: "报道并传播活动" }] },
+  film: { title: "宣传片", play: "播放影片" },
   organisers: { title: '主办单位', empty: '主办单位待确认。' },
   partners: { titleLight: '与我们', titleBold: '同行的伙伴', note: '各机构书面同意后方可发布其标志。', empty: '合作伙伴待确认。', sought: '我们寻求的合作伙伴类别', soughtText: '首批合作伙伴在收到其书面同意后将在此展示。合作手册详细介绍了各类别的权益。' },
   news: { title: '新闻', empty: '首批新闻即将发布。', all: '查看全部' },
@@ -287,6 +295,8 @@ const ru: Dictionary = {
     text: 'Для каждого проекта на SCD-RDC DATA указаны цели, которым он способствует, по заявлению ведущей организации. Выберите цель, чтобы увидеть связанные проекты.',
     link: 'Проекты по целям',
   },
+  quick: { title: "Как принять участие", items: [{ label: "Стать партнёром", text: "Организации, доноры и компании" }, { label: "Представить проект", text: "На Выставке проектов" }, { label: "Участвовать в Форуме", text: "Заявить об интересе" }, { label: "Стать медиапартнёром", text: "Освещать мероприятие" }] },
+  film: { title: "Презентационный фильм", play: "Смотреть фильм" },
   organisers: { title: 'Организаторы', empty: 'Организаторы уточняются.' },
   partners: {
     titleLight: 'Наши ',
@@ -362,6 +372,8 @@ const ar: Dictionary = {
     text: 'يبيّن كل مشروع على منصة SCD-RDC DATA الأهداف التي يسهم فيها، وفق ما تعلنه المؤسسة المسؤولة عنه. اختر هدفًا لعرض المشاريع المرتبطة به.',
     link: 'استكشاف المشاريع حسب الهدف',
   },
+  quick: { title: "كيف تشارك", items: [{ label: "كن شريكًا", text: "المؤسسات والجهات المانحة والشركات" }, { label: "اعرض مشروعًا", text: "في معرض المشاريع" }, { label: "شارك في المنتدى", text: "أبدِ اهتمامك" }, { label: "كن شريكًا إعلاميًا", text: "غطِّ الحدث وانشره" }] },
+  film: { title: "الفيلم التعريفي", play: "تشغيل الفيلم" },
   organisers: { title: 'الجهات المنظِّمة', empty: 'الجهات المنظِّمة قيد التأكيد.' },
   partners: {
     titleLight: 'شركاؤنا ',

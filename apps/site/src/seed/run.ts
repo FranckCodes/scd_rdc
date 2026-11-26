@@ -86,6 +86,52 @@ for (const [index, org] of organisers.entries()) {
   }
 }
 
+// Formulaire exposant enrichi (analyse, étape 2) : ajouté aux formulaires déjà créés sans toucher au reste.
+{
+  const expo = (await payload.find({ collection: 'forms', where: { slug: { equals: 'exposant' } }, limit: 1, depth: 0 })).docs[0]
+  const target = forms.find((f) => f.slug === 'exposant')
+  const hasNew = expo?.fields?.some((f) => 'name' in f && f.name === 'surface')
+  if (expo && target && !hasNew) {
+    await payload.update({ collection: 'forms', id: expo.id, locale: 'fr', data: { fields: target.fields } as never })
+    payload.logger.info('↻ forms/exposant (questions de qualification ajoutées)')
+  }
+}
+
+// Offres, Salon et programme prévisionnel : contenu de départ NON publié (cases de validation décochées).
+// Seuls les publics visés sont affichés tant que rien n'est validé.
+{
+  const offers = await payload.findGlobal({ slug: 'offers', locale: 'fr' })
+  if (FORCE || !offers.institutionnel?.audience) {
+    await payload.updateGlobal({
+      slug: 'offers',
+      locale: 'fr',
+      data: {
+        institutionnel: {
+          audience:
+            'Ministères, Parlement, provinces, établissements publics et représentations diplomatiques qui souhaitent s’associer officiellement à la SCD-RDC.',
+        },
+        ptf: {
+          audience:
+            'Bailleurs bilatéraux et multilatéraux, institutions financières internationales et agences des Nations Unies qui financent ou accompagnent des projets en RDC.',
+        },
+        sponsor: {
+          audience:
+            'Entreprises, banques et opérateurs économiques qui souhaitent associer leur image à une coopération plus visible et orientée vers les résultats.',
+        },
+        media: { audience: 'Médias nationaux et internationaux qui souhaitent couvrir la SCD-RDC et relayer ses temps forts.' },
+        // Trame proposée par l'analyse professionnelle (nov. 2026) — à valider avant publication.
+        provisional: [
+          { day: 'j1', period: 'am', title: 'Cérémonie officielle d’ouverture et Forum national' },
+          { day: 'j1', period: 'pm', title: 'Panels de haut niveau et ouverture du Salon des projets' },
+          { day: 'j2', period: 'am', title: 'Rencontres sectorielles, Agora citoyenne et Laboratoire des solutions' },
+          { day: 'j2', period: 'pm', title: 'Rencontres partenariales, remise des Trophées et clôture' },
+        ],
+      },
+    })
+    payload.logger.info('+ Offres et programme prévisionnel (contenu de départ, non publié)')
+  }
+}
+
 const currentEvent = await payload.findGlobal({ slug: 'event-info', locale: 'fr' })
 if (!FORCE && (currentEvent.keyFigures?.length ?? 0) > 0) {
   payload.logger.info('= Informations de l’événement (déjà renseignées, conservées)')

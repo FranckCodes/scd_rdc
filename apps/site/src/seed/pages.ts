@@ -5,6 +5,39 @@ import { doc, h2, h3, p, ul } from './lexical'
 
 export const pages = [
   {
+    slug: 'pourquoi-participer',
+    title: 'Pourquoi participer ?',
+    intro:
+      'Chaque acteur de la coopération au développement en RDC trouve à la SCD-RDC un intérêt propre : voici, public par public, ce que l’événement vous apporte et comment vous y associer.',
+    meta: {
+      title: 'Pourquoi participer ?',
+      description: 'Ce que la SCD-RDC apporte aux institutions, bailleurs, entreprises, société civile, chercheurs et médias.',
+    },
+    content: doc(
+      h2('Institutions publiques'),
+      p('Présenter les priorités nationales, rendre compte des engagements et rencontrer en deux jours l’ensemble des partenaires.'),
+      p('→ [Manifester son intérêt](/fr/participer/manifestation-interet)'),
+      h2('Partenaires techniques et financiers'),
+      p('Rendre visibles vos interventions et leurs résultats, mieux coordonner vos programmes et publier vos fiches projets sur SCD-RDC DATA.'),
+      p('→ [Devenir partenaire](/fr/participer/partenaire)'),
+      h2('Représentations diplomatiques'),
+      p('Valoriser la coopération de votre pays avec la RDC et rencontrer les décideurs nationaux et provinciaux.'),
+      p('→ [Manifester son intérêt](/fr/participer/manifestation-interet)'),
+      h2('Secteur privé et investisseurs'),
+      p('Identifier les opportunités, exposer vos solutions au Salon des projets et participer aux rencontres B2B et B2G.'),
+      p('→ [Exposer un projet](/fr/participer/exposant) · [Devenir partenaire](/fr/participer/partenaire)'),
+      h2('ONG, société civile et bénéficiaires'),
+      p('Comprendre les enjeux, prendre la parole à l’Agora citoyenne et proposer un témoignage.'),
+      p('→ [Proposer une contribution](/fr/participer/contribution)'),
+      h2('Universités et chercheurs'),
+      p('Proposer une contribution scientifique, un panel ou une solution au Laboratoire des solutions.'),
+      p('→ [Proposer une contribution](/fr/participer/contribution)'),
+      h2('Médias'),
+      p('Consulter les communiqués, demander une accréditation et télécharger le kit presse.'),
+      p('→ [Demander une accréditation](/fr/participer/accreditation-presse)'),
+    ),
+  },
+  {
     slug: 'a-propos',
     title: 'À propos de la SCD-RDC',
     intro:

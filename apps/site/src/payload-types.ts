@@ -118,9 +118,11 @@ export interface Config {
     | ('fr' | 'en' | 'zh' | 'ru' | 'ar')[];
   globals: {
     'event-info': EventInfo;
+    offers: Offer;
   };
   globalsSelect: {
     'event-info': EventInfoSelect<false> | EventInfoSelect<true>;
+    offers: OffersSelect<false> | OffersSelect<true>;
   };
   locale: 'fr' | 'en' | 'zh' | 'ru' | 'ar';
   widgets: {
@@ -516,7 +518,19 @@ export interface Governance {
 export interface Document {
   id: number;
   title: string;
-  kind?: ('dossier' | 'note' | 'programme' | 'rapport' | 'communique' | 'kit-presse' | 'formulaire') | null;
+  kind?:
+    | (
+        | 'dossier'
+        | 'dossier-partenariat'
+        | 'dossier-exposant'
+        | 'note'
+        | 'programme'
+        | 'rapport'
+        | 'communique'
+        | 'kit-presse'
+        | 'formulaire'
+      )
+    | null;
   language?: ('fr' | 'en' | 'zh' | 'ru' | 'ar') | null;
   version?: string | null;
   updatedAt: string;
@@ -743,6 +757,10 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
+  followUpStatus?: ('nouvelle' | 'qualifiee' | 'discussion' | 'conclue' | 'sans-suite') | null;
+  assignee?: (number | null) | User;
+  nextAction?: string | null;
+  internalNotes?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1284,6 +1302,10 @@ export interface FormSubmissionsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
+  followUpStatus?: T;
+  assignee?: T;
+  nextAction?: T;
+  internalNotes?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1364,6 +1386,212 @@ export interface EventInfo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers".
+ */
+export interface Offer {
+  id: number;
+  institutionnel?: {
+    audience?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    benefits?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    modalities?: string | null;
+  };
+  ptf?: {
+    audience?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    benefits?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    modalities?: string | null;
+  };
+  sponsor?: {
+    audience?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    benefits?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    modalities?: string | null;
+  };
+  media?: {
+    audience?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    benefits?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    modalities?: string | null;
+  };
+  /**
+   * Réservé aux comptes admin et validateur.
+   */
+  offersValidated?: boolean | null;
+  stands?:
+    | {
+        name: string;
+        dimensions?: string | null;
+        price?: string | null;
+        /**
+         * Un élément par ligne.
+         */
+        included?: string | null;
+        /**
+         * Réservé aux comptes admin et validateur.
+         */
+        priceApproved?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Réservé aux comptes admin et validateur.
+   */
+  standsValidated?: boolean | null;
+  /**
+   * Un élément par ligne.
+   */
+  advantages?: string | null;
+  /**
+   * Réservé aux comptes admin et validateur.
+   */
+  advantagesValidated?: boolean | null;
+  floorPlan?: (number | null) | Media;
+  /**
+   * Réservé aux comptes admin et validateur.
+   */
+  floorPlanValidated?: boolean | null;
+  provisional?:
+    | {
+        day: 'j1' | 'j2';
+        period: 'am' | 'pm';
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Réservé aux comptes admin et validateur.
+   */
+  provisionalPublished?: boolean | null;
+  forum?: {
+    /**
+     * Un élément par ligne.
+     */
+    objectives?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    audiences?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    results?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    contribution?: string | null;
+  };
+  salon?: {
+    /**
+     * Un élément par ligne.
+     */
+    objectives?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    audiences?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    results?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    contribution?: string | null;
+  };
+  agora?: {
+    /**
+     * Un élément par ligne.
+     */
+    objectives?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    audiences?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    results?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    contribution?: string | null;
+  };
+  laboratoire?: {
+    /**
+     * Un élément par ligne.
+     */
+    objectives?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    audiences?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    results?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    contribution?: string | null;
+  };
+  trophees?: {
+    /**
+     * Un élément par ligne.
+     */
+    objectives?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    audiences?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    results?: string | null;
+    /**
+     * Un élément par ligne.
+     */
+    contribution?: string | null;
+  };
+  /**
+   * Réservé aux comptes admin et validateur.
+   */
+  componentsValidated?: boolean | null;
+  /**
+   * Lien YouTube (le film est chargé seulement au clic, sans cookie publicitaire) ou adresse directe d’un fichier .mp4. Idéalement 60 à 90 secondes, sous-titré.
+   */
+  videoUrl?: string | null;
+  videoPoster?: (number | null) | Media;
+  videoTitle?: string | null;
+  /**
+   * Réservé aux comptes admin et validateur.
+   */
+  videoPublished?: boolean | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "event-info_select".
  */
 export interface EventInfoSelect<T extends boolean = true> {
@@ -1392,6 +1620,113 @@ export interface EventInfoSelect<T extends boolean = true> {
         phone?: T;
         address?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offers_select".
+ */
+export interface OffersSelect<T extends boolean = true> {
+  institutionnel?:
+    | T
+    | {
+        audience?: T;
+        benefits?: T;
+        modalities?: T;
+      };
+  ptf?:
+    | T
+    | {
+        audience?: T;
+        benefits?: T;
+        modalities?: T;
+      };
+  sponsor?:
+    | T
+    | {
+        audience?: T;
+        benefits?: T;
+        modalities?: T;
+      };
+  media?:
+    | T
+    | {
+        audience?: T;
+        benefits?: T;
+        modalities?: T;
+      };
+  offersValidated?: T;
+  stands?:
+    | T
+    | {
+        name?: T;
+        dimensions?: T;
+        price?: T;
+        included?: T;
+        priceApproved?: T;
+        id?: T;
+      };
+  standsValidated?: T;
+  advantages?: T;
+  advantagesValidated?: T;
+  floorPlan?: T;
+  floorPlanValidated?: T;
+  provisional?:
+    | T
+    | {
+        day?: T;
+        period?: T;
+        title?: T;
+        id?: T;
+      };
+  provisionalPublished?: T;
+  forum?:
+    | T
+    | {
+        objectives?: T;
+        audiences?: T;
+        results?: T;
+        contribution?: T;
+      };
+  salon?:
+    | T
+    | {
+        objectives?: T;
+        audiences?: T;
+        results?: T;
+        contribution?: T;
+      };
+  agora?:
+    | T
+    | {
+        objectives?: T;
+        audiences?: T;
+        results?: T;
+        contribution?: T;
+      };
+  laboratoire?:
+    | T
+    | {
+        objectives?: T;
+        audiences?: T;
+        results?: T;
+        contribution?: T;
+      };
+  trophees?:
+    | T
+    | {
+        objectives?: T;
+        audiences?: T;
+        results?: T;
+        contribution?: T;
+      };
+  componentsValidated?: T;
+  videoUrl?: T;
+  videoPoster?: T;
+  videoTitle?: T;
+  videoPublished?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -20,6 +20,7 @@ import { Pages } from './collections/Pages'
 import { Partners } from './collections/Partners'
 import { Projects } from './collections/Projects'
 import { Governance } from './collections/Governance'
+import { Offers } from './globals/Offers'
 import { Trophies } from './collections/Trophies'
 import { Sessions } from './collections/Sessions'
 import { Speakers } from './collections/Speakers'
@@ -69,7 +70,7 @@ export default buildConfig({
   },
 
   collections: [Pages, News, Sessions, Speakers, Trophies, Exhibitors, Partners, Projects, Governance, Documents, Media, Users],
-  globals: [EventInfo],
+  globals: [EventInfo, Offers],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },
@@ -112,9 +113,30 @@ export default buildConfig({
           ...defaultFields,
         ],
       },
+      // Suivi des demandes (analyse, étape 2) : statut, personne en charge, prochaine relance, notes internes.
       formSubmissionOverrides: {
         labels: { singular: 'Demande reçue', plural: 'Demandes reçues' },
-        admin: { group: 'Formulaires' },
+        admin: { group: 'Formulaires', defaultColumns: ['form', 'followUpStatus', 'assignee', 'nextAction', 'createdAt'] },
+        fields: ({ defaultFields }) => [
+          ...defaultFields,
+          {
+            name: 'followUpStatus',
+            label: 'Suivi',
+            type: 'select',
+            defaultValue: 'nouvelle',
+            options: [
+              { label: 'Nouvelle', value: 'nouvelle' },
+              { label: 'Qualifiée', value: 'qualifiee' },
+              { label: 'En discussion', value: 'discussion' },
+              { label: 'Conclue', value: 'conclue' },
+              { label: 'Sans suite', value: 'sans-suite' },
+            ],
+            admin: { position: 'sidebar' },
+          },
+          { name: 'assignee', label: 'Personne en charge', type: 'relationship', relationTo: 'users', admin: { position: 'sidebar' } },
+          { name: 'nextAction', label: 'Prochaine relance', type: 'date', admin: { position: 'sidebar', date: { pickerAppearance: 'dayOnly', displayFormat: 'dd/MM/yyyy' } } },
+          { name: 'internalNotes', label: 'Notes internes (jamais publiées)', type: 'textarea' },
+        ],
       },
     }),
   ],

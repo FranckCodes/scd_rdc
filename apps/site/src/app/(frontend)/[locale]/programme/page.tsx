@@ -8,6 +8,7 @@ import { PageHeader, StatusBadge } from '@/components/PageHeader'
 import { ProgrammeFilters } from '@/components/ProgrammeFilters'
 import { componentKeys, sectorKeys, sectorLabel } from '@/i18n/sectors'
 import { isSessionLive } from '@/lib/event-time'
+import { toLines } from '@/lib/lines'
 import { setup } from '@/lib/locale'
 
 type Search = Promise<{ jour?: string; composante?: string; theme?: string }>
@@ -28,7 +29,24 @@ export default async function ProgrammePage({
   if (jour) and.push({ day: { equals: jour } })
   if (composante) and.push({ component: { equals: composante } })
   if (theme) and.push({ sectors: { contains: theme } })
-  const event = await payload.findGlobal({ slug: 'event-info', locale })
+  const [event, offers] = await Promise.all([
+    payload.findGlobal({ slug: 'event-info', locale }),
+    payload.findGlobal({ slug: 'offers', locale }),
+  ])
+  const s2 = tp.step2
+  // Trame et fiches des composantes : publiées seulement une fois validées dans l'administration
+  const trame = offers.provisionalPublished ? (offers.provisional ?? []) : []
+  const sheets = offers.componentsValidated
+    ? componentKeys
+        .map((key) => {
+          const sheet = offers[key]
+          const rows = (['objectives', 'audiences', 'results', 'contribution'] as const)
+            .map((field) => ({ field, items: toLines(sheet?.[field]) }))
+            .filter((row) => row.items.length > 0)
+          return { key, rows }
+        })
+        .filter((sheet) => sheet.rows.length > 0)
+    : []
   // Pastilles « En cours » : seulement si les dates sont confirmées et le premier jour saisi (Jour 1).
   const eventStart = event.datesConfirmed && event.startDate ? event.startDate : null
   const now = new Date()
@@ -47,6 +65,35 @@ export default async function ProgrammePage({
   return (
     <>
       <PageHeader title={tp.programme.title} intro={tp.programme.intro} />
+      {trame.length > 0 && (
+        <section className="section section--alt" aria-labelledby="previsionnel-titre">
+          <div className="container stack">
+            <div className="section__head">
+              <h2 className="h2" id="previsionnel-titre">
+                <strong>{s2.provisionalTitle}</strong>
+              </h2>
+            </div>
+            <p className="text-muted">{s2.provisionalNote}</p>
+            <div className="trame">
+              {(['j1', 'j2'] as const).map((day) => (
+                <div key={day} className="trame__day">
+                  <h3>{tp.programme.days[day]}</h3>
+                  <ul>
+                    {trame
+                      .filter((slot) => slot.day === day)
+                      .map((slot, i) => (
+                        <li key={slot.id ?? i}>
+                          <span className="label">{slot.period === 'am' ? s2.am : s2.pm}</span>
+                          <span>{slot.title}</span>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
       <section className="section">
         <div className="container stack">
           <ProgrammeFilters
@@ -133,6 +180,36 @@ export default async function ProgrammePage({
           </Link>
         </div>
       </section>
+      {sheets.length > 0 && (
+        <section className="section section--alt" aria-labelledby="composantes-titre">
+          <div className="container stack">
+            <h2 className="h2" id="composantes-titre">
+              <strong>{s2.componentsTitle}</strong>
+            </h2>
+            <div className="sheets">
+              {sheets.map((sheet) => (
+                <details key={sheet.key} className="sheet" id={`composante-${sheet.key}`}>
+                  <summary>{componentName(sheet.key)}</summary>
+                  <dl>
+                    {sheet.rows.map((row) => (
+                      <div key={row.field}>
+                        <dt>{s2[row.field]}</dt>
+                        <dd>
+                          <ul>
+                            {row.items.map((item) => (
+                              <li key={item}>{item}</li>
+                            ))}
+                          </ul>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   )
 }

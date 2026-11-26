@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { ViewTransition } from 'react'
 
 import { PROJECT_STATUSES, PROVINCES, SDGS, SECTORS } from '@scd/ui/reference'
@@ -80,6 +81,9 @@ function Method() {
           fiche peut en compter plusieurs.
         </li>
       </ul>
+      <p>
+        <Link href="/methodologie">Lire la méthodologie complète</Link>
+      </p>
     </section>
   )
 }

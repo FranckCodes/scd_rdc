@@ -373,3 +373,10 @@ a.sdg__tile:hover, a.sdg__tile:focus-visible { transform: translateY(-3px); }
 ::view-transition-old(.card-move), ::view-transition-new(.card-move) { animation-duration: var(--data-dur-change); }
 ::view-transition-old(.card-exit) { animation: var(--scd-dur-fast) var(--scd-ease-in) both scd-fade-out; }
 ::view-transition-new(.card-enter) { animation: var(--scd-dur-base) var(--scd-ease-out) both scd-fade-up; }
+
+/* --- Méthodologie --- */
+.methodology { display: flex; flex-direction: column; gap: 24px; }
+.methodology__steps { display: grid; gap: 14px; }
+.methodology__steps h2 { margin: 0 0 10px; font-family: var(--scd-font-title); font-weight: 800; font-size: 20px; }
+.methodology__steps ul { margin: 0; padding-inline-start: 20px; display: grid; gap: 8px; line-height: 1.6; }
+.methodology__links { display: flex; flex-wrap: wrap; gap: 12px 28px; font-weight: 700; }

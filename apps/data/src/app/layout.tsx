@@ -60,6 +60,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p>Fond de carte : geoBoundaries, © contributeurs OpenStreetMap (ODbL 1.0).</p>
             <ul className="footer__links">
               <li>
+                <Link href="/methodologie">Méthodologie</Link>
+              </li>
+              <li>
                 <a href={`${SITE_URL}/fr/mentions-legales`}>Mentions légales</a>
               </li>
               <li>

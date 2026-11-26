@@ -16,6 +16,8 @@ export const Documents: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Dossier institutionnel', value: 'dossier' },
+        { label: 'Dossier de partenariat et de sponsoring', value: 'dossier-partenariat' },
+        { label: 'Dossier exposant', value: 'dossier-exposant' },
         { label: 'Note conceptuelle', value: 'note' },
         { label: 'Programme', value: 'programme' },
         { label: 'Rapport', value: 'rapport' },

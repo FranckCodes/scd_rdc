@@ -153,6 +153,20 @@ commissions spécialisées). Une fiche n'apparaît en ligne (page et API) qu'au 
 une personnalité qu'après sa désignation officielle **et** son accord écrit. Une instance sans fiche confirmée
 affiche « Composition communiquée après confirmation officielle ».
 
+## Offres, Salon et programme prévisionnel
+Administration → *Partenariats → Offres, Salon et programme prévisionnel* (onglets) :
+- **Offres de partenariat** : public visé (déjà rempli), contreparties et modalités (une par ligne).
+  Les contreparties ne s'affichent qu'une fois « validées pour publication » ; sinon le site renvoie au dossier.
+- **Salon des projets** : catégories de stands (dimensions, prestations, tarif), avantages, plan d'implantation.
+  Un tarif non approuvé s'affiche « Tarif sur demande ».
+- **Programme prévisionnel** : trame par demi-journée (déjà remplie d'après l'analyse, non publiée) et fiches des
+  cinq composantes. Cocher la case de validation pour les publier.
+- **Film de présentation** : lien YouTube ou fichier .mp4, image d'attente ; rien n'est chargé avant le clic.
+- **Dossiers à télécharger** : *Contenus → Documents*, type « Dossier de partenariat et de sponsoring » ou
+  « Dossier exposant » ; le bouton apparaît automatiquement sur la page concernée.
+- **Suivi des demandes** : *Formulaires → Demandes reçues* : statut (nouvelle → conclue), personne en charge,
+  prochaine relance, notes internes.
+
 ## Temps forts de l'événement
 - **Compte à rebours (accueil)** : administration → *Informations de l’événement* → saisir le premier et
   le dernier jour, puis un compte validateur coche « Confirmé officiellement » pour les dates. Sans ces

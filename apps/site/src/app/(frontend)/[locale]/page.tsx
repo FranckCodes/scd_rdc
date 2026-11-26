@@ -10,6 +10,7 @@ import { CountUp } from '@/components/CountUp'
 import { FingerprintRings } from '@/components/FingerprintRings'
 import { notOrganiserWhere, Organisers } from '@/components/Organisers'
 import { SdgSection } from '@/components/SdgSection'
+import { VideoPlayer } from '@/components/VideoPlayer'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { getPageDictionary } from '@/i18n/pages'
@@ -23,7 +24,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = getDictionary(locale)
 
   const payload = await getPayload({ config })
-  const [event, news, partners] = await Promise.all([
+  const [event, news, partners, offers] = await Promise.all([
     payload.findGlobal({ slug: 'event-info', locale }),
     payload.find({ collection: 'news', locale, limit: 3, sort: '-publishedAt', where: { _status: { equals: 'published' } } }),
     // Règle TDR §13 : seuls les partenaires confirmés ET dont le logo est autorisé sont affichés.
@@ -33,7 +34,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       sort: 'order',
       where: { and: [{ validationStatus: { equals: 'confirme' } }, { logoAuthorized: { equals: true } }, notOrganiserWhere] },
     }),
+    payload.findGlobal({ slug: 'offers', locale, depth: 1 }),
   ])
+  // Film de présentation : seulement une fois validé
+  const film = offers.videoPublished && offers.videoUrl ? offers : null
+  const filmPoster = film?.videoPoster && typeof film.videoPoster === 'object' ? film.videoPoster.url : null
+  const quickHrefs = ['partenaire', 'exposant', 'manifestation-interet', 'partenaire'].map((f) => `/${locale}/participer/${f}`)
 
   const pending = (confirmed?: boolean | null) =>
     confirmed ? null : <span className="muted"> · {t.ui.toConfirm}</span>
@@ -111,6 +117,40 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <span className="muted small">{t.hero.photoCredit}</span>
         </div>
       </section>
+
+      {/* QUATRE ACCÈS DIRECTS (analyse, étape 2) */}
+      <section className="section section--tight" aria-labelledby="quick-title">
+        <div className="container stack">
+          <h2 className="h2" id="quick-title">
+            <strong>{t.quick.title}</strong>
+          </h2>
+          <ul className="quick">
+            {t.quick.items.map((item, i) => (
+              <li key={item.label}>
+                <Link className="quick__link" href={quickHrefs[i]}>
+                  <span className="quick__label">
+                    {item.label} <Arrow />
+                  </span>
+                  <span className="quick__text">{item.text}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {film && (
+        <section className="section" aria-labelledby="film-title">
+          <div className="container stack">
+            <h2 className="h2" id="film-title">
+              <strong>{film.videoTitle || t.film.title}</strong>
+            </h2>
+            <div className="video">
+              <VideoPlayer url={film.videoUrl!} poster={filmPoster} title={film.videoTitle || t.film.title} playLabel={t.film.play} />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* COMPOSANTES */}
       <section className="section section--alt">

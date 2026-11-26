@@ -22,18 +22,34 @@ const block = (type: string, children: Node[], extra: Node = {}): Node => ({
   ...extra,
 })
 
-/** Paragraphe. `**gras**` est pris en charge pour un segment en gras. */
-export const p = (value: string): Node => {
+const boldRuns = (value: string): Node[] =>
   // split avec groupe capturant : indices impairs = segments en gras
-  const parts = value
+  value
     .split(/\*\*(.+?)\*\*/g)
     .map((part, i) => ({ part, bold: i % 2 === 1 }))
     .filter(({ part }) => part.length > 0)
-  return block(
-    'paragraph',
-    parts.map(({ part, bold }) => text(part, bold)),
-    { textFormat: 0, textStyle: '' },
-  )
+    .map(({ part, bold }) => text(part, bold))
+
+const link = (label: string, url: string): Node => ({
+  type: 'link',
+  children: [text(label)],
+  direction: 'ltr',
+  format: '',
+  indent: 0,
+  version: 3,
+  fields: { url, newTab: false, linkType: 'custom' },
+})
+
+/** Paragraphe. `**gras**` et les liens `[texte](/adresse)` sont pris en charge. */
+export const p = (value: string): Node => {
+  const children: Node[] = []
+  // split avec 2 groupes capturants : [texte, libellé, adresse, texte, libellé, adresse, …]
+  const parts = value.split(/\[([^\]]+)\]\(([^)\s]+)\)/g)
+  for (let i = 0; i < parts.length; i += 3) {
+    children.push(...boldRuns(parts[i]))
+    if (i + 2 < parts.length) children.push(link(parts[i + 1], parts[i + 2]))
+  }
+  return block('paragraph', children, { textFormat: 0, textStyle: '' })
 }
 
 export const h2 = (value: string): Node => block('heading', [text(value)], { tag: 'h2' })

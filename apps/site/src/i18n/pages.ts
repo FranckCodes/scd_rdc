@@ -50,6 +50,34 @@ export type PageDictionary = {
   news: { title: string; empty: string; back: string }
   live: string
   trophies: { title: string; intro: string; empty: string; pending: string; laureate: string; live: string; revealed: string }
+  step2: {
+    offersTitle: string
+    audience: string
+    benefits: string
+    modalities: string
+    onRequest: string
+    dossierPartner: string
+    why: string
+    standsTitle: string
+    category: string
+    dimensions: string
+    included: string
+    price: string
+    priceOnRequest: string
+    standsPending: string
+    advantagesTitle: string
+    planTitle: string
+    dossierExhibitor: string
+    provisionalTitle: string
+    provisionalNote: string
+    am: string
+    pm: string
+    componentsTitle: string
+    objectives: string
+    audiences: string
+    results: string
+    contribution: string
+  }
   governance: {
     title: string
     intro: string
@@ -138,6 +166,34 @@ const fr: PageDictionary = {
   },
   news: { title: 'Actualités', empty: 'Les premières actualités seront publiées prochainement.', back: 'Toutes les actualités' },
   live: 'En cours',
+  step2: {
+    offersTitle: "Quatre formules de partenariat",
+    audience: "Pour qui",
+    benefits: "Contreparties",
+    modalities: "Modalités",
+    onRequest: "Contreparties et modalités détaillées dans le dossier de partenariat, sur demande.",
+    dossierPartner: "Télécharger le dossier de partenariat",
+    why: "Pourquoi participer ?",
+    standsTitle: "Stands et formules d’exposition",
+    category: "Catégorie",
+    dimensions: "Dimensions",
+    included: "Prestations incluses",
+    price: "Tarif",
+    priceOnRequest: "Tarif sur demande",
+    standsPending: "Les formules d’exposition (dimensions, prestations, tarifs) seront publiées dès leur approbation. Vous pouvez déjà envoyer votre demande : l’équipe vous répond sous 24 heures ouvrées.",
+    advantagesTitle: "Avantages pour les exposants",
+    planTitle: "Plan d’implantation",
+    dossierExhibitor: "Télécharger le dossier exposant",
+    provisionalTitle: "Programme prévisionnel",
+    provisionalNote: "Trame indicative, susceptible d’évoluer. Les sessions confirmées s’affichent au fur et à mesure ci-dessous.",
+    am: "Matin",
+    pm: "Après-midi",
+    componentsTitle: "Les cinq composantes",
+    objectives: "Objectifs",
+    audiences: "Publics ciblés",
+    results: "Résultats attendus",
+    contribution: "Comment contribuer",
+  },
   governance: {
     title: 'Gouvernance et organisation',
     intro: 'Qui organise la SCD-RDC, sous quelle gouvernance et avec quelles responsabilités. Seules les personnes et institutions dont la participation est officiellement confirmée sont présentées.',
@@ -236,6 +292,34 @@ const en: PageDictionary = {
   },
   news: { title: 'News', empty: 'The first news items will be published soon.', back: 'All news' },
   live: 'Live now',
+  step2: {
+    offersTitle: "Four partnership packages",
+    audience: "Who it is for",
+    benefits: "Benefits",
+    modalities: "How it works",
+    onRequest: "Benefits and terms are detailed in the partnership pack, available on request.",
+    dossierPartner: "Download the partnership pack",
+    why: "Why take part?",
+    standsTitle: "Stands and exhibition packages",
+    category: "Category",
+    dimensions: "Size",
+    included: "Included services",
+    price: "Price",
+    priceOnRequest: "Price on request",
+    standsPending: "Exhibition packages (sizes, services, prices) will be published once approved. You can already send your request: the team replies within 24 working hours.",
+    advantagesTitle: "Benefits for exhibitors",
+    planTitle: "Floor plan",
+    dossierExhibitor: "Download the exhibitor pack",
+    provisionalTitle: "Provisional programme",
+    provisionalNote: "Indicative outline, subject to change. Confirmed sessions appear below as they are approved.",
+    am: "Morning",
+    pm: "Afternoon",
+    componentsTitle: "The five components",
+    objectives: "Objectives",
+    audiences: "Target audiences",
+    results: "Expected results",
+    contribution: "How to contribute",
+  },
   governance: {
     title: 'Governance and organisation',
     intro: 'Who organises SCD-RDC, under what governance and with which responsibilities. Only people and institutions whose participation has been officially confirmed are listed.',
@@ -323,6 +407,34 @@ const zh: PageDictionary = {
   },
   news: { title: '新闻', empty: '首批新闻即将发布。', back: '全部新闻' },
   live: '正在进行',
+  step2: {
+    offersTitle: "四种合作方案",
+    audience: "适用对象",
+    benefits: "合作权益",
+    modalities: "参与方式",
+    onRequest: "合作权益与方式详见合作手册，可应要求提供。",
+    dossierPartner: "下载合作手册",
+    why: "为什么参与？",
+    standsTitle: "展位与参展方案",
+    category: "类别",
+    dimensions: "尺寸",
+    included: "包含服务",
+    price: "价格",
+    priceOnRequest: "价格面议",
+    standsPending: "参展方案（尺寸、服务、价格）审定后即公布。您现在即可提交申请，团队将在 24 个工作小时内回复。",
+    advantagesTitle: "参展方权益",
+    planTitle: "展位平面图",
+    dossierExhibitor: "下载参展手册",
+    provisionalTitle: "暂定议程",
+    provisionalNote: "指示性安排，可能调整。已确认的会议将陆续显示在下方。",
+    am: "上午",
+    pm: "下午",
+    componentsTitle: "五大板块",
+    objectives: "目标",
+    audiences: "目标受众",
+    results: "预期成果",
+    contribution: "如何参与",
+  },
   governance: {
     title: '治理与组织',
     intro: '谁在组织 SCD-RDC、采用何种治理架构、承担哪些职责。仅展示已正式确认参与的人员和机构。',
@@ -421,6 +533,34 @@ const ru: PageDictionary = {
   },
   news: { title: 'Новости', empty: 'Первые новости скоро появятся.', back: 'Все новости' },
   live: 'Идёт сейчас',
+  step2: {
+    offersTitle: "Четыре формата партнёрства",
+    audience: "Для кого",
+    benefits: "Преимущества",
+    modalities: "Условия участия",
+    onRequest: "Преимущества и условия подробно описаны в партнёрском пакете, который предоставляется по запросу.",
+    dossierPartner: "Скачать партнёрский пакет",
+    why: "Зачем участвовать?",
+    standsTitle: "Стенды и форматы участия",
+    category: "Категория",
+    dimensions: "Размеры",
+    included: "Включённые услуги",
+    price: "Стоимость",
+    priceOnRequest: "Цена по запросу",
+    standsPending: "Форматы участия (размеры, услуги, стоимость) будут опубликованы после утверждения. Вы уже можете отправить заявку: команда ответит в течение 24 рабочих часов.",
+    advantagesTitle: "Преимущества для экспонентов",
+    planTitle: "План размещения",
+    dossierExhibitor: "Скачать пакет экспонента",
+    provisionalTitle: "Предварительная программа",
+    provisionalNote: "Ориентировочный план, возможны изменения. Подтверждённые сессии появляются ниже по мере утверждения.",
+    am: "Утро",
+    pm: "После обеда",
+    componentsTitle: "Пять составляющих",
+    objectives: "Цели",
+    audiences: "Целевая аудитория",
+    results: "Ожидаемые результаты",
+    contribution: "Как принять участие",
+  },
   governance: {
     title: 'Управление и организация',
     intro: 'Кто организует SCD-RDC, на основе какой системы управления и с какими обязанностями. Представлены только лица и организации, чьё участие официально подтверждено.',
@@ -513,6 +653,34 @@ const ar: PageDictionary = {
   },
   news: { title: 'الأخبار', empty: 'ستُنشر الأخبار الأولى قريبًا.', back: 'جميع الأخبار' },
   live: 'جارٍ الآن',
+  step2: {
+    offersTitle: "أربع صيغ للشراكة",
+    audience: "لمن",
+    benefits: "المزايا",
+    modalities: "طرق المشاركة",
+    onRequest: "المزايا وطرق المشاركة مفصّلة في ملف الشراكة، المتاح عند الطلب.",
+    dossierPartner: "تنزيل ملف الشراكة",
+    why: "لماذا تشارك؟",
+    standsTitle: "الأجنحة وصيغ العرض",
+    category: "الفئة",
+    dimensions: "المقاسات",
+    included: "الخدمات المشمولة",
+    price: "السعر",
+    priceOnRequest: "السعر عند الطلب",
+    standsPending: "ستُنشر صيغ العرض (المقاسات والخدمات والأسعار) فور اعتمادها. يمكنكم إرسال طلبكم الآن، وسيردّ الفريق خلال 24 ساعة عمل.",
+    advantagesTitle: "مزايا العارضين",
+    planTitle: "مخطط التوزيع",
+    dossierExhibitor: "تنزيل ملف العارض",
+    provisionalTitle: "البرنامج المبدئي",
+    provisionalNote: "إطار استرشادي قابل للتعديل. تظهر الجلسات المؤكدة أدناه تباعًا.",
+    am: "صباحًا",
+    pm: "بعد الظهر",
+    componentsTitle: "المكوّنات الخمسة",
+    objectives: "الأهداف",
+    audiences: "الجمهور المستهدف",
+    results: "النتائج المتوقعة",
+    contribution: "كيف تساهم",
+  },
   governance: {
     title: 'الحوكمة والتنظيم',
     intro: 'من ينظّم SCD-RDC، وفي إطار أي حوكمة، وبأي مسؤوليات. لا يُعرض إلا الأشخاص والمؤسسات الذين تأكدت مشاركتهم رسميًا.',
