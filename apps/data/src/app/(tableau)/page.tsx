@@ -177,12 +177,18 @@ export default async function DataHome({ searchParams }: { searchParams: Promise
           <Filters values={{ secteur: filters.secteur, province: filters.province, odd: filters.odd, statut: filters.statut }} />
         </section>
 
+        {demo && (
+          <p className="demo-note" role="note">
+            <strong>Données d’illustration</strong> : les chiffres, la carte et les graphiques ci-dessous sont calculés
+            sur des projets fictifs. Ils ne décrivent pas la coopération réelle en RDC.
+          </p>
+        )}
         <dl className="totals">
           <div className="total">
             <dt>Projets</dt>
             <dd>
               <AnimatedNumber value={filtered.length} text={formatInteger(filtered.length)} />
-              <span className="total__note">{activeFilters || 'Toutes les fiches publiées'}</span>
+              <span className="total__note">{activeFilters || (demo ? 'Fiches fictives d’illustration' : 'Toutes les fiches publiées')}</span>
             </dd>
           </div>
           <div className="total">

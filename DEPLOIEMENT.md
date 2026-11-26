@@ -24,8 +24,12 @@ leur domaine et ne s'appellent pas l'un l'autre.
    `scd-rdc.org` n'est pas branché).
 4. **Deploy**.
 
-> Ne jamais définir `DATA_DEMO` sur Vercel : cette variable n'active la démonstration (projets
-> fictifs) que sur un ordinateur, via `apps/data/.env.local`, et elle est de toute façon refusée sur Vercel.
+> **Données d'illustration.** Tant qu'aucune fiche projet n'est validée (ou si l'API du site ne répond pas),
+> DATA affiche en ligne 40 projets **fictifs** pour montrer le fonctionnement de la plateforme : bandeau jaune
+> « Données d'illustration », étiquette « Illustration · fictif » sur chaque fiche, encadré au-dessus des
+> chiffres, pages non indexées. Ils disparaissent d'eux-mêmes dès la première fiche validée.
+> Pour les couper sans attendre : variable `DATA_ILLUSTRATION=0` sur le projet `scd-rdc-data`, puis redéployer.
+> `DATA_DEMO` reste réservé à un ordinateur (`apps/data/.env.local`) et est ignoré sur Vercel.
 
 ## 2. Projet `scd-rdc-site`
 
@@ -134,8 +138,8 @@ Valider le fichier de migration avec le code. Il sera appliqué au prochain dép
 5. La fiche apparaît sur `data.scd-rdc.org` en 5 minutes au plus. Repasser une fiche à « En attente »
    la retire de DATA dans le même délai.
 
-Démonstration locale avec des projets fictifs : créer `apps/data/.env.local` contenant `DATA_DEMO=1`,
-puis `pnpm --filter data dev` (http://localhost:3001). Un bandeau jaune rappelle que tout est fictif.
+Données d'illustration en local même si des fiches existent : créer `apps/data/.env.local` contenant
+`DATA_DEMO=1`, puis `pnpm --filter data dev` (http://localhost:3001). Un bandeau jaune rappelle que tout est fictif.
 
 ## Organisateurs (« Organisé par »)
 Les quatre cabinets organisateurs (CBS SARL, NKOSI ADVISORY, CABINET DEBRE INT’L, BANTU EXPERTISE) sont

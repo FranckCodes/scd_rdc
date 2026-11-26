@@ -8,19 +8,24 @@ import '@scd/ui/tokens.css'
 import '@scd/ui/motion.css'
 import './styles.css'
 
-import { isDemo } from '../lib/projects'
+import { getProjects } from '../lib/projects'
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/+$/, '')
 
-export const metadata: Metadata = {
-  title: { default: 'SCD-RDC DATA', template: '%s · SCD-RDC DATA' },
-  description: 'Qui finance quoi, où, pour qui ? Le portefeuille de la coopération au développement en RDC, province par province.',
-  // La démonstration locale (projets fictifs) ne doit jamais être indexée
-  robots: isDemo ? { index: false, follow: false } : undefined,
+export async function generateMetadata(): Promise<Metadata> {
+  const { mode } = await getProjects()
+  return {
+    title: { default: 'SCD-RDC DATA', template: '%s · SCD-RDC DATA' },
+    description:
+      'Qui finance quoi, où, pour qui ? Le portefeuille de la coopération au développement en RDC, province par province.',
+    // Les données d'illustration (projets fictifs) ne doivent jamais être indexées
+    robots: mode === 'demo' ? { index: false, follow: false } : undefined,
+  }
 }
 
 // V1 en français ; les autres langues (EN, ZH, RU, AR) suivront comme sur le site institutionnel.
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { mode } = await getProjects()
   return (
     <html lang="fr" dir="ltr">
       <head>
@@ -31,10 +36,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a className="skip-link" href="#contenu">
           Aller au contenu
         </a>
-        {isDemo && (
+        {mode === 'demo' && (
           <p className="demo-banner" role="note">
-            <strong>Démonstration locale :</strong> les projets affichés sont <strong>fictifs</strong>. Ils ne sont
-            jamais publiés en ligne.
+            <strong>Données d’illustration :</strong> les projets, institutions et montants affichés sont{' '}
+            <strong>fictifs</strong>. Ils montrent le fonctionnement de la plateforme et seront remplacés par les
+            fiches validées par les institutions porteuses.
           </p>
         )}
         <header className="topbar">

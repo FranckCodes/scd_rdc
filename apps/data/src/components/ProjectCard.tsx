@@ -39,7 +39,7 @@ export function ProjectCard({ project, demo }: { project: Project; demo: boolean
         )}
       </div>
       <p className="card__source">
-        {demo ? <span className="tag tag--demo">Fictif</span> : <span className="tag tag--ok">Fiche validée</span>}
+        {demo ? <span className="tag tag--demo">Illustration · fictif</span> : <span className="tag tag--ok">Fiche validée</span>}
         <span>Mise à jour le {formatDate(project.updatedOn)}</span>
       </p>
     </article>

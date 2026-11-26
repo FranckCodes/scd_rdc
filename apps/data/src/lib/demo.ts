@@ -2,9 +2,9 @@ import { SECTORS, type ProjectStatusId, type ProvinceId, type SdgId, type Sector
 
 import type { Currency, Project } from './projects'
 
-// ⚠ DÉMONSTRATION LOCALE UNIQUEMENT (voir isDemo dans projects.ts).
+// ⚠ DONNÉES D'ILLUSTRATION (voir getProjects dans projects.ts) : affichées en ligne seulement tant qu'aucune fiche n'est validée.
 // Projets 100 % FICTIFS : intitulés, institutions, montants et résultats sont inventés pour tester
-// l'interface et ses animations. Ils ne décrivent aucun projet réel et ne sont jamais publiés en ligne.
+// l'interface. Ils ne décrivent aucun projet réel et sont toujours signalés comme tels à l'écran.
 
 const ACTIVITIES: Record<SectorId, string[]> = {
   infrastructures: ['Réhabilitation de routes de desserte agricole', 'Construction d’un pont', 'Aménagement de la voirie urbaine'],
@@ -93,8 +93,8 @@ function buildDemoProjects(): Project[] {
       slug: `demo-${n}`,
       title: `Projet fictif ${n} · ${pick(ACTIVITIES[sector])}`,
       summary:
-        'Fiche fictive créée pour la démonstration locale de SCD-RDC DATA. Elle ne décrit aucun projet réel ; ' +
-        'elle sert uniquement à vérifier l’affichage des fiches, des filtres, de la carte et des graphiques.',
+        'Donnée d’illustration : fiche fictive qui montre le fonctionnement de SCD-RDC DATA. Elle ne décrit aucun ' +
+        'projet réel et sera remplacée par les fiches validées par les institutions porteuses.',
       institution: `Institution fictive ${pick(['A', 'B', 'C', 'D', 'E', 'F'])}`,
       partners: rand() < 0.6 ? `Partenaire fictif ${1 + Math.floor(rand() * 5)}` : null,
       supervision: rand() < 0.5 ? 'Ministère fictif de tutelle' : null,
@@ -114,11 +114,11 @@ function buildDemoProjects(): Project[] {
       results:
         rand() < 0.6
           ? [
-              { indicator: 'Indicateur fictif 1', value: String(10 + Math.floor(rand() * 90)), period: '2026', source: 'Démonstration' },
-              { indicator: 'Indicateur fictif 2', value: `${Math.floor(rand() * 100)} %`, period: null, source: 'Démonstration' },
+              { indicator: 'Indicateur fictif 1', value: String(10 + Math.floor(rand() * 90)), period: '2026', source: 'Illustration' },
+              { indicator: 'Indicateur fictif 2', value: `${Math.floor(rand() * 100)} %`, period: null, source: 'Illustration' },
             ]
           : [],
-      dataSource: 'Jeu de démonstration (fictif)',
+      dataSource: 'Données d’illustration (fictives)',
       updatedOn: `2026-${updatedMonth}-${String(updatedDay).padStart(2, '0')}T12:00:00.000Z`,
     }
   })

@@ -37,7 +37,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   // Appelé ici aussi : pour les robots d'indexation, les métadonnées sont résolues avant l'envoi de la page,
   // ce qui permet de répondre un vrai 404 (les navigateurs reçoivent la page « introuvable » en noindex).
   if (!project) notFound()
-  return { title: project.title, description: project.summary }
+  return {
+    title: project.title,
+    description: project.summary,
+    ...(project.slug.startsWith('demo-') ? { robots: { index: false, follow: false } } : {}),
+  }
 }
 
 export default async function ProjectPage({ params }: Params) {
@@ -86,7 +90,7 @@ export default async function ProjectPage({ params }: Params) {
         <h1>{project.title}</h1>
         <p className="fiche__institution">{project.institution}</p>
         <p className="fiche__badges">
-          {demo ? <span className="tag tag--demo">Fiche fictive</span> : <span className="tag tag--ok">Fiche validée</span>}
+          {demo ? <span className="tag tag--demo">Donnée d’illustration · fiche fictive</span> : <span className="tag tag--ok">Fiche validée</span>}
           <span>Mise à jour le {formatDate(project.updatedOn)}</span>
         </p>
       </header>
@@ -168,7 +172,7 @@ export default async function ProjectPage({ params }: Params) {
             <p className="muted small">{province}</p>
           </div>
           <p className="fiche__source">
-            Source de la fiche : {project.dataSource}. Statut : {demo ? 'fiche fictive (démonstration)' : 'confirmé'}.
+            Source de la fiche : {project.dataSource}. Statut : {demo ? 'donnée d’illustration, fiche fictive' : 'confirmé'}.
           </p>
         </aside>
       </div>

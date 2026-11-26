@@ -265,6 +265,7 @@ main { max-width: var(--scd-container); margin-inline: auto; padding: 24px var(-
 .chip[data-status='cloture'] { background: #e9ecef; color: #44525f; }
 .tag { display: inline-flex; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; }
 .tag--ok { background: #e5f8e2; color: #1f5f17; }
+.demo-note { margin: 0 0 16px; padding: 12px 16px; border-left: 4px solid var(--scd-yellow); background: #fff8d6; color: var(--scd-ink); font-size: 15px; }
 .tag--demo { background: var(--scd-yellow); color: var(--scd-ink); }
 .empty { margin: 0; padding: 32px; background: var(--scd-white); border-radius: var(--scd-radius); text-align: center; }
 

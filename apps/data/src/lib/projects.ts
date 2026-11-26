@@ -49,11 +49,15 @@ export type Project = {
 export type ProjectsData = { mode: 'api' | 'demo'; projects: Project[] } | { mode: 'unavailable'; projects: Project[] }
 
 /**
- * Démonstration locale avec des projets FICTIFS, pour voir l'interface et ses animations.
- * Double verrou : DATA_DEMO n'existe que dans .env.local (jamais versionné ni déployé),
- * et la démonstration est refusée sur Vercel quoi qu'il arrive.
+ * Données d'illustration : 40 projets FICTIFS (intitulés « Projet fictif NN », institutions
+ * « Institution fictive X ») qui montrent le fonctionnement de la plateforme.
+ * - En local : forcées avec DATA_DEMO=1 (.env.local).
+ * - En ligne : affichées seulement tant qu'AUCUNE fiche n'est validée (ou si l'API ne répond pas),
+ *   avec un bandeau, une étiquette sur chaque fiche et sans indexation. Dès la première fiche
+ *   validée, elles disparaissent d'elles-mêmes. DATA_ILLUSTRATION=0 les coupe complètement.
  */
-export const isDemo = process.env.DATA_DEMO === '1' && !process.env.VERCEL && !process.env.VERCEL_ENV
+export const isLocalDemo = process.env.DATA_DEMO === '1' && !process.env.VERCEL && !process.env.VERCEL_ENV
+const illustrationAllowed = process.env.DATA_ILLUSTRATION !== '0'
 
 const API_BASE = (process.env.SITE_API_URL || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(
   /\/+$/,
@@ -155,11 +159,14 @@ const byMostRecent = (a: Project, b: Project) =>
 
 /** Toutes les fiches publiables, de la plus récemment mise à jour à la plus ancienne (mémorisé par requête). */
 export const getProjects = cache(async (): Promise<ProjectsData> => {
-  if (isDemo) return { mode: 'demo', projects: [...DEMO_PROJECTS].sort(byMostRecent) }
+  const illustration = (): ProjectsData => ({ mode: 'demo', projects: [...DEMO_PROJECTS].sort(byMostRecent) })
+  if (isLocalDemo) return illustration()
   try {
-    return { mode: 'api', projects: (await fetchValidatedProjects()).sort(byMostRecent) }
+    const projects = (await fetchValidatedProjects()).sort(byMostRecent)
+    if (projects.length === 0 && illustrationAllowed) return illustration()
+    return { mode: 'api', projects }
   } catch (error) {
     console.error('[SCD-RDC DATA] Fiches projets indisponibles :', error)
-    return { mode: 'unavailable', projects: [] }
+    return illustrationAllowed ? illustration() : { mode: 'unavailable', projects: [] }
   }
 })
