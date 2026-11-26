@@ -36,6 +36,37 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     }),
     payload.findGlobal({ slug: 'offers', locale, depth: 1 }),
   ])
+  // Comité de patronage : seules les personnalités confirmées (désignation officielle et accord)
+  const patrons = await payload.find({
+    collection: 'governance',
+    locale,
+    depth: 1,
+    limit: 12,
+    sort: 'order',
+    overrideAccess: false,
+    where: { body: { equals: 'patronage' } },
+  })
+  const s3 = getPageDictionary(locale).step3
+  // Données structurées de l'événement (référencement) : la date n'est donnée que si elle est confirmée.
+  const site = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/+$/, '')
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: 'Semaine de la Coopération au Développement – RDC (SCD-RDC)',
+    description: t.hero.positioning,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    ...(event.datesConfirmed && event.startDate ? { startDate: event.startDate.slice(0, 10) } : {}),
+    ...(event.datesConfirmed && event.endDate ? { endDate: event.endDate.slice(0, 10) } : {}),
+    location: {
+      '@type': 'Place',
+      name: event.venueConfirmed && event.venue ? event.venue : event.city || 'Kinshasa',
+      address: { '@type': 'PostalAddress', addressLocality: 'Kinshasa', addressCountry: 'CD' },
+    },
+    image: `${site}/images/og-scd-rdc.png`,
+    url: `${site}/${locale}`,
+    organizer: { '@type': 'Organization', name: 'SCD-RDC', url: site },
+  }
   // Film de présentation : seulement une fois validé
   const film = offers.videoPublished && offers.videoUrl ? offers : null
   const filmPoster = film?.videoPoster && typeof film.videoPoster === 'object' ? film.videoPoster.url : null
@@ -51,6 +82,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       {/* ACCROCHE */}
       <section className="hero">
         <FingerprintRings id="hero-rings" className="hero__rings" />
@@ -213,6 +245,32 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
       {/* OBJECTIFS DE DÉVELOPPEMENT DURABLE */}
       <SdgSection locale={locale} labels={t.sdgs} />
+
+      {/* COMITÉ DE PATRONAGE */}
+      {patrons.docs.length > 0 && (
+        <section className="section" aria-labelledby="patronage-title">
+          <div className="container stack">
+            <h2 className="h2" id="patronage-title">
+              <strong>{s3.patronage}</strong>
+            </h2>
+            <ul className="patrons">
+              {patrons.docs.map((m) => {
+                const photo = m.photo && typeof m.photo === 'object' && m.photo.url ? m.photo : null
+                return (
+                  <li key={m.id}>
+                    {photo && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={photo.url!} alt="" width={96} height={96} loading="lazy" decoding="async" />
+                    )}
+                    <strong>{m.name}</strong>
+                    {m.role && <span className="muted small">{m.role}</span>}
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </section>
+      )}
 
       {/* ORGANISATEURS */}
       <Organisers title={t.organisers.title} empty={t.organisers.empty} />

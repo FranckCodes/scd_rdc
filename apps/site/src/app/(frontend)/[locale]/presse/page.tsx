@@ -14,7 +14,7 @@ export default async function PressePage({ params }: { params: Promise<{ locale:
       sort: '-publishedAt',
       where: { and: [{ _status: { equals: 'published' } }, { category: { in: ['communique', 'presse'] } }] },
     }),
-    payload.find({ collection: 'documents', locale, limit: 20, where: { kind: { in: ['kit-presse', 'communique'] } } }),
+    payload.find({ collection: 'documents', locale, limit: 20, where: { kind: { in: ['kit-presse', 'dossier-presse', 'communique', 'logos', 'charte'] } } }),
     payload.findGlobal({ slug: 'event-info', locale }),
   ])
   const formatDate = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' })
@@ -67,8 +67,15 @@ export default async function PressePage({ params }: { params: Promise<{ locale:
             <div className="box">
               <h3>{pr.accreditation}</h3>
               <p>{pr.accreditationText}</p>
-              <h3>{pr.contact}</h3>
-              <a href={`mailto:${event.contact?.email || 'info@scd-rdc.org'}`}>{event.contact?.email || 'info@scd-rdc.org'}</a>
+              <h3>{tp.step3.pressContact}</h3>
+              {event.contact?.pressName && <p>{event.contact.pressName}</p>}
+              <a href={`mailto:${event.contact?.pressEmail || event.contact?.email || 'info@scd-rdc.org'}`}>
+                {event.contact?.pressEmail || event.contact?.email || 'info@scd-rdc.org'}
+              </a>
+              {event.contact?.pressPhone && <p>{event.contact.pressPhone}</p>}
+              <p>
+                <Link href={`/${locale}/mediatheque`}>{tp.step3.gallery} →</Link>
+              </p>
             </div>
           </div>
         </div>

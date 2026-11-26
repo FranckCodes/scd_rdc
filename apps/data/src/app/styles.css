@@ -76,7 +76,8 @@ main { max-width: var(--scd-container); margin-inline: auto; padding: 24px var(-
 .intro h1 { margin: 0; font-weight: 300; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.1; }
 .intro strong { font-weight: 800; }
 .intro p { margin: 0; max-width: 640px; font-size: 18px; line-height: 1.6; }
-.eyebrow { font-family: var(--scd-font-title); font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--scd-yellow); }
+/* Texte blanc (le jaune de la charte manque de contraste en petit texte sur le bleu), filet jaune en signature */
+.eyebrow { font-family: var(--scd-font-title); font-weight: 700; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--scd-white); border-inline-start: 3px solid var(--scd-yellow); padding-inline-start: 10px; }
 .eyebrow--navy { color: var(--scd-navy); }
 .rings { pointer-events: none; }
 .rings__reveal {

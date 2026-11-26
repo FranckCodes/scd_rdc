@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
@@ -22,10 +23,26 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
 }
 
-export const metadata: Metadata = {
-  title: { default: 'SCD-RDC · Semaine de la Coopération au Développement', template: '%s · SCD-RDC' },
-  description:
-    'Rendez-vous national de la coopération au développement en République Démocratique du Congo. Coopérer pour développer, rendre compte pour transformer.',
+const BASE = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000').replace(/\/+$/, '')
+
+// Métadonnées communes : adresse de base, versions linguistiques, aperçu de partage (réseaux sociaux).
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const description =
+    'Rendez-vous national de la coopération au développement en République Démocratique du Congo. Coopérer pour développer, rendre compte pour transformer.'
+  return {
+    metadataBase: new URL(BASE),
+    title: { default: 'SCD-RDC · Semaine de la Coopération au Développement', template: '%s · SCD-RDC' },
+    description,
+    openGraph: {
+      type: 'website',
+      siteName: 'SCD-RDC',
+      locale,
+      description,
+      images: [{ url: '/images/og-scd-rdc.png', width: 1200, height: 630, alt: 'SCD-RDC' }],
+    },
+    twitter: { card: 'summary_large_image', images: ['/images/og-scd-rdc.png'] },
+  }
 }
 
 export default async function LocaleLayout({
@@ -56,7 +73,10 @@ export default async function LocaleLayout({
         </a>
         <Header locale={locale} t={t} />
         <main id="contenu">{children}</main>
-        <Footer locale={locale} t={t} email={event.contact?.email || 'info@scd-rdc.org'} />
+        <Footer locale={locale} t={t} email={event.contact?.email || 'info@scd-rdc.org'} social={event.social ?? []} />
+        {/* Mesure d'audience sans cookie (Vercel Web Analytics) : activée seulement si NEXT_PUBLIC_VERCEL_ANALYTICS=1
+            ET l'option activée dans le projet Vercel. */}
+        {process.env.NEXT_PUBLIC_VERCEL_ANALYTICS === '1' && <Analytics />}
       </body>
     </html>
   )

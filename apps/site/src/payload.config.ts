@@ -19,6 +19,7 @@ import { News } from './collections/News'
 import { Pages } from './collections/Pages'
 import { Partners } from './collections/Partners'
 import { Projects } from './collections/Projects'
+import { Cooperations } from './collections/Cooperations'
 import { Governance } from './collections/Governance'
 import { Offers } from './globals/Offers'
 import { Trophies } from './collections/Trophies'
@@ -69,7 +70,7 @@ export default buildConfig({
     fallback: true,
   },
 
-  collections: [Pages, News, Sessions, Speakers, Trophies, Exhibitors, Partners, Projects, Governance, Documents, Media, Users],
+  collections: [Pages, News, Sessions, Speakers, Trophies, Exhibitors, Partners, Projects, Governance, Cooperations, Documents, Media, Users],
   globals: [EventInfo, Offers],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

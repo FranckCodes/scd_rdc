@@ -5,6 +5,7 @@ import * as migration_20261125_110439_organisateurs from './20261125_110439_orga
 import * as migration_20261125_112041_odd_projets from './20261125_112041_odd_projets';
 import * as migration_20261125_125113_gouvernance from './20261125_125113_gouvernance';
 import * as migration_20261126_080754_etape2_offres from './20261126_080754_etape2_offres';
+import * as migration_20261126_083534_etape3_cooperation from './20261126_083534_etape3_cooperation';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261126_080754_etape2_offres.up,
     down: migration_20261126_080754_etape2_offres.down,
-    name: '20261126_080754_etape2_offres'
+    name: '20261126_080754_etape2_offres',
+  },
+  {
+    up: migration_20261126_083534_etape3_cooperation.up,
+    down: migration_20261126_083534_etape3_cooperation.down,
+    name: '20261126_083534_etape3_cooperation'
   },
 ];

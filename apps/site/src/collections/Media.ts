@@ -25,6 +25,13 @@ export const Media: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
     },
+    {
+      name: 'inGallery',
+      label: 'Afficher dans la médiathèque officielle',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: { description: 'La photo n’apparaît que si les droits de reproduction sont aussi cochés.' },
+    },
   ],
   upload: {
     mimeTypes: ['image/*'],

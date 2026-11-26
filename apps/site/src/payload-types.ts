@@ -76,6 +76,7 @@ export interface Config {
     partners: Partner;
     projects: Project;
     governance: Governance;
+    cooperations: Cooperation;
     documents: Document;
     media: Media;
     users: User;
@@ -97,6 +98,7 @@ export interface Config {
     partners: PartnersSelect<false> | PartnersSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
     governance: GovernanceSelect<false> | GovernanceSelect<true>;
+    cooperations: CooperationsSelect<false> | CooperationsSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -234,6 +236,10 @@ export interface Media {
   date?: string | null;
   credit: string;
   rightsCleared?: boolean | null;
+  /**
+   * La photo n’apparaît que si les droits de reproduction sont aussi cochés.
+   */
+  inGallery?: boolean | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -512,6 +518,27 @@ export interface Governance {
   createdAt: string;
 }
 /**
+ * Publié uniquement au statut « Confirmé », avec l’accord écrit du pays ou de l’institution présentés.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cooperations".
+ */
+export interface Cooperation {
+  id: number;
+  name: string;
+  summary?: string | null;
+  source?: string | null;
+  photo?: (number | null) | Media;
+  url?: string | null;
+  order?: number | null;
+  /**
+   * Ne passer à « Confirmé » qu’après validation écrite par le responsable désigné.
+   */
+  validationStatus: 'confirme' | 'en-attente' | 'a-venir';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "documents".
  */
@@ -528,6 +555,9 @@ export interface Document {
         | 'rapport'
         | 'communique'
         | 'kit-presse'
+        | 'dossier-presse'
+        | 'logos'
+        | 'charte'
         | 'formulaire'
       )
     | null;
@@ -825,6 +855,10 @@ export interface PayloadLockedDocument {
         value: number | Governance;
       } | null)
     | ({
+        relationTo: 'cooperations';
+        value: number | Cooperation;
+      } | null)
+    | ({
         relationTo: 'documents';
         value: number | Document;
       } | null)
@@ -1063,6 +1097,21 @@ export interface GovernanceSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cooperations_select".
+ */
+export interface CooperationsSelect<T extends boolean = true> {
+  name?: T;
+  summary?: T;
+  source?: T;
+  photo?: T;
+  url?: T;
+  order?: T;
+  validationStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "documents_select".
  */
 export interface DocumentsSelect<T extends boolean = true> {
@@ -1093,6 +1142,7 @@ export interface MediaSelect<T extends boolean = true> {
   date?: T;
   credit?: T;
   rightsCleared?: T;
+  inGallery?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1380,7 +1430,29 @@ export interface EventInfo {
     email?: string | null;
     phone?: string | null;
     address?: string | null;
+    pressName?: string | null;
+    pressEmail?: string | null;
+    pressPhone?: string | null;
+    delegationsEmail?: string | null;
   };
+  venueAddress?: string | null;
+  access?: string | null;
+  hotels?:
+    | {
+        name: string;
+        url?: string | null;
+        note?: string | null;
+        confirmed?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  social?:
+    | {
+        network: 'linkedin' | 'facebook' | 'x' | 'instagram' | 'youtube' | 'tiktok' | 'whatsapp';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1619,6 +1691,28 @@ export interface EventInfoSelect<T extends boolean = true> {
         email?: T;
         phone?: T;
         address?: T;
+        pressName?: T;
+        pressEmail?: T;
+        pressPhone?: T;
+        delegationsEmail?: T;
+      };
+  venueAddress?: T;
+  access?: T;
+  hotels?:
+    | T
+    | {
+        name?: T;
+        url?: T;
+        note?: T;
+        confirmed?: T;
+        id?: T;
+      };
+  social?:
+    | T
+    | {
+        network?: T;
+        url?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

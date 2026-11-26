@@ -78,6 +78,27 @@ export type PageDictionary = {
     results: string
     contribution: string
   }
+  step3: {
+    coopTitle: string
+    coopIntro: string
+    whyRdc: string
+    countries: string
+    source: string
+    delegations: string
+    patronage: string
+    gallery: string
+    galleryIntro: string
+    galleryEmpty: string
+    credit: string
+    resources: string
+    hotels: string
+    access: string
+    address: string
+    assistance: string
+    follow: string
+    pressContact: string
+    audiences: { title: string; text: string; action: string }[]
+  }
   governance: {
     title: string
     intro: string
@@ -193,6 +214,33 @@ const fr: PageDictionary = {
     audiences: "Publics ciblés",
     results: "Résultats attendus",
     contribution: "Comment contribuer",
+  },
+  step3: {
+    coopTitle: "Partenaires et coopération internationale",
+    coopIntro: "La SCD-RDC réunit tous les acteurs de la coopération au développement en RDC. Chaque public y trouve sa place : voici comment vous associer.",
+    whyRdc: "Pourquoi la RDC ? Pourquoi la SCD-RDC ?",
+    countries: "Pays et coopérations à l’honneur",
+    source: "Source",
+    delegations: "Délégations internationales",
+    patronage: "Sous le haut patronage de",
+    gallery: "Médiathèque",
+    galleryIntro: "Photos officielles libres de droits pour la presse et les partenaires, avec leur légende et leur crédit. Logos, charte graphique et dossiers à télécharger.",
+    galleryEmpty: "Les photos officielles seront publiées ici au fil de la préparation et de l’événement.",
+    credit: "Crédit",
+    resources: "Logos, charte et dossiers",
+    hotels: "Hôtels partenaires",
+    access: "Accès au lieu",
+    address: "Adresse",
+    assistance: "Assistance aux délégations",
+    follow: "Suivez-nous",
+    pressContact: "Contact presse",
+    audiences: [
+      { title: "Institutions publiques", text: "Ministères, Parlement, provinces et établissements publics : présenter les priorités nationales et rendre compte des engagements.", action: "Manifester son intérêt" },
+      { title: "Partenaires techniques et financiers", text: "Bailleurs bilatéraux et multilatéraux, institutions financières internationales, agences des Nations Unies : rendre visibles vos interventions et leurs résultats.", action: "Devenir partenaire" },
+      { title: "Représentations diplomatiques", text: "Ambassades, consulats et organisations internationales : valoriser la coopération de votre pays avec la RDC.", action: "Manifester son intérêt" },
+      { title: "Secteur privé et investisseurs", text: "Entreprises, banques, opérateurs économiques et sponsors : identifier les opportunités et rencontrer les décideurs.", action: "Exposer un projet" },
+      { title: "Société civile et universités", text: "ONG, associations, centres de recherche et universités : faire entendre la voix des bénéficiaires et proposer des solutions.", action: "Proposer une contribution" },
+    ],
   },
   governance: {
     title: 'Gouvernance et organisation',
@@ -320,6 +368,33 @@ const en: PageDictionary = {
     results: "Expected results",
     contribution: "How to contribute",
   },
+  step3: {
+    coopTitle: "Partners and international cooperation",
+    coopIntro: "SCD-RDC brings together all development cooperation stakeholders in the DRC. Every audience has its place: here is how to get involved.",
+    whyRdc: "Why the DRC? Why SCD-RDC?",
+    countries: "Countries and partnerships in focus",
+    source: "Source",
+    delegations: "International delegations",
+    patronage: "Under the high patronage of",
+    gallery: "Media library",
+    galleryIntro: "Official royalty-free photos for the press and partners, with captions and credits. Logos, visual identity guide and packs to download.",
+    galleryEmpty: "Official photos will be published here as preparations and the event unfold.",
+    credit: "Credit",
+    resources: "Logos, identity guide and packs",
+    hotels: "Partner hotels",
+    access: "Getting to the venue",
+    address: "Address",
+    assistance: "Support for delegations",
+    follow: "Follow us",
+    pressContact: "Press contact",
+    audiences: [
+      { title: "Public institutions", text: "Ministries, Parliament, provinces and public bodies: present national priorities and report on commitments.", action: "Express interest" },
+      { title: "Technical and financial partners", text: "Bilateral and multilateral donors, international financial institutions, United Nations agencies: make your interventions and their results visible.", action: "Become a partner" },
+      { title: "Diplomatic missions", text: "Embassies, consulates and international organisations: showcase your country’s cooperation with the DRC.", action: "Express interest" },
+      { title: "Private sector and investors", text: "Companies, banks, economic operators and sponsors: identify opportunities and meet decision-makers.", action: "Exhibit a project" },
+      { title: "Civil society and universities", text: "NGOs, associations, research centres and universities: give a voice to beneficiaries and propose solutions.", action: "Submit a contribution" },
+    ],
+  },
   governance: {
     title: 'Governance and organisation',
     intro: 'Who organises SCD-RDC, under what governance and with which responsibilities. Only people and institutions whose participation has been officially confirmed are listed.',
@@ -434,6 +509,33 @@ const zh: PageDictionary = {
     audiences: "目标受众",
     results: "预期成果",
     contribution: "如何参与",
+  },
+  step3: {
+    coopTitle: "合作伙伴与国际合作",
+    coopIntro: "SCD-RDC 汇聚刚果（金）发展合作的所有参与方。每类受众都能找到自己的位置：以下是参与方式。",
+    whyRdc: "为什么是刚果（金）？为什么是 SCD-RDC？",
+    countries: "重点国家与合作",
+    source: "来源",
+    delegations: "国际代表团",
+    patronage: "名誉赞助",
+    gallery: "媒体资料库",
+    galleryIntro: "供媒体和合作伙伴使用的官方免版税照片，附说明和署名。可下载标志、视觉规范和资料包。",
+    galleryEmpty: "官方照片将在筹备和活动期间陆续发布。",
+    credit: "署名",
+    resources: "标志、视觉规范与资料包",
+    hotels: "合作酒店",
+    access: "交通指南",
+    address: "地址",
+    assistance: "代表团协助",
+    follow: "关注我们",
+    pressContact: "媒体联系人",
+    audiences: [
+      { title: "公共机构", text: "各部委、议会、各省及公共机构：介绍国家优先事项，汇报承诺落实情况。", action: "表达参与意向" },
+      { title: "技术与资金合作伙伴", text: "双边与多边出资方、国际金融机构、联合国机构：展示您的项目及其成果。", action: "成为合作伙伴" },
+      { title: "外交使团", text: "大使馆、领事馆和国际组织：展示贵国与刚果（金）的合作。", action: "表达参与意向" },
+      { title: "私营部门与投资者", text: "企业、银行、经济运营商和赞助商：发现机遇，结识决策者。", action: "展示项目" },
+      { title: "民间社会与高校", text: "非政府组织、协会、研究中心和高校：传递受益者的声音，提出解决方案。", action: "提交贡献" },
+    ],
   },
   governance: {
     title: '治理与组织',
@@ -561,6 +663,33 @@ const ru: PageDictionary = {
     results: "Ожидаемые результаты",
     contribution: "Как принять участие",
   },
+  step3: {
+    coopTitle: "Партнёры и международное сотрудничество",
+    coopIntro: "SCD-RDC объединяет всех участников сотрудничества в целях развития в ДРК. У каждой аудитории своё место: вот как принять участие.",
+    whyRdc: "Почему ДРК? Почему SCD-RDC?",
+    countries: "Страны и сотрудничество в центре внимания",
+    source: "Источник",
+    delegations: "Международные делегации",
+    patronage: "Под высоким патронажем",
+    gallery: "Медиатека",
+    galleryIntro: "Официальные фотографии без лицензионных отчислений для прессы и партнёров, с подписями и указанием авторства. Логотипы, фирменный стиль и материалы для скачивания.",
+    galleryEmpty: "Официальные фотографии будут публиковаться здесь по мере подготовки и проведения мероприятия.",
+    credit: "Автор",
+    resources: "Логотипы, фирменный стиль и материалы",
+    hotels: "Отели-партнёры",
+    access: "Как добраться",
+    address: "Адрес",
+    assistance: "Помощь делегациям",
+    follow: "Мы в соцсетях",
+    pressContact: "Контакт для прессы",
+    audiences: [
+      { title: "Государственные учреждения", text: "Министерства, Парламент, провинции и государственные организации: представить национальные приоритеты и отчитаться об обязательствах.", action: "Заявить об интересе" },
+      { title: "Технические и финансовые партнёры", text: "Двусторонние и многосторонние доноры, международные финансовые институты, агентства ООН: показать ваши проекты и их результаты.", action: "Стать партнёром" },
+      { title: "Дипломатические представительства", text: "Посольства, консульства и международные организации: представить сотрудничество вашей страны с ДРК.", action: "Заявить об интересе" },
+      { title: "Частный сектор и инвесторы", text: "Компании, банки, экономические операторы и спонсоры: найти возможности и встретиться с лицами, принимающими решения.", action: "Представить проект" },
+      { title: "Гражданское общество и университеты", text: "НКО, ассоциации, исследовательские центры и университеты: донести голос получателей помощи и предложить решения.", action: "Предложить вклад" },
+    ],
+  },
   governance: {
     title: 'Управление и организация',
     intro: 'Кто организует SCD-RDC, на основе какой системы управления и с какими обязанностями. Представлены только лица и организации, чьё участие официально подтверждено.',
@@ -680,6 +809,33 @@ const ar: PageDictionary = {
     audiences: "الجمهور المستهدف",
     results: "النتائج المتوقعة",
     contribution: "كيف تساهم",
+  },
+  step3: {
+    coopTitle: "الشركاء والتعاون الدولي",
+    coopIntro: "تجمع SCD-RDC جميع الفاعلين في التعاون الإنمائي في جمهورية الكونغو الديمقراطية. لكل جمهور مكانه: إليكم طرق المشاركة.",
+    whyRdc: "لماذا جمهورية الكونغو الديمقراطية؟ لماذا SCD-RDC؟",
+    countries: "بلدان وشراكات في دائرة الضوء",
+    source: "المصدر",
+    delegations: "الوفود الدولية",
+    patronage: "تحت الرعاية السامية لـ",
+    gallery: "المكتبة الإعلامية",
+    galleryIntro: "صور رسمية خالية من حقوق الاستخدام للصحافة والشركاء، مع التعليق واسم المصوّر. شعارات ودليل الهوية البصرية وملفات للتنزيل.",
+    galleryEmpty: "ستُنشر الصور الرسمية هنا تباعًا خلال التحضير والحدث.",
+    credit: "المصدر",
+    resources: "الشعارات والهوية البصرية والملفات",
+    hotels: "الفنادق الشريكة",
+    access: "الوصول إلى الموقع",
+    address: "العنوان",
+    assistance: "مساعدة الوفود",
+    follow: "تابعونا",
+    pressContact: "جهة الاتصال الصحفية",
+    audiences: [
+      { title: "المؤسسات العامة", text: "الوزارات والبرلمان والمقاطعات والمؤسسات العامة: عرض الأولويات الوطنية والمساءلة عن الالتزامات.", action: "أبدِ اهتمامك" },
+      { title: "الشركاء التقنيون والماليون", text: "الجهات المانحة الثنائية ومتعددة الأطراف والمؤسسات المالية الدولية ووكالات الأمم المتحدة: إبراز تدخلاتكم ونتائجها.", action: "كن شريكًا" },
+      { title: "البعثات الدبلوماسية", text: "السفارات والقنصليات والمنظمات الدولية: إبراز تعاون بلدكم مع جمهورية الكونغو الديمقراطية.", action: "أبدِ اهتمامك" },
+      { title: "القطاع الخاص والمستثمرون", text: "الشركات والمصارف والفاعلون الاقتصاديون والرعاة: اكتشاف الفرص ولقاء صانعي القرار.", action: "اعرض مشروعًا" },
+      { title: "المجتمع المدني والجامعات", text: "المنظمات غير الحكومية والجمعيات ومراكز البحث والجامعات: إيصال صوت المستفيدين واقتراح الحلول.", action: "قدّم مساهمة" },
+    ],
   },
   governance: {
     title: 'الحوكمة والتنظيم',

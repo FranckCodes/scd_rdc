@@ -23,6 +23,9 @@ export const Documents: CollectionConfig = {
         { label: 'Rapport', value: 'rapport' },
         { label: 'Communiqué', value: 'communique' },
         { label: 'Kit presse', value: 'kit-presse' },
+        { label: 'Dossier de presse', value: 'dossier-presse' },
+        { label: 'Logos haute définition', value: 'logos' },
+        { label: 'Charte graphique', value: 'charte' },
         { label: 'Formulaire', value: 'formulaire' },
       ],
     },
@@ -35,6 +38,6 @@ export const Documents: CollectionConfig = {
     { name: 'version', label: 'Version / date', type: 'text' },
   ],
   upload: {
-    mimeTypes: ['application/pdf', 'application/vnd.openxmlformats-officedocument.*', 'application/zip'],
+    mimeTypes: ['application/pdf', 'application/vnd.openxmlformats-officedocument.*', 'application/zip', 'application/x-zip-compressed'],
   },
 }

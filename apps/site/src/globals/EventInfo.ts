@@ -97,6 +97,57 @@ export const EventInfo: GlobalConfig = {
         { name: 'email', label: 'E-mail', type: 'email', defaultValue: 'info@scd-rdc.org' },
         { name: 'phone', label: 'Téléphone', type: 'text' },
         { name: 'address', label: 'Adresse', type: 'textarea', localized: true },
+        { name: 'pressName', label: 'Contact presse : nom', type: 'text' },
+        { name: 'pressEmail', label: 'Contact presse : e-mail', type: 'email' },
+        { name: 'pressPhone', label: 'Contact presse : téléphone', type: 'text' },
+        { name: 'delegationsEmail', label: 'Assistance aux délégations : e-mail', type: 'email' },
+      ],
+    },
+    {
+      type: 'collapsible',
+      label: 'Lieu, accès et hébergement',
+      admin: { description: 'Affichés sur « Infos pratiques » et « Délégations internationales » dès qu’ils sont confirmés.' },
+      fields: [
+        { name: 'venueAddress', label: 'Adresse exacte du lieu', type: 'text', localized: true },
+        { name: 'access', label: 'Modalités d’accès (une par ligne)', type: 'textarea', localized: true },
+        {
+          name: 'hotels',
+          label: 'Hôtels partenaires',
+          type: 'array',
+          labels: { singular: 'Hôtel', plural: 'Hôtels' },
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                { name: 'name', label: 'Nom', type: 'text', required: true },
+                { name: 'url', label: 'Site ou lien de réservation', type: 'text' },
+              ],
+            },
+            { name: 'note', label: 'Conditions (tarif négocié, navette…)', type: 'text', localized: true },
+            confirmed('confirmed'),
+          ],
+        },
+      ],
+    },
+    {
+      name: 'social',
+      label: 'Réseaux sociaux officiels',
+      type: 'array',
+      labels: { singular: 'Compte', plural: 'Comptes' },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'network',
+              label: 'Réseau',
+              type: 'select',
+              required: true,
+              options: ['LinkedIn', 'Facebook', 'X', 'Instagram', 'YouTube', 'TikTok', 'WhatsApp'].map((n) => ({ label: n, value: n.toLowerCase() })),
+            },
+            { name: 'url', label: 'Adresse du compte', type: 'text', required: true },
+          ],
+        },
       ],
     },
   ],

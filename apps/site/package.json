@@ -31,6 +31,7 @@
     "@payloadcms/translations": "3.91.0",
     "@payloadcms/ui": "3.91.0",
     "@scd/ui": "workspace:*",
+    "@vercel/analytics": "^2.0.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",

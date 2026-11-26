@@ -8,6 +8,7 @@ import config from '@payload-config'
 import { Arrow } from '@/components/Arrow'
 import { Organisers } from '@/components/Organisers'
 import { Notice, PageHeader } from '@/components/PageHeader'
+import { PracticalInfo } from '@/components/PracticalInfo'
 import { isLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { setup } from '@/lib/locale'
@@ -53,6 +54,12 @@ export default async function EditorialPage({ params }: { params: Params }) {
           </div>
         )}
       </div>
+      {(slug === 'infos-pratiques' || slug === 'delegations') && (
+        <PracticalInfo
+          event={await (await getPayload({ config })).findGlobal({ slug: 'event-info', locale })}
+          labels={{ hotels: tp.step3.hotels, access: tp.step3.access, address: tp.step3.address, assistance: tp.step3.assistance }}
+        />
+      )}
       {slug === 'a-propos' && (
         <div className="container prose-wrap">
           <Link className="link-arrow" href={`/${locale}/gouvernance`}>

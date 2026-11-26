@@ -95,8 +95,9 @@ a:focus-visible .arrow--back { transform: translateX(calc(var(--scd-dir) * -3px)
 .site-nav a:hover { color: var(--scd-yellow); text-decoration-color: currentColor; }
 .site-nav a[aria-current='page'] { text-decoration-color: var(--scd-yellow); }
 .lang-switcher { display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--scd-font-title); font-weight: 700; font-size: 13px; }
-.site-header .lang-switcher a:hover { color: var(--scd-yellow); }
-.lang-switcher a[aria-current='true'] { color: var(--scd-yellow); }
+/* Le jaune de la charte n'est pas assez contrasté en texte sur le bleu : souligné jaune à la place */
+.site-header .lang-switcher a:hover { text-decoration: underline; text-decoration-color: var(--scd-yellow); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.lang-switcher a[aria-current='true'] { text-decoration: underline; text-decoration-color: var(--scd-yellow); text-decoration-thickness: 3px; text-underline-offset: 6px; }
 
 /* Menu mobile : ☰ qui se transforme en ✕, panneau qui descend en fondu */
 .mobile-menu { display: none; margin-inline-start: auto; }
@@ -219,7 +220,7 @@ a.card:active { transform: none; box-shadow: 0 2px 8px rgba(10, 26, 43, 0.08); }
 .site-footer a:hover { color: var(--scd-yellow); }
 .site-footer__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
 .site-footer__brand img { height: 48px; width: auto; }
-.site-footer__brand p { margin: 16px 0 0; font-size: 14px; color: rgba(255, 255, 255, 0.85); }
+.site-footer__brand p { margin: 16px 0 0; font-size: 14px; color: var(--scd-white); }
 .site-footer__nav, .site-footer__contact { display: flex; flex-direction: column; gap: 10px; font-size: 15px; }
 .site-footer__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.2); font-size: 13px; }
 .site-footer__legal div { display: flex; flex-wrap: wrap; gap: 20px; }
@@ -379,6 +380,25 @@ ul.cards { list-style: none; margin: 0; padding: 0; }
 .sheet dd { margin: 0; }
 .sheet dd ul { margin: 4px 0 0; padding-inline-start: 18px; }
 
+/* ===== Étape 3 de l'analyse : coopération internationale, patronage, médiathèque, infos pratiques ===== */
+.audiences { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 14px; }
+.audience { display: flex; flex-direction: column; gap: 8px; padding: 22px; background: var(--scd-surface-alt); border-radius: var(--scd-radius); border-inline-start: 4px solid var(--scd-navy); }
+.audience p { margin: 0; }
+.audience__title { margin: 0; font-family: var(--scd-font-title); font-weight: 800; font-size: 19px; }
+.audience .link-arrow { margin-top: auto; }
+.card__img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--scd-radius-btn); }
+.patrons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); gap: 18px; }
+.patrons li { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.patrons img { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; }
+.gallery { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 18px; }
+.gallery figure { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.gallery img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--scd-radius); }
+.gallery figcaption { display: flex; flex-direction: column; gap: 2px; font-size: 15px; }
+.practical { display: flex; flex-direction: column; gap: 22px; padding-top: 0; }
+.practical h2 { margin: 0 0 8px; font-family: var(--scd-font-title); font-weight: 800; font-size: 22px; color: var(--scd-navy); }
+.practical p, .practical ul { margin: 0; }
+.social { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 14px; }
+
 /* ===== Apparitions au défilement (animations, phase 2) =====
    CSS pur, sans JavaScript : un bloc apparaît en fondu (+ 8 px) pendant qu'il entre à l'écran,
    au rythme du défilement, et il est complet dès qu'il est entièrement visible.
@@ -387,7 +407,7 @@ ul.cards { list-style: none; margin: 0; padding: 0; }
    - Rien n'est retardé au chargement : un bloc déjà entièrement visible est déjà complet. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .governance__member, .quick > *, .offers > *, .trame__day, .tiers > *, .checklist > *, .split > *, .box, .placeholder) {
+    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .governance__member, .quick > *, .offers > *, .trame__day, .audiences > *, .patrons > *, .gallery > *, .tiers > *, .checklist > *, .split > *, .box, .placeholder) {
       animation: scd-fade-up linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 100%;
@@ -398,7 +418,7 @@ ul.cards { list-style: none; margin: 0; padding: 0; }
     :is(.cards, .chips) > :nth-child(n + 4) { animation-range: entry 24% entry 100%; }
     :is(.cards, .chips) > :nth-child(n + 5) { animation-range: entry 32% entry 100%; }
     /* Un bloc atteint au clavier est toujours entièrement visible */
-    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .governance__member, .quick > *, .offers > *, .trame__day, .tiers > *, .checklist > *, .split > *, .box, .placeholder):focus-within {
+    :is(.section__head, .cards > *, .chips > *, .sessions > *, .news > *, .partners > *, .organisers > *, .sdgs > *, .governance__member, .quick > *, .offers > *, .trame__day, .audiences > *, .patrons > *, .gallery > *, .tiers > *, .checklist > *, .split > *, .box, .placeholder):focus-within {
       animation: none;
     }
   }

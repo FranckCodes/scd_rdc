@@ -7,7 +7,10 @@ import { getPageDictionary } from '@/i18n/pages'
 
 import { navLinks } from './Header'
 
-export function Footer({ locale, t, email }: { locale: Locale; t: Dictionary; email: string }) {
+type Social = { network: string; url: string; id?: string | null }
+
+export function Footer({ locale, t, email, social = [] }: { locale: Locale; t: Dictionary; email: string; social?: Social[] }) {
+  const s3 = getPageDictionary(locale).step3
   return (
     <footer className="site-footer">
       <div className="container site-footer__grid">
@@ -24,10 +27,23 @@ export function Footer({ locale, t, email }: { locale: Locale; t: Dictionary; em
           <Link href={`/${locale}/participer`}>{t.cta.participate}</Link>
           <Link href={`/${locale}/infos-pratiques`}>{t.nav.practical}</Link>
           <Link href={`/${locale}/gouvernance`}>{getPageDictionary(locale).governance.link}</Link>
+          <Link href={`/${locale}/cooperation`}>{s3.coopTitle}</Link>
+          <Link href={`/${locale}/mediatheque`}>{s3.gallery}</Link>
         </nav>
         <div className="site-footer__contact">
           <a href={`mailto:${email}`}>{email}</a>
           <span>www.scd-rdc.org</span>
+          {social.length > 0 && (
+            <ul className="social" aria-label={s3.follow}>
+              {social.map((s) => (
+                <li key={s.id ?? s.url}>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer me">
+                    {s.network === 'x' ? 'X' : s.network.charAt(0).toUpperCase() + s.network.slice(1).replace('linkedin', 'LinkedIn').replace('youtube', 'YouTube').replace('tiktok', 'TikTok').replace('whatsapp', 'WhatsApp')}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
       <div className="container site-footer__legal">

@@ -45,6 +45,7 @@ Dans Vercel → onglet **Storage** (place de marché) :
 | `PAYLOAD_SECRET` | chaîne aléatoire longue, **différente** de celle du local (`openssl rand -hex 32`) |
 | `NEXT_PUBLIC_SERVER_URL` | `https://scd-rdc.org` |
 | `NEXT_PUBLIC_DATA_URL` | `https://data.scd-rdc.org` |
+| `NEXT_PUBLIC_VERCEL_ANALYTICS` | `1` pour activer la mesure d'audience sans cookie (activer aussi **Analytics** dans le projet Vercel) |
 
 3. **Deploy**. Vercel lance automatiquement le script `vercel-build` :
    `payload migrate` (crée/actualise les tables) **puis** `next build`.
@@ -167,6 +168,22 @@ Administration → *Partenariats → Offres, Salon et programme prévisionnel* (
 - **Suivi des demandes** : *Formulaires → Demandes reçues* : statut (nouvelle → conclue), personne en charge,
   prochaine relance, notes internes.
 
+## Rayonnement international, presse et référencement
+- **Partenaires et coopération internationale** (`/fr/cooperation`) : un accès par public. Les pages
+  « Pourquoi la RDC ? » et « Délégations internationales » sont des textes proposés (*Contenus → Pages*) :
+  compléter les passages entre crochets, puis décocher « Texte proposé ».
+- **Pays et coopérations à l'honneur** : *Partenariats → Pays et coopérations à l'honneur*, publiés au statut
+  **Confirmé** seulement, avec l'accord écrit du pays ou de l'institution.
+- **Comité de patronage** : les membres « Comité de patronage » confirmés de *Gouvernance et organisation*
+  apparaissent aussi sur l'accueil.
+- **Lieu, accès, hôtels, assistance aux délégations, contacts presse, réseaux sociaux** : *Informations de
+  l'événement*. Le lieu et l'accès s'affichent quand le lieu est « Confirmé officiellement » ; chaque hôtel a sa case.
+- **Médiathèque** (`/fr/mediatheque`) : dans *Médias*, cocher « Droits de reproduction obtenus » **et**
+  « Afficher dans la médiathèque ». Logos, charte et dossier de presse : *Documents* (types dédiés).
+- **Référencement** : plan du site `/sitemap.xml`, `/robots.txt`, image de partage et données structurées de
+  l'événement (la date n'y figure qu'une fois confirmée). Après la mise en ligne, déclarer le plan du site dans
+  Google Search Console.
+
 ## Temps forts de l'événement
 - **Compte à rebours (accueil)** : administration → *Informations de l’événement* → saisir le premier et
   le dernier jour, puis un compte validateur coche « Confirmé officiellement » pour les dates. Sans ces
@@ -183,5 +200,4 @@ Administration → *Partenariats → Offres, Salon et programme prévisionnel* (
 
 ## Encore à faire avant l'ouverture au public
 - **Polices** : les auto-héberger plutôt que de les charger depuis Google Fonts.
-- **Mesure d'audience** respectueuse de la vie privée (ex. Vercel Web Analytics, sans cookie).
 - **Sauvegardes** : vérifier la rétention des sauvegardes Neon selon l'offre choisie.

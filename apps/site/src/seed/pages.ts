@@ -5,6 +5,51 @@ import { doc, h2, h3, p, ul } from './lexical'
 
 export const pages = [
   {
+    slug: 'pourquoi-la-rdc',
+    title: 'Pourquoi la RDC ? Pourquoi la SCD-RDC ?',
+    intro:
+      'La République Démocratique du Congo est l’un des pays où la coopération au développement compte le plus — et où elle gagne le plus à être visible, coordonnée et jugée sur ses résultats.',
+    meta: {
+      title: 'Pourquoi la RDC ? Pourquoi la SCD-RDC ?',
+      description: 'Le potentiel de la RDC, ses priorités de développement et ce que la SCD-RDC apporte à ses partenaires.',
+    },
+    content: doc(
+      h2('Un pays aux potentiels considérables'),
+      p('Par sa superficie, sa population jeune, ses 26 provinces, ses ressources naturelles et la forêt du Bassin du Congo, la RDC occupe une place stratégique en Afrique et dans les grands enjeux mondiaux, du climat à la transition énergétique.'),
+      p('[Chiffres clés sourcés à fournir par l’organisation : population, part des jeunes, superficie forestière, potentiel hydroélectrique, minerais stratégiques — avec source et date.]'),
+      h2('Des priorités de développement claires'),
+      p('Infrastructures, énergie, capital humain, climat, agriculture, industrie, santé, développement des territoires et culture : les neuf secteurs du Salon des projets reprennent les priorités sur lesquelles se concentrent les partenaires.'),
+      p('[Référence au plan national de développement en vigueur à préciser par l’organisation.]'),
+      h2('Pourquoi la SCD-RDC'),
+      p('La SCD-RDC est le seul rendez-vous qui réunit chaque année l’ensemble des acteurs de la coopération en RDC autour d’une exigence commune : rendre compte des résultats. Elle permet de voir **qui finance quoi, où et pour qui**, grâce à la plateforme SCD-RDC DATA, de rencontrer les décideurs nationaux et provinciaux, et de construire des partenariats mieux coordonnés.'),
+      p('→ [Partenaires et coopération internationale](/fr/cooperation) · [Devenir partenaire](/fr/participer/partenaire)'),
+    ),
+  },
+  {
+    slug: 'delegations',
+    title: 'Délégations internationales',
+    intro:
+      'Informations utiles pour préparer la venue d’une délégation à Kinshasa : formalités, arrivée, hébergement et assistance de l’équipe SCD-RDC.',
+    meta: {
+      title: 'Délégations internationales',
+      description: 'Visa, arrivée à Kinshasa, hébergement, accueil et assistance pour les délégations internationales de la SCD-RDC.',
+    },
+    content: doc(
+      h2('Formalités d’entrée'),
+      p('Un visa est généralement requis pour entrer en RDC. Rapprochez-vous de l’ambassade ou du consulat de la RDC dans votre pays.'),
+      p('[Procédure de lettre d’invitation, délais et éventuelles facilités pour les délégations officielles : à préciser par l’organisation.]'),
+      h2('Santé'),
+      p('[Exigences sanitaires à l’entrée (vaccinations, certificats) : à confirmer auprès des autorités compétentes et à préciser par l’organisation.]'),
+      h2('Arrivée et accueil'),
+      p('Les délégations arrivent par l’aéroport international de N’Djili, à Kinshasa.'),
+      p('[Dispositif d’accueil, navettes et accréditations : à préciser par l’organisation.]'),
+      h2('Hébergement'),
+      p('Les hôtels partenaires apparaissent ci-dessous dès leur confirmation, avec leurs conditions.'),
+      h2('Nous contacter'),
+      p('Pour toute question sur la venue d’une délégation : [Manifester son intérêt](/fr/participer/manifestation-interet). L’équipe répond sous 24 heures ouvrées.'),
+    ),
+  },
+  {
     slug: 'pourquoi-participer',
     title: 'Pourquoi participer ?',
     intro:
